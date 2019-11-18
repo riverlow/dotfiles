@@ -1,6 +1,6 @@
 # git clone --bare https://bitbucket.org/durdn/cfg.git $HOME/.dotfiles
 function dotfiles {
-	$(which git) --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+	$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 mkdir -p .dotfiles-backup
 dotfiles checkout
