@@ -1,0 +1,9 @@
+LET doc = DOCUMENT('https://chp.shadiao.app/',true) 
+
+WAIT_ELEMENT(doc, '.mdl-textfield', 5000)
+
+LET chp = ELEMENTS(doc, '.mdl-textfield')
+FOR p IN chp
+    RETURN {
+        truep: TRIM(INNER_TEXT(p, '.mdl-textfield__input')),
+    }

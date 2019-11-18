@@ -1,0 +1,6 @@
+$(which git) init --bare ${HOME}/.dotfiles
+function dotfiles {
+   $(which git) --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME} $@
+}
+
+dotfiles config --local status.showUntrackedFiles no

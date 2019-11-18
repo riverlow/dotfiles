@@ -1,0 +1,9 @@
+--ignore-errors
+# --no-playlist
+#
+#--proxy socks5://127.0.0.1:1080
+
+# save path
+-o ~/dl/youtube/%(title)s.%(ext)s
+
+--write-auto-sub

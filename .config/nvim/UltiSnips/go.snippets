@@ -1,0 +1,489 @@
+# shorthand variable initialization
+snippet vk  "v := value" b
+${1:x} := ${2:value}
+${0}
+endsnippet
+
+# shorthand err co-equal
+snippet ek "err := value" b
+err := ${1:value}
+${0}
+endsnippet
+
+# shorthand var, err co-equal
+snippet vk, "v, err := value" b
+${1:x}, ${2:err} := ${3:value}
+${0}
+endsnippet
+
+# variable initialization
+snippet va "var x = Type{...}" b
+var ${1:x} = ${2:value}
+${0}
+endsnippet
+
+# variable declaration
+snippet vd "var x Type" b
+var ${1:x} ${2:Type}
+${0}
+endsnippet
+
+# variable declaration
+snippet var "var x Type [= ...]"
+var ${1:x} ${2:Type} = ${3:value}}
+${0}
+endsnippet
+
+# variables declaration
+snippet vars "var ( ... )"
+var (
+	${1:x} ${2:Type}${3: = ${4:value}}
+)
+${0}
+endsnippet
+
+# shorthand variable assignment
+snippet vn "v = value" b
+${1:name } = ${2:value}
+${0}
+endsnippet
+
+# shorthand variable assignment
+snippet en "err = value" b
+err = ${0}
+endsnippet
+
+# shorthand variable assignment for 2 value
+snippet vn, "v, err = value" b
+${1:name}, ${2:err} = ${3:value}
+${0}
+endsnippet
+
+# struct
+snippet st "type T struct { ... }" b
+type ${1:Type} struct {
+	${2}
+}
+${0}
+endsnippet
+
+# type alias
+snippet tp "type T Type" b
+type ${1:T} ${2:struct{}} 
+${0}
+endsnippet
+
+# A Buffer needs no initialization.
+snippet buf "var buf bytes.Buffer" b
+var buf bytes.Buffer
+${0}
+endsnippet
+
+# byte slice
+snippet bs "[]byte" w
+[]byte
+endsnippet
+
+# time
+snippet tm "time.Time"
+time.Time
+endsnippet
+
+# http.Handler
+snippet hd "http.Handler" 
+http.Handler
+endsnippet
+
+# http.HandlerFunc
+snippet hdf "http.HandlerFunc" 
+http.HandlerFunc
+endsnippet
+
+# http.Request
+snippet req "http.Request" w
+http.Request
+endsnippet
+
+# http.NewRequest
+snippet nreq "http.Request" b
+r, err := http.NewRequest("${1:GET}", "${2:/}", ${3:nil})
+${0}
+endsnippet
+
+# http.Response
+snippet resp "http.Response" w
+http.Response
+endsnippet
+
+# http.ResponseWriter
+snippet resw "http.ResponseWriter" w
+http.ResponseWriter
+endsnippet
+
+# append
+snippet ap "append(slice, value)"
+append(${1:slice}, ${0:value})
+endsnippet
+
+# append assignment
+snippet aa "a = append(a, value)" b
+${1:slice} = append($1, ${2:value})
+${0}
+endsnippet
+
+# ok initialization
+snippet ko "value, ok := ..." b
+${1:value}, ok := ${2:value}
+${0}
+endsnippet
+
+# inline if ok
+snippet iok "if v, ok := value; ok { ... }" b
+if ${1:x}, ok := ${2:value}; ok {
+	${2:${VISUAL}}
+}
+${0}
+endsnippet
+
+# if ok
+snippet ok "if ok { ... }" b
+if ok {
+	${1:${VISUAL}}
+}
+${0}
+endsnippet
+
+# if not ok
+snippet nok "if !ok { ... }" b
+if !ok {
+	${1:${VISUAL}}
+	${2:return}
+}
+${0}
+endsnippet
+
+# error snippet
+snippet er "Error return" !b
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+# error snippet
+snippet eer "Error return" 
+else if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+# error multiple return
+snippet er, "Error return with two return values" !b
+if err != nil {
+	return ${1:nil}, ${2:err}
+}
+${0}
+endsnippet
+
+# error multiple return
+snippet eer, "Error return with two return values" 
+else if err != nil {
+	return ${1:nil}, ${2:err}
+}
+${0}
+endsnippet
+
+# error handle
+snippet eh "Error handle" !b
+if err != nil {
+	${1}
+}
+${0}
+endsnippet
+
+# else error handle
+snippet eeh "else Error handle" 
+else if err != nil {
+	${1}
+}
+${0}
+endsnippet
+
+# error snippet
+snippet eis "if err == sth. {...}" b
+if err == ${1:sth} {
+	${2:handle err}
+} ${0}
+endsnippet
+
+# error snippet
+snippet eeis "if err == sth. {...}" 
+else if err == ${1:sth} {
+	${2:handle err}
+} ${0}
+endsnippet
+
+# if sth is nil
+snippet isn "Error is nil handle" !b
+if ${1:condition} == nil {
+	${2:new(something)}
+}
+${0}
+endsnippet
+
+# if condition
+snippet if "if ... { ... }" b
+if ${1:condition} {
+	${2:${VISUAL}}
+}
+${0}
+endsnippet
+
+# else snippet
+snippet el "else { ... }" 
+else {
+	${2:${VISUAL}}
+} ${0}
+endsnippet
+
+# else if snippet
+snippet ei "else if {...}" 
+else if ${1:condition} {
+	${2:${VISUAL}}
+}
+${0}
+endsnippet
+
+
+# defer
+snippet df "defer someFunction()"
+defer ${1:func}(${2})
+${0}
+endsnippet
+
+snippet dff "defer func() { ... }"
+defer func() {
+	${1:${VISUAL}}
+}()
+${0}
+endsnippet
+
+# defer recover
+snippet dfr
+defer func() {
+	if err := recover(); err != nil {
+		${1:${VISUAL}}
+	}
+}()
+${0}
+endsnippet
+
+
+# fmt Fprintf 
+snippet ff "fmt.Fprintf(...)"
+fmt.Fprintf(${1:w}, "${2:${VISUAL}} = %+v\n", $2)
+endsnippet
+
+# Fmt Fprintln 
+snippet fn "fmt.Println(...)"
+fmt.Fprintln(${1:w}, "${2:${VISUAL}}")
+endsnippet
+
+# Fmt Fprint
+snippet fp "fmt.Print(...)"
+fmt.Fprint(${1:w}, "${2:${VISUAL}}")
+endsnippet
+
+# Fmt Printf debug
+snippet pf "fmt.Printf(...)"
+fmt.Printf("${1:${VISUAL}} = %+v\n", $1)
+endsnippet
+
+# Fmt Println debug
+snippet pn "fmt.Println(...)"
+fmt.Println("${1:${VISUAL}}")
+endsnippet
+
+# Fmt Print debug
+snippet p "fmt.Print(...)"
+fmt.Print("${1:${VISUAL}}")
+endsnippet
+
+# sprintf
+snippet sf "fmt.Sprintf(...)"
+fmt.Sprintf("${1:%s}", ${2:var})
+endsnippet
+
+# Fmt Sprintln 
+snippet sn "fmt.Sprintln(...)"
+fmt.Sprintln("${1:${VISUAL}}")
+endsnippet
+
+# Fmt Sprint
+snippet sp "fmt.Sprint(...)"
+fmt.Print("${1:${VISUAL}}")
+endsnippet
+
+# Fmt Errorf debug
+snippet ef "fmt.Errorf(...)"
+fmt.Errorf("${1:${VISUAL}}")
+endsnippet
+
+snippet fu "function" b
+func ${1:funcName}(${2}) ${3:error} {
+	${4}
+}
+${0}
+endsnippet
+
+snippet fr "function on receiver" b
+func (${1:receiver} ${2:type}) ${3:funcName}(${4}) ${5:error} {
+	${6}
+}
+${0}
+endsnippet
+
+snippet fh "http.HandlerFunc" !b
+func ${1:handler}(w http.ResponseWriter, r *http.Request) {
+	${2:fmt.Fprintf(w, "hello world")}
+}
+${0}
+endsnippet
+
+snippet fhr "http.HandlerFunc on receiver" !b
+func (${1:receiver} ${2:type}) ${3:methName}(w http.ResponseWriter, r *http.Request) {
+	${4:fmt.Fprintf(w, "hello world")}
+}
+${0}
+endsnippet
+
+snippet hh "mux.Handle(pattern, handler)" !b
+${1:http}.Handle("${2:/}", ${3:Handler}) 
+${0}
+endsnippet
+
+snippet hhf "mux.HandleFunc(pattern, handler func(...))" !b
+${1:http}.HandleFunc("${2:/}", func(w http.ResponseWriter, r *http.Request) {
+	${3:fmt.Fprintf(w, "hello world")}
+})
+${0}
+endsnippet
+
+snippet hf "http.HandlerFunc(HandlerFunc)" 
+http.HandlerFunc(${0:HandlerFunc}) 
+endsnippet
+
+
+snippet vhf "http.HandlerFunc(func(w,r){...})" !b
+${1:hd} := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	${3:fmt.Fprintf(w, "hello world")}
+})
+${0}
+endsnippet
+
+
+snippet mw "func mw( next http.Handler ) http.Handler" !b
+func ${1:myMiddleware}(next http.Handler) http.Handler {
+
+	hd := ${2:http.Handler}
+
+	${3:// TODO: do some middleware config here ...}
+
+	return hd
+}
+endsnippet
+
+snippet mr "func (r receiver) mw( next http.Handler ) http.Handler" !b
+func (${1:receiver} ${2:type}) ${3:myMiddleware}(next http.Handler) http.Handler {
+
+	hd := ${5:http.Handler}
+
+	${6:// TODO: do some middleware config here ...}
+
+	return hd
+}
+endsnippet
+
+snippet mc "middleware: handler closure" !b
+func ${1:myMiddleware}(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		${0:// TODO: Execute our middleware logic here...}
+
+		next.ServeHTTP(w,r)
+	})
+}
+endsnippet
+
+snippet mcr "middleware: handler closure on receiver" !b
+func (${1:receiver} ${2:type}) ${3:myMiddleware}(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		${0:// TODO: Execute our middleware logic here...}
+
+		next.ServeHTTP(w,r)
+	})
+}
+endsnippet
+
+# test function
+snippet ft "func TestXYZ(t *testing.T) { ... }"
+func Test${1:Function}(t *testing.T) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+# test table snippet
+snippet tt
+var tests = []struct {
+	name string
+	expected string
+	given string
+}{
+	{"${1}", "${2}", "${3}",},
+}
+for _, tt := range tests {
+	tt := tt
+	t.Run(tt.name, func(t *testing.T){
+		actual := ${0:${VISUAL}}(tt.given)
+		if actual != tt.expected {
+				t.Errorf("$0(%s): expected %s, actual %s", tt.given, tt.expected, actual)
+		}
+
+	})
+}
+endsnippet
+
+# test error handling
+snippet te "if err != nil { t.Errorf(...) }"
+if ${1:err != nil} {
+	t.Error(${2:err})
+}
+${0}
+endsnippet
+
+# test error handling
+snippet tef "if err != nil { t.Errorf(...) }"
+if ${1:err} != ${2:nil} {
+	t.Errorf("want: %q, got: %q", $1, $2)
+}
+${0}
+endsnippet
+
+# test error handling
+snippet tf "if err != nil { t.Errorf(...) }"
+if ${1:err != nil} {
+	t.Fatal(${2:err})
+}
+${0}
+endsnippet
+
+# test error handling
+snippet tff "if err != nil { t.Errorf(...) }"
+if ${1:err != nil} {
+	t.Fatalf("${2:message}")
+}
+${0}
+endsnippet
+

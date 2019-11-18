@@ -1,0 +1,11 @@
+groups:
+- name: vsftpd.mtail
+  rules:
+  - alert: NoFileReceived
+    expr: increase(vsftpd_transfer_completed_total{user="xxxxx"}[1d])  == 0
+    for: 1d
+    labels:
+      severity: page
+    annotations:
+      summary: "No File Received From (user {{ $labels.user }})"
+      description: "expr: increase(vsftpd_transfer_completed_total{user=\"xxxxx\"}[1d])  == 0"
