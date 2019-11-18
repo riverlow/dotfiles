@@ -79,10 +79,14 @@ else
 	alias P=proxychains
 fi
 
+alias dotfiles='/usr/local/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
+
+alias nmgodoc='GO111MODULE=off godoc'
+alias nmgosdoc='GO111MODULE=off go doc'
+
 alias gitpush='git add . && git commit -m a && git push'
 alias gitcommit='git add . && git commit -m a'
 
-alias dotfiles='/usr/local/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 
 alias k='kubectl'
 
