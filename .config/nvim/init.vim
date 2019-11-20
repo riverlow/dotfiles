@@ -63,7 +63,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-sensible'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'mattn/emmet-vim'
@@ -161,6 +161,7 @@ set wildmenu
 set wrapscan
 set wrap
 
+filetype plugin indent on
 "
 " ============================== mapping ==============================
 "" change the leader key from "\" to ";" ("," is also popular)

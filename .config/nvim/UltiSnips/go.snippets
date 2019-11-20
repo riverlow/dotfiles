@@ -1,17 +1,17 @@
 # shorthand variable initialization
-snippet vk  "v := value" b
+snippet v "v := value" b
 ${1:x} := ${2:value}
 ${0}
 endsnippet
 
 # shorthand err co-equal
-snippet ek "err := value" b
+snippet ve "err := value" b
 err := ${1:value}
 ${0}
 endsnippet
 
 # shorthand var, err co-equal
-snippet vk, "v, err := value" b
+snippet v, "v, err := value" b
 ${1:x}, ${2:err} := ${3:value}
 ${0}
 endsnippet
@@ -43,18 +43,18 @@ ${0}
 endsnippet
 
 # shorthand variable assignment
-snippet vn "v = value" b
+snippet pv "v = value" b
 ${1:name } = ${2:value}
 ${0}
 endsnippet
 
 # shorthand variable assignment
-snippet en "err = value" b
+snippet pe "err = value" b
 err = ${0}
 endsnippet
 
 # shorthand variable assignment for 2 value
-snippet vn, "v, err = value" b
+snippet p, "v, err = value" b
 ${1:name}, ${2:err} = ${3:value}
 ${0}
 endsnippet
@@ -82,6 +82,11 @@ endsnippet
 # byte slice
 snippet bs "[]byte" w
 []byte
+endsnippet
+
+# string slice
+snippet ss "[]byte" w
+[]string
 endsnippet
 
 # time
@@ -225,8 +230,16 @@ else if err == ${1:sth} {
 endsnippet
 
 # if sth is nil
-snippet isn "Error is nil handle" !b
+snippet nl "Is nil handle" !b
 if ${1:condition} == nil {
+	${2:new(something)}
+}
+${0}
+endsnippet
+
+# if sth is not nil
+snippet nn "Is not nil handle" !b
+if ${1:condition} != nil {
 	${2:new(something)}
 }
 ${0}
@@ -487,3 +500,14 @@ if ${1:err != nil} {
 ${0}
 endsnippet
 
+# ============================== vecty ==============================
+snippet cmp "vecty.Component" b
+type ${1:name} struct {
+	vecty.Core
+	${2:property}
+}
+
+func (cmp *$1) Render() vecty.ComponentOrHTML {
+	${0:render}
+}
+endsnippet
