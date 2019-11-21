@@ -362,17 +362,17 @@ let g:go_version_warning = 0
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 " ============================== fzf ==============================
-nnoremap <Leader>fe :FZF -e<Space>
-nnoremap <Leader>ff :FZF<Space>
-nnoremap <Leader>fz :FZF<CR>
-nnoremap <Leader>fl :Lines<CR>
-nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fL :BLines<CR>
-nnoremap <Leader>fT :BTags<CR>
-nnoremap <Leader>fh :FZF ~<CR>
-nnoremap <Leader>fg :FZF ~/go/src<CR>
-nnoremap <Leader>fc :FZF -e ~/.config<CR>
-nnoremap <Leader>fv :FZF -e ~/.vim<CR>
+nnoremap <Leader>de :FZF -e<Space>
+nnoremap <Leader>df :FZF<Space>
+nnoremap <Leader>dz :FZF<CR>
+nnoremap <Leader>dl :Lines<CR>
+nnoremap <Leader>dt :Tags<CR>
+nnoremap <Leader>dL :BLines<CR>
+nnoremap <Leader>dT :BTags<CR>
+nnoremap <Leader>dh :FZF ~<CR>
+nnoremap <Leader>dg :FZF ~/go/src<CR>
+nnoremap <Leader>dc :FZF -e ~/.config<CR>
+nnoremap <Leader>dv :FZF -e ~/.vim<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
 
@@ -591,7 +591,20 @@ let g:EasyMotion_smartcase = 1
 
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
@@ -654,8 +667,8 @@ set background=dark
 " let g:airline_theme='iceberg'
 "
 
-colorscheme moonfly 			" it is weird.
-let g:airline_theme = 'moonfly'
+" colorscheme moonfly 			" it is weird.
+" let g:airline_theme = 'moonfly'
 "
 "
 colorscheme palenight
