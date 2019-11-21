@@ -1,17 +1,17 @@
 # shorthand variable initialization
-snippet v "v := value" b
+snippet k "v := value" b
 ${1:x} := ${2:value}
 ${0}
 endsnippet
 
 # shorthand err co-equal
-snippet ve "err := value" b
+snippet ke "err := value" b
 err := ${1:value}
 ${0}
 endsnippet
 
 # shorthand var, err co-equal
-snippet v, "v, err := value" b
+snippet k, "v, err := value" b
 ${1:x}, ${2:err} := ${3:value}
 ${0}
 endsnippet
@@ -42,8 +42,8 @@ var (
 ${0}
 endsnippet
 
-# shorthand variable assignment
-snippet pv "v = value" b
+# put value
+snippet pu "v = value" b
 ${1:name } = ${2:value}
 ${0}
 endsnippet
@@ -54,7 +54,7 @@ err = ${0}
 endsnippet
 
 # shorthand variable assignment for 2 value
-snippet p, "v, err = value" b
+snippet pu, "v, err = value" b
 ${1:name}, ${2:err} = ${3:value}
 ${0}
 endsnippet
@@ -501,7 +501,7 @@ ${0}
 endsnippet
 
 # ============================== vecty ==============================
-snippet cmp "vecty.Component" b
+snippet vc "vecty.Component" b
 type ${1:name} struct {
 	vecty.Core
 	${2:property}

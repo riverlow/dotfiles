@@ -46,7 +46,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plug 'tpope/vim-eunuch'
-
+" https://github.com/easymotion/vim-easymotion
+Plug 'easymotion/vim-easymotion'
 "
 " ============================== specific ==============================
 Plug 'cespare/vim-toml'
@@ -77,6 +78,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'cocopon/iceberg.vim',
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'bluz71/vim-moonfly-colors'
+Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'connorholyday/vim-snazzy' 			" not clear
+" Plug 'sonph/onehalf' 						" buggy
 " Plug 'tyrannicaltoucan/vim-deep-space'
 " Plug 'endel/vim-github-colorscheme'
 " Plug 'dracula/vim', { 'as': 'dracula' }
@@ -318,6 +322,8 @@ let g:go_auto_sameids = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
+let g:go_gopls_complete_unimported = 1
+
 let g:go_null_module_warning = 0
 let g:go_echo_command_info = 1
 
@@ -325,19 +331,29 @@ let g:go_autodetect_gopath = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint']
 
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 0
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_types = 0
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_format_strings = 0
-let g:go_highlight_function_calls = 0
-let g:go_gocode_propose_source = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_diagnostic_errors = 1
+let g:go_highlight_diagnostic_warnings = 1
+let g:go_highlight_debug = 1
 
 let g:go_modifytags_transform = 'camelcase'
-let g:go_fold_enable = []
+" let g:go_fold_enable = []
 
 let g:go_version_warning = 0
 
@@ -375,39 +391,34 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " ============================== ale ==============================
+nmap <silent> <Leader>ap <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>an <Plug>(ale_next_wrap)
+
+let g:ale_enabled = 1
 " MUST SET THIS
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'go': ['gopls'],
 \}
+let g:ale_disable_lsp = 1
+let g:ale_completion_enabled = 0
+
 " Set this. Airline will handle the rest.
 let g:airline#extensions#ale#enabled = 1
-"
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
-" Set this. Airline will handle the rest.
-let g:airline#extensions#ale#enabled = 1
-nmap <silent> <Leader>ap <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>an <Plug>(ale_next_wrap)
 
 " Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 5
 
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_insert_leave = 1
 " You can disable this option too
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
-
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-
-" let g:ale_open_list = 1
-" Set this if you want to.
-" This can be useful if you are combining ALE with
-" some other plugin which sets quickfix errors, etc.
-" let g:ale_keep_list_window_open = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 "
 " ============================== deoplete ==============================
 let g:deoplete#enable_at_startup = 1
@@ -573,6 +584,24 @@ nmap ga <Plug>(EasyAlign)
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader>at :EasyAlign *<Bar><CR>
 "
+" ============================== easymotion ==============================
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+"
+" ============================== vim-indent-guides ==============================
+" let g:indent_guides_enable_on_vim_startup = 1
+" hi IndentGuidesOdd  ctermbg=black
+" hi IndentGuidesEven ctermbg=darkgrey
+"
 " ============================== vim-table-mode ==============================
 " For Markdown-compatible tables use
 let g:table_mode_corner='|'
@@ -617,17 +646,25 @@ if has('termguicolors')
   set termguicolors
 endif
 
+" ============================== color and theme ==============================
+set background=dark
+"
+"
+" colorscheme iceberg
+" let g:airline_theme='iceberg'
+"
+
+colorscheme moonfly 			" it is weird.
+let g:airline_theme = 'moonfly'
+"
+"
+colorscheme palenight
+let g:airline_theme = "palenight"
+"
 " ============================== airline ==============================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='iceberg'
-" let g:airline_theme = 'moonfly'
 " let g:airline_theme='papercolor'
-
-set background=dark
-" dracula iceberg PaperColor
-colorscheme iceberg
-" it is weird.
-" colorscheme moonfly
+"
 "
 " ============================== functiongs ==============================

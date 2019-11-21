@@ -42,6 +42,7 @@ require (
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
+	github.com/hajimehoshi/wasmserve v0.0.0-20190923141630-74336f2566c1 // indirect
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/intel-go/nff-go v0.9.1 // indirect
 	github.com/ipfs/go-ipfs-util v0.0.1 // indirect
