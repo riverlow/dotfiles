@@ -1,7 +1,8 @@
-export GO111MODULE=off
+go env -w GO111MODULE=on
 
 # bin
 go get -u -v golang.org/x/tools/...
+go get -u -v github.com/hajimehoshi/wasmserve
 go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 go get -u -v github.com/fatih/gomodifytags
 go get -u -v github.com/fatih/motion
@@ -24,6 +25,8 @@ go get -u -v github.com/mitchellh/gox
 go get -u -v github.com/u-root/u-root
 
 # pkg
+go get -u -v github.com/microcosm-cc/bluemonday
+go get -u -v gopkg.in/russross/blackfriday.v2
 go get -u -v bitbucket.org/bertimus9/systemstat              
 go get -u -v github.com/MontFerret/ferret                    
 go get -u -v github.com/armon/go-socks5                      
@@ -38,8 +41,9 @@ go get -u -v github.com/golang/protobuf/protoc-gen-go
 go get -u -v github.com/golangcollege/sessions
 go get -u -v github.com/google/goexpect                      
 go get -u -v github.com/google/gopacket                      
-go get -u -v github.com/gopherjs/gopherjs
-go get -u -v github.com/gopherjs/vecty
+go get -u -v github.com/gopherjs/gopherjs/...
+go get -u -v github.com/gopherjs/vecty/...
+go get -u -v -d github.com/gopherjs/vecty/example
 go get -u -v github.com/gorilla/mux
 go get -u -v github.com/gorilla/sessions
 go get -u -v github.com/gorilla/websocket
@@ -64,6 +68,5 @@ go get -u -v github.com/spf13/viper
 go get -u -v github.com/stretchr/testify/assert              
 go get -u -v github.com/ziutek/telnet                        
 go get -u -v go.uber.org/zap                                 
-go get -u -v golang.org/x/...
 go get -u -v google.golang.org/grpc                          
 go get -u -v gopkg.in/tucnak/telebot.v2                      
