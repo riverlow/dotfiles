@@ -12,15 +12,12 @@ zplugin load zsh-users/zsh-history-substring-search
 
 
 # ============================== Setting ==============================
-TERM=xterm-256color
-EDITOR=vim
-GO111MODULE=on
-GOPATH=~/go
-GOROOT=/usr/local/go
-GOBIN=${GOPATH}/bin
+bindkey -e
+export TERM=xterm-256color
+export EDITOR=vim
 
 typeset -U path
-path=(~/nvim-osx64/bin/ ~/.local/bin ~/.cargo/bin ~/myscripts/bin/ $GOBIN /usr/local/opt/openssl/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin $path[@])
+path=(~/nvim-osx64/bin/ ~/.local/bin ~/.cargo/bin ~/myscripts/bin/ ~/go/bin/ /usr/local/go/bin /usr/local/opt/openssl/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin $path[@])
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 if test "$(uname)" = "Darwin" ; then

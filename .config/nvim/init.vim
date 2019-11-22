@@ -286,8 +286,10 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
 " ============================== vim-plug ==============================
-map <Leader>pi :PlugInstall<cr>
-map <Leader>pu :PlugUpdate<cr>
+map <Leader>I :PlugInstall<cr>
+map <Leader>U :PlugUpdate<cr>
+map <Leader>G :PlugUpgrade<cr>
+map <Leader>C :PlugClean<cr>
 "
 " ============================== vim-go ==============================
 map <Leader>goib :GoInstallBinaries<CR>
@@ -492,7 +494,7 @@ let g:NERDTreeShowIgnoredStatus = 1
 let g:delimitMate_expand_cr = 1   
 let g:delimitMate_expand_space = 1    
 let g:delimitMate_smart_quotes = 1    
-let g:delimitMate_expand_inside_quotes = 0    
+let g:delimitMate_expand_inside_quotes = 1
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   
 
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
