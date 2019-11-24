@@ -5,6 +5,8 @@ go 1.13
 require (
 	9fans.net/go v0.0.2 // indirect
 	bitbucket.org/bertimus9/systemstat v0.0.0-20180207000608-0eeff89b0690 // indirect
+	cloud.google.com/go v0.49.0 // indirect
+	github.com/Azure/go-autorest/autorest v0.9.0 // indirect
 	github.com/ChimeraCoder/gojson v1.1.0 // indirect
 	github.com/MontFerret/ferret v0.9.0 // indirect
 	github.com/ScaleFT/sshkeys v0.0.0-20181112160850-82451a803681 // indirect
@@ -18,8 +20,11 @@ require (
 	github.com/btcsuite/btcd v0.20.1-beta // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/cosiner/argv v0.0.1 // indirect
+	github.com/dave/jsgo v0.0.2 // indirect
+	github.com/dave/wasmgo v0.0.2 // indirect
 	github.com/davidrjenni/reftools v0.0.0-20191020193632-c872ffe85332 // indirect
 	github.com/dchest/bcrypt_pbkdf v0.0.0-20150205184540-83f37f9c154a // indirect
+	github.com/dennwc/dom v0.3.0 // indirect
 	github.com/docopt/docopt-go v0.0.0-20180111231733-ee0de3bc6815 // indirect
 	github.com/fatih/gomodifytags v1.0.1 // indirect
 	github.com/fatih/motion v1.0.0 // indirect
@@ -42,6 +47,7 @@ require (
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
+	github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7 // indirect
 	github.com/hajimehoshi/wasmserve v0.0.0-20190923141630-74336f2566c1 // indirect
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/intel-go/nff-go v0.9.1 // indirect
@@ -50,7 +56,7 @@ require (
 	github.com/jlaffaye/ftp v0.0.0-20191025175106-a59fe673c9b2 // indirect
 	github.com/jmoiron/sqlx v1.2.0 // indirect
 	github.com/josharian/impl v0.0.0-20191119165012-6b9658ad00c7 // indirect
-	github.com/json-iterator/go v1.1.8 // indirect
+	github.com/jstemmer/go-junit-report v0.9.1 // indirect
 	github.com/jstemmer/gotags v1.4.1 // indirect
 	github.com/justinas/alice v1.2.0 // indirect
 	github.com/justinas/nosurf v1.1.0 // indirect
@@ -78,6 +84,7 @@ require (
 	github.com/libp2p/go-stream-muxer v0.1.0 // indirect
 	github.com/libp2p/go-ws-transport v0.1.2 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
+	github.com/mattn/go-oci8 v0.0.0-20191108001511-cbd8d5bc1da0 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/mattn/go-shellwords v1.0.6 // indirect
 	github.com/mattn/go-sqlite3 v2.0.0+incompatible // indirect
@@ -86,10 +93,10 @@ require (
 	github.com/multiformats/go-multiaddr v0.1.2 // indirect
 	github.com/multiformats/go-multiaddr-dns v0.2.0 // indirect
 	github.com/multiformats/go-multihash v0.0.9 // indirect
-	github.com/neelance/astrewrite v0.0.0-20160511093645-99348263ae86 // indirect
-	github.com/neelance/sourcemap v0.0.0-20151028013722-8c68805598ab // indirect
+	github.com/norunners/vue v0.0.0-20190428171114-cdefdbc96268 // indirect
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/peterh/liner v1.1.0 // indirect
+	github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 // indirect
 	github.com/prometheus/alertmanager v0.19.0 // indirect
 	github.com/prometheus/client_golang v1.2.1 // indirect
 	github.com/prometheus/procfs v0.0.7 // indirect
@@ -112,6 +119,7 @@ require (
 	github.com/spf13/viper v1.5.0 // indirect
 	github.com/u-root/u-root v6.0.0+incompatible // indirect
 	github.com/uudashr/gocognit v1.0.0 // indirect
+	github.com/vugu/vugu v0.1.0 // indirect
 	github.com/whyrusleeping/go-logging v0.0.1 // indirect
 	github.com/whyrusleeping/go-smux-multiplex v3.0.16+incompatible // indirect
 	github.com/whyrusleeping/go-smux-multistream v2.0.2+incompatible // indirect
@@ -127,17 +135,22 @@ require (
 	go.uber.org/multierr v1.4.0 // indirect
 	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/arch v0.0.0-20191101135251-a0d8588395bd // indirect
-	golang.org/x/crypto v0.0.0-20191119213627-4f8c1d86b1ba // indirect
+	golang.org/x/crypto v0.0.0-20191122220453-ac88ee75c92c // indirect
 	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914 // indirect
+	golang.org/x/oauth2 v0.0.0-20191122200657-5d9234df094c // indirect
 	golang.org/x/sys v0.0.0-20191120155948-bd437916bb0e // indirect
-	golang.org/x/tools v0.0.0-20191121040551-947d4aa89328 // indirect
+	golang.org/x/tools v0.0.0-20191124021906-f5828fc9a103 // indirect
 	golang.org/x/xerrors v0.0.0-20191011141410-1b5146add898 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	gopkg.in/russross/blackfriday.v2 v2.0.0 // indirect
+	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect
 	gopkg.in/tucnak/telebot.v2 v2.0.0-20191005061224-d0707a9d73c4 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
+	k8s.io/api v0.0.0-20191121015604-11707872ac1c // indirect
+	k8s.io/apimachinery v0.0.0-20191123013113-aee2c0efe032 // indirect
+	k8s.io/utils v0.0.0-20191114184206-e782cd3c129f // indirect
 	mvdan.cc/unparam v0.0.0-20191111180625-960b1ec0f2c2 // indirect
 	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect
 )

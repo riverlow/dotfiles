@@ -48,6 +48,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 " https://github.com/easymotion/vim-easymotion
 Plug 'easymotion/vim-easymotion'
+Plug 't9md/vim-choosewin'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'tpope/vim-repeat'
 "
 " ============================== specific ==============================
 Plug 'cespare/vim-toml'
@@ -55,19 +58,18 @@ Plug 'elzr/vim-json', {'for' : 'json'}
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 Plug 'corylanou/vim-present', {'for' : 'present'}
 Plug 'plasticboy/vim-markdown'
-Plug 't9md/vim-choosewin'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. 
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-sensible'
 "Plug 'ervandew/supertab'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-haml'
 "
 " ============================== color and theme ==============================
 Plug 'vim-airline/vim-airline'
@@ -105,11 +107,17 @@ set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
 " o       Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
 " tcroqwan2vblmMB1j
 set formatoptions+=cqnmMB1j
-set fo-=trowa2vbl
-
-
+set formatoptions-=trowa2vbl
 scriptencoding utf-8
+set encoding=utf-8
+set nocompatible
+set number                   " Show line numbers
+set numberwidth=5
 set autoindent
+set noexpandtab
+set shiftwidth=4
+set tabstop=4
+
 set autowrite                " Automatically save before :next, :make etc.
 set belloff+=ctrlg           " If Vim beeps during completion
 set cmdheight=2
@@ -118,7 +126,6 @@ set completeopt-=preview,noselect
 set conceallevel=2           " Concealed text is completely hidden
 set cursorline
 set display=lastline
-set encoding=utf-8
 set fileformats=unix,dos,mac " Prefer Unix over Windows over OS 9 formats
 set grepprg=grep\ -nH
 set hidden
@@ -135,7 +142,6 @@ set mouse=a                  " Enable mouse mode
 set nobackup                 " Don't create annoying backup files
 set nocursorcolumn           " speed up syntax highlighting
 set noerrorbells             " No beeps
-set noexpandtab
 set noimcmdline
 set noimdisable
 set noshowmatch              " Do not show matching brackets by flickering
@@ -143,12 +149,8 @@ set noshowmode               " We show the mode with airline or lightline
 set nosmartindent
 set noswapfile               " Don't use swapfile
 set nrformats-=octal
-set number                   " Show line numbers
-set numberwidth=5
-set pumheight=10             " Completion window max size
 set scrolloff=8
 set shiftround
-set shiftwidth=4
 set shortmess+=c             " Shut off completion messages
 set shortmess=acTI
 set showcmd
@@ -158,24 +160,37 @@ set sidescrolloff=16
 set smartcase                " ... but not it begins with upper case
 set splitbelow               " Split horizontal windows below to the current windows
 set splitright               " Split vertical windows right to the current windows
-set tabstop=4
 set updatetime=300
 set virtualedit=block
 set wildmenu
 set wrapscan
 set wrap
 
-filetype plugin indent on
+"
+"
 "
 " ============================== mapping ==============================
-"" change the leader key from "\" to ";" ("," is also popular)
-let mapleader=";"
+" let mapleader = "\<space>"
+" let mapleader=";"
+let mapleader=","
+"
+" I don't like it. Not easy to fzf current dir.
+" Enter automatically into the files directory
+" autocmd BufEnter * silent! lcd %:p:h
+" map <Leader>cd :pwd<cr>
+"map <Leader>wp :echo expand("%:p")<cr>
+map <Leader>lc :lcd %:p:h<cr>
+"
+" Automatically resize screens to be equally the same
+autocmd VimResized * wincmd =
+
 "
 " Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
 nmap <silent> <leader>er :e $MYVIMRC<CR>
 " Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
 nmap <silent> <leader>re :source $MYVIMRC<CR>
 "
+imap <C-A> <Esc>I
 imap <C-D> <Left>
 imap <C-F> <Right>
 nmap  <Leader>U <Esc>gUiwea
@@ -195,6 +210,8 @@ nmap N Nzzzv
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
 
+" Center the screen
+nnoremap <space> zz
 "
 " Turn off the IME when escaping from Insert mode
 imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
@@ -215,6 +232,7 @@ cmap <C-n> <Down>
 " cmap <Down> <C-n>
 "
 nnoremap <silent> <leader>wr :w<CR>
+nnoremap <silent> <leader>q :q<CR>
 " Remove search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
 function! s:clear_highlight()
@@ -243,7 +261,7 @@ map <Leader>p "*p
 " nn == nnoremap
 "To define a mapping which will not be echoed on the command line, add
 "<silent>" as the first argument. 
-nmap <Leader>ba :ls<CR>
+nmap <Leader>ls :ls<CR>
 " list and select buffer
 nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
 
@@ -261,6 +279,13 @@ nmap <silent> <leader>bk :bd!<CR>
 nmap <silent> <leader>br :br<CR>
 nmap <silent> <leader>bf :bf<CR>
 nmap <silent> <leader>bl :bl<CR>
+
+nmap <silent> <Leader>ma :marks<CR>
+
+" ============================== explore ==============================
+nmap <silent> <Leader>ex :Explore<CR>
+
+
 
 nmap <silent> <leader>te :terminal<CR>
 tmap <C-x> <C-\><C-n><C-w>q
@@ -282,15 +307,34 @@ tmap <C-k> <C-w>k
 tmap <C-l> <C-w>l
 endif
 
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
+" https://www.reddit.com/r/neovim/comments/akcp97/how_to_automatically_enter_insert_mode_on_opening/
+augroup insertonenter
+	function! InsertOnTerminal()
+		if &buftype ==# "terminal"
+			normal i
+		endif
+	endfunction
+
+	autocmd! BufEnter * call InsertOnTerminal()
+	if has('nvim')
+		autocmd! TermOpen * call InsertOnTerminal()
+	endif
+augroup END
 
 " ============================== vim-plug ==============================
-map <Leader>I :PlugInstall<cr>
-map <Leader>U :PlugUpdate<cr>
-map <Leader>G :PlugUpgrade<cr>
-map <Leader>C :PlugClean<cr>
+map <Leader>vpi :PlugInstall<cr>
+map <Leader>vpu :PlugUpdate<cr>
+map <Leader>vpg :PlugUpgrade<cr>
+map <Leader>vpc :PlugClean<cr>
 "
+" ============================== golang ==============================
+" Some Linux distributions set filetype in /etc/vimrc.
+" Clear filetype flags before changing runtimepath to force Vim to reload them.
+filetype off
+filetype plugin indent off
+filetype plugin indent on
+syntax on
+
 " ============================== vim-go ==============================
 map <Leader>goib :GoInstallBinaries<CR>
 map <Leader>goub :GoUpdateBinaries<CR>
@@ -333,11 +377,11 @@ let g:go_autodetect_gopath = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint']
 
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_chan_whitespace_error = 0
 let g:go_highlight_extra_types = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_parameters = 1
@@ -364,17 +408,18 @@ let g:go_version_warning = 0
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 " ============================== fzf ==============================
-nnoremap <Leader>de :FZF -e<Space>
-nnoremap <Leader>df :FZF<Space>
-nnoremap <Leader>dz :FZF<CR>
-nnoremap <Leader>dl :Lines<CR>
-nnoremap <Leader>dt :Tags<CR>
-nnoremap <Leader>dL :BLines<CR>
-nnoremap <Leader>dT :BTags<CR>
-nnoremap <Leader>dh :FZF ~<CR>
-nnoremap <Leader>dg :FZF ~/go/src<CR>
-nnoremap <Leader>dc :FZF -e ~/.config<CR>
-nnoremap <Leader>dv :FZF -e ~/.vim<CR>
+nnoremap <Leader>fe :FZF -e<Space>
+nnoremap <Leader>ff :FZF<Space>
+nnoremap <Leader>fz :FZF<CR>
+nnoremap <Leader>fl :Lines<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fL :BLines<CR>
+nnoremap <Leader>fT :BTags<CR>
+nnoremap <Leader>fh :FZF ~<CR>
+nnoremap <Leader>fg :FZF ~/go/src<CR>
+nnoremap <Leader>fc :FZF ~/.config<CR>
+nnoremap <Leader>fv :FZF ~/.vim<CR>
+nnoremap <Leader>fm :FZF ~/go/pkg/mod/<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
 
@@ -402,25 +447,33 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'go': ['gopls'],
 \}
-let g:ale_disable_lsp = 1
+let g:ale_disable_lsp = 0
+let g:ale_lint_delay = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
+
+let g:ale_set_highlights = 0
+
 let g:ale_completion_enabled = 0
 
-" Set this. Airline will handle the rest.
-let g:airline#extensions#ale#enabled = 1
+let g:ale_set_signs = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
 
+let g:ale_open_list = 0
 " Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 5
-
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
+
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
 "
 " ============================== deoplete ==============================
 let g:deoplete#enable_at_startup = 1
@@ -462,7 +515,7 @@ let g:tagbar_type_go = {
 	\ }
 
 " ============================== nerdtree ==============================
-map <Leader>wd :NERDTreeToggle<cr>
+map <Leader>wn :NERDTreeToggle<cr>
 map <Leader>nf :NERDTreeFind<cr>
 
 let NERDTreeShowHidden=1
@@ -584,7 +637,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Align GitHub-flavored Markdown tables
-au FileType markdown vmap <Leader>at :EasyAlign *<Bar><CR>
+au FileType markdown vmap <Leader>alb :EasyAlign *<Bar><CR>
 "
 " ============================== easymotion ==============================
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -594,15 +647,15 @@ let g:EasyMotion_smartcase = 1
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
 " <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Leader>m <Plug>(easymotion-bd-f)
+nmap <Leader>m <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>M <Plug>(easymotion-bd-jk)
+nmap <Leader>M <Plug>(easymotion-overwin-line)
 
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
@@ -612,17 +665,20 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 "
-" ============================== vim-indent-guides ==============================
-" let g:indent_guides_enable_on_vim_startup = 1
-" hi IndentGuidesOdd  ctermbg=black
-" hi IndentGuidesEven ctermbg=darkgrey
-"
 " ============================== vim-table-mode ==============================
 " For Markdown-compatible tables use
 let g:table_mode_corner='|'
 " To get ReST-compatible tables use
 " let g:table_mode_corner_corner='+'
 " let g:table_mode_header_fillchar='='
+" 
+"
+" ============================== tabular ==============================
+let g:tabular_loaded = 1
+nmap <Leader>r/ :Tabularize /
+nmap <Leader>r, :Tabularize /,
+nmap <Leader>r< :Tabularize /<
+nmap <Leader>r: :Tabularize /:
 "
 " ============================== vim-xkbswitch ==============================
 if has('mac')
@@ -634,8 +690,8 @@ let g:XkbSwitchEnabled = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,tmpl EmmetInstall
 
-" ============================== misc ==============================
-nmap - <Plug>(choosewin)
+" ============================== choosewin ==============================
+nmap W <Plug>(choosewin)
 
 " ============================== vim-json ==============================
 let g:vim_json_syntax_conceal = 0

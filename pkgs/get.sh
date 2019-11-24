@@ -25,6 +25,10 @@ go get -u -v github.com/mitchellh/gox
 go get -u -v github.com/u-root/u-root
 
 # pkg
+go get -u -v github.com/vugu/vugu/...
+go get -u -v github.com/vugu/vugu/cmd/...
+go get -u -v github.com/mattn/go-oci8
+go get -u -v k8s.io/client-go@master
 go get -u -v github.com/microcosm-cc/bluemonday
 go get -u -v gopkg.in/russross/blackfriday.v2
 go get -u -v bitbucket.org/bertimus9/systemstat              
@@ -54,7 +58,6 @@ go get -u -v github.com/jmoiron/sqlx
 go get -u -v github.com/justinas/alice                       
 go get -u -v github.com/justinas/nosurf
 go get -u -v github.com/lib/pq                               
-go get -u -v github.com/libp2p/go-libp2p                     
 go get -u -v github.com/mattn/go-shellwords                  
 go get -u -v github.com/mattn/go-sqlite3                     
 go get -u -v github.com/prometheus/alertmanager/template
