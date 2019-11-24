@@ -1,7 +1,6 @@
 go env -w GO111MODULE=on
 
 # bin
-go get -u -v golang.org/dl/gotip
 go get -u -v golang.org/x/tools/...
 go get -u -v github.com/hajimehoshi/wasmserve
 go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
