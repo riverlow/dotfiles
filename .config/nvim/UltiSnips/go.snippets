@@ -270,7 +270,7 @@ fmt.Println("${1:${VISUAL}}")
 endsnippet
 
 # Fmt Print debug
-snippet p "fmt.Print(...)"
+snippet pr "fmt.Print(...)"
 fmt.Print("${1:${VISUAL}}")
 endsnippet
 
@@ -484,16 +484,4 @@ if ${1:err != nil} {
 	t.Fatalf("${2:message}")
 }
 ${0}
-endsnippet
-
-# ============================== vecty ==============================
-snippet vc "vecty.Component" b
-type ${1:name} struct {
-	vecty.Core
-	${2:property}
-}
-
-func (${2:c} *$1) Render() vecty.ComponentOrHTML {
-	return ${0:ComponentOrHTML}
-}
 endsnippet

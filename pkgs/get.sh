@@ -1,6 +1,7 @@
 go env -w GO111MODULE=on
 
 # bin
+go get -u -v golang.org/dl/gotip
 go get -u -v golang.org/x/tools/...
 go get -u -v github.com/hajimehoshi/wasmserve
 go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
@@ -25,6 +26,8 @@ go get -u -v github.com/mitchellh/gox
 go get -u -v github.com/u-root/u-root
 
 # pkg
+go get -u -v golang.org/x/oauth2
+go get -u -v gioui.org/...
 go get -u -v github.com/vugu/vugu/...
 go get -u -v github.com/vugu/vugu/cmd/...
 go get -u -v github.com/mattn/go-oci8

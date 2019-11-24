@@ -247,9 +247,8 @@ function! s:echoBinary()
 endfunction
 nnoremap <silent> gb :<C-u>call <SID>echoBinary()<CR>
 
-map <Leader>y "*y
-map <Leader>Y "*Y
-map <Leader>p "*p
+map P "*p
+map Y "*y
 "
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
