@@ -9,23 +9,23 @@ err := ${1}
 endsnippet
 
 # shorthand var, err co-equal
-snippet k, "v, err := value" b
+snippet kk "v, err := value" b
 ${1}, ${2:err} := ${3}
 endsnippet
 
 # variable initialization
-snippet va "var x = Type{...}" b
-var ${1:name} = ${2:Type}
+snippet v "var x Type" b
+var ${1:name} ${2:type}
 endsnippet
 
-# variable declaration
-snippet vd "var x Type" b
-var ${1:name} ${2:Type}
+# variable initialization
+snippet va "var x = Type{...}" b
+var ${1:name} = ${0:value}
 endsnippet
 
 # variable declaration
 snippet var "var x Type [= ...]"
-var ${1:name} ${2:Type} = ${3:value}}
+var ${1:name} ${2:Type} = ${3:value}
 endsnippet
 
 # variables declaration
@@ -37,7 +37,7 @@ ${0}
 endsnippet
 
 # put value
-snippet pu "v = value" b
+snippet p "v = value" b
 ${1} = ${2}
 endsnippet
 
@@ -47,16 +47,23 @@ err = ${0}
 endsnippet
 
 # shorthand variable assignment for 2 value
-snippet pu, "v, err = value" b
+snippet pp "v, err = value" b
 ${1:name}, ${2:err} = ${3}
 endsnippet
 
-# struct
-snippet st "type T struct { ... }" b
-type ${1:Type} struct {
-	${2}
-}
-${0}
+# type alias
+snippet r "return nil" b
+return ${0:nil}
+endsnippet
+
+# type alias
+snippet re "return err" b
+return ${0:err}
+endsnippet
+
+# type alias
+snippet rr "return v, err" b
+return ${1:v}, ${0:err}
 endsnippet
 
 # type alias
@@ -64,8 +71,22 @@ snippet t "type T Type" b
 type ${1:T} ${2:struct{}} 
 endsnippet
 
+# struct
+snippet ts "type T struct { ... }" b
+type ${1:Type} struct {
+	${2}
+}
+endsnippet
+
+# struct
+snippet ti "type T interface { ... }" b
+type ${1:Type} interface {
+	${2}
+}
+endsnippet
+
 # A Buffer needs no initialization.
-snippet bf "var buf bytes.Buffer" b
+snippet buf "var buf bytes.Buffer" b
 var buf bytes.Buffer
 endsnippet
 

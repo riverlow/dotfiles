@@ -136,7 +136,8 @@ set imsearch=-1
 set incsearch                " Shows the match while typing
 set laststatus=2
 set lazyredraw
-set listchars=eol:¬,tab:▸\
+"set listchars=eol:¬,tab:▸\
+set list listchars=tab:\|\ 
 set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
 set mouse=a                  " Enable mouse mode
 set nobackup                 " Don't create annoying backup files
@@ -217,10 +218,10 @@ nnoremap <space> zz
 imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 
 " Switch active window
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
+nmap <C-h> <C-w> h
+nmap <C-j> <C-w> j
+nmap <C-k> <C-w> k
+nmap <C-l> <C-w> l
 " Close all but the current one
 nmap <leader>o :only<CR>
 "
@@ -250,6 +251,9 @@ nnoremap <silent> gb :<C-u>call <SID>echoBinary()<CR>
 map P "*p
 map Y "*y
 "
+" ============================== tab ==============================
+nmap <silent> <leader>tn :tabnew<CR>
+" ============================== buffer ==============================
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
 " \l       : list buffers
@@ -337,19 +341,16 @@ syntax on
 " ============================== vim-go ==============================
 map <Leader>goib :GoInstallBinaries<CR>
 map <Leader>goub :GoUpdateBinaries<CR>
-au Filetype go nmap <Leader>got :GoTest<CR>
-au Filetype go nmap <Leader>gotf :GoTestFunc<CR>
-au Filetype go nmap <Leader>goc :GoCoverageToggle -short<CR>
-au Filetype go nmap <leader>goa <Plug>(go-alternate-edit)
-au Filetype go nmap <leader>goah <Plug>(go-alternate-split)
-au Filetype go nmap <leader>goav <Plug>(go-alternate-vertical)
-au FileType go nmap <leader>gor <Plug>(go-run-tab)
-au FileType go nmap <Leader>gors <Plug>(go-run-split)
-au FileType go nmap <Leader>gorv <Plug>(go-run-vertical)
-
-" pls don't add this config. this will cause message "press ENTER or type
-" command to continue"
-" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+au Filetype go nmap <Leader>tt :GoTest<CR>
+au Filetype go nmap <Leader>tf :GoTestFunc<CR>
+au Filetype go nmap <Leader>cv :GoCoverageToggle -short<CR>
+au Filetype go nmap <leader>gae <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gas <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <Leader>rs <Plug>(go-run-split)
+au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
+au FileType go nmap <Leader>im :GoImpl<space>
 
 " https://github.com/fatih/vim-go-tutorial
 let g:go_fmt_fail_silently = 1
@@ -361,20 +362,12 @@ let g:go_debug_windows = {
 
 let g:go_test_prepend_name = 1
 let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 0
-
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
+let g:go_auto_type_info = 0
 
 let g:go_gopls_complete_unimported = 1
 
 let g:go_null_module_warning = 0
 let g:go_echo_command_info = 1
-
-let g:go_autodetect_gopath = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_enabled = ['vet', 'golint']
 
 let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_chan_whitespace_error = 0
@@ -440,13 +433,14 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 nmap <silent> <Leader>ap <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>an <Plug>(ale_next_wrap)
 
+let g:ale_completion_enabled = 0
 let g:ale_enabled = 1
+let g:ale_disable_lsp = 0
 " MUST SET THIS
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'go': ['gopls'],
 \}
-let g:ale_disable_lsp = 0
 let g:ale_lint_delay = 0
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
@@ -458,10 +452,9 @@ let g:ale_lint_on_enter = 0
 
 let g:ale_set_highlights = 0
 
-let g:ale_completion_enabled = 0
 
-let g:ale_set_signs = 1
-let g:ale_sign_column_always = 1
+let g:ale_set_signs = 0
+let g:ale_sign_column_always = 0
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
 

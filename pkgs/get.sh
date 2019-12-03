@@ -1,6 +1,9 @@
+#!/bin/bash
+
 go env -w GO111MODULE=on
 
 # bin
+if [[ $1 == "bin" ]]; then
 go get -u -v golang.org/x/tools/...
 go get -u -v github.com/hajimehoshi/wasmserve
 go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
@@ -18,17 +21,20 @@ go get -u -v github.com/zmb3/gogetdoc
 go get -u -v golang.org/x/lint/golint
 go get -u -v honnef.co/go/tools/cmd/keyify
 go get -u -v github.com/ChimeraCoder/gojson/gojson           
-go get -u -v github.com/google/mtail/cmd/mtail
 go get -u -v github.com/jstemmer/gotags                      
 go get -u -v github.com/messagebird/sachet
 go get -u -v github.com/mitchellh/gox                        
-go get -u -v github.com/u-root/u-root
+go get -u -v github.com/fogleman/primitive
+go get -u -v github.com/restic/restic
+
+exit 0
+fi
 
 # pkg
+go get -u -v cloud.google.com/go
 go get -u -v golang.org/x/oauth2
 go get -u -v gioui.org/...
-go get -u -v github.com/vugu/vugu/...
-go get -u -v github.com/vugu/vugu/cmd/...
+go get -u -v gioui.org/cmd/...
 go get -u -v github.com/mattn/go-oci8
 go get -u -v k8s.io/client-go@master
 go get -u -v github.com/microcosm-cc/bluemonday
@@ -38,7 +44,6 @@ go get -u -v github.com/MontFerret/ferret
 go get -u -v github.com/armon/go-socks5                      
 go get -u -v github.com/bmizerany/pat
 go get -u -v github.com/free/sql_exporter                    
-go get -u -v github.com/go-chi/chi
 go get -u -v github.com/go-playground/validator/v10
 go get -u -v github.com/go-sql-driver/mysql
 go get -u -v github.com/go-telegram-bot-api/telegram-bot-api 
@@ -47,9 +52,6 @@ go get -u -v github.com/golang/protobuf/protoc-gen-go
 go get -u -v github.com/golangcollege/sessions
 go get -u -v github.com/google/goexpect                      
 go get -u -v github.com/google/gopacket                      
-go get -u -v github.com/gopherjs/gopherjs/...
-go get -u -v github.com/gopherjs/vecty/...
-go get -u -v -d github.com/gopherjs/vecty/example
 go get -u -v github.com/gorilla/mux
 go get -u -v github.com/gorilla/sessions
 go get -u -v github.com/gorilla/websocket

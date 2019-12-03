@@ -47,6 +47,8 @@ zle -N down-line-or-beginning-search
 
 
 # ============================== alias ==============================
+alias dotfiles="$(which git) --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
+
 if test "$(uname)" = "Darwin" ; then
 	alias ls='ls -G'
 	alias P=proxychains4
@@ -55,14 +57,8 @@ else
 	alias P=proxychains
 fi
 
-alias dotfiles='/usr/local/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
-
-alias nmgodoc='GO111MODULE=off godoc'
-alias nmgosdoc='GO111MODULE=off go doc'
-
 alias gitpush='git add . && git commit -m a && git push'
 alias gitcommit='git add . && git commit -m a'
-
 
 alias k='kubectl'
 
