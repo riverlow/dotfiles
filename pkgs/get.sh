@@ -26,16 +26,20 @@ go get -u -v github.com/messagebird/sachet
 go get -u -v github.com/mitchellh/gox                        
 go get -u -v github.com/fogleman/primitive
 go get -u -v github.com/restic/restic
+go get -u -v github.com/google/gops
+go get -u -v github.com/zenhack/socks2http
 
 exit 0
 fi
 
 # pkg
-go get -u -v cloud.google.com/go
+go get -u -v github.com/go-gl/glfw/v3.3/glfw
+go get -u -v github.com/go-gl/gl/v4.6-core/gl
 go get -u -v golang.org/x/oauth2
 go get -u -v gioui.org/...
 go get -u -v gioui.org/cmd/...
 go get -u -v github.com/mattn/go-oci8
+go get -u -v cloud.google.com/go
 go get -u -v k8s.io/client-go@master
 go get -u -v github.com/microcosm-cc/bluemonday
 go get -u -v gopkg.in/russross/blackfriday.v2
@@ -69,7 +73,7 @@ go get -u -v github.com/prometheus/client_golang/...
 go get -u -v github.com/prometheus/common/model              
 go get -u -v github.com/reconquest/orgalorg                  
 go get -u -v github.com/shurcooL/goexec                      
-go get -u -v github.com/spf13/cobra                          
+go get -u -v github.com/spf13/cobra/cobra
 go get -u -v github.com/spf13/pflag                          
 go get -u -v github.com/spf13/viper                          
 go get -u -v github.com/stretchr/testify/assert              
