@@ -6,7 +6,6 @@ dotfiles add $HOME/README.md
 dotfiles add $HOME/.gitignore
 
 dotfiles add $HOME/myscripts/
-dotfiles add $HOME/pkgs/
 
 dotfiles add $HOME/.zshrc
 

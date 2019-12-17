@@ -667,10 +667,11 @@ let g:table_mode_corner='|'
 "
 " ============================== tabular ==============================
 let g:tabular_loaded = 1
-nmap <Leader>r/ :Tabularize /
-nmap <Leader>r, :Tabularize /,
-nmap <Leader>r< :Tabularize /<
-nmap <Leader>r: :Tabularize /:
+nmap <Leader>ta\ :Tabularize /\\
+nmap <Leader>ta/ :Tabularize /
+nmap <Leader>ta, :Tabularize /,
+nmap <Leader>ta< :Tabularize /<
+nmap <Leader>ta: :Tabularize /:
 "
 " ============================== vim-xkbswitch ==============================
 if has('mac')
