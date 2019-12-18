@@ -41,14 +41,15 @@ if [[ $1 == "bin" ]]; then
 fi
 
 # pkg
-go get -v gioui.org/...
-go get -v github.com/MontFerret/ferret
-go get -v github.com/go-gl/gl/v4.6-core/gl
-go get -v github.com/go-gl/glfw/v3.3/glfw
-go get -v github.com/intel-go/nff-go/flow
-go get -v github.com/intel-go/nff-go/packet
-go get -v github.com/mattn/go-oci8
-go get -v github.com/u-root/u-root
+go get -u -v gioui.org/...
+go get -u -v github.com/prometheus/client_golang/...
+go get -u -v github.com/MontFerret/ferret
+go get -u -v github.com/go-gl/gl/v4.6-core/gl
+go get -u -v github.com/go-gl/glfw/v3.3/glfw
+go get -u -v github.com/intel-go/nff-go/flow
+go get -u -v github.com/intel-go/nff-go/packet
+go get -u -v github.com/mattn/go-oci8
+go get -u -v github.com/u-root/u-root
 
 go build
 rm -f main
