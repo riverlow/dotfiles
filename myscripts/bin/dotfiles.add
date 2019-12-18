@@ -19,5 +19,9 @@ dotfiles add $HOME/.config/nvim/UltiSnips/
 dotfiles add $HOME/.config/mpv/mpv.conf
 dotfiles add $HOME/.config/youtube-dl/config
 
+
+dotfiles add $HOME/pkgs/get.sh
+dotfiles add $HOME/pkgs/main.go
+
 dotfiles status
 
