@@ -20,8 +20,9 @@ dotfiles add $HOME/.config/mpv/mpv.conf
 dotfiles add $HOME/.config/youtube-dl/config
 
 
-dotfiles add $HOME/pkgs/gitget.sh
-dotfiles add $HOME/pkgs/get.sh
+dotfiles add $HOME/pkgs/0get.sh
+dotfiles add $HOME/pkgs/1privget.sh
+dotfiles add $HOME/pkgs/2gitget.sh
 dotfiles add $HOME/pkgs/main.go
 
 dotfiles status
