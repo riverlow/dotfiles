@@ -1,6 +1,4 @@
-# prerequests
-sudo apt install python python-pip gcc tmux zsh rsync 
-
+#!/bin/bash
 # must use --user, or it will warn PermissionError
 # the destination dir is .local/
 pip3 install --user --upgrade msgpack greenlet pynvim

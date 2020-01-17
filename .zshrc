@@ -13,7 +13,7 @@ zplugin load zsh-users/zsh-history-substring-search
 
 # ============================== Setting ==============================
 bindkey -e
-#export TERM=xterm-256color
+export TERM=xterm-256color
 export EDITOR=vim
 
 typeset -U path

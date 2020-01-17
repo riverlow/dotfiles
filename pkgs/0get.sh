@@ -36,7 +36,6 @@ if [[ $1 == "bin" ]]; then
         go get -u -v golang.org/x/lint/golint
         go get -u -v golang.org/x/tools/...
         go get -u -v honnef.co/go/tools/cmd/keyify
-        go get -u -v github.com/mehrdadrad/radvpn
 
         exit 0
 fi
@@ -49,6 +48,8 @@ if [[ $1 == "pkg" ]]; then
         go get -u -v github.com/prometheus/client_golang/...
         go get -u -v github.com/MontFerret/ferret
         go get -u -v github.com/u-root/u-root
+		go get -u -v fyne.io/fyne
+		go get -u -v fyne.io/fyne_demo
         #go get -u -v github.com/mattn/go-oci8
 
         exit 0
