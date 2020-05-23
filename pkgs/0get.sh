@@ -9,6 +9,7 @@ fi
 
 # bin
 if [[ $1 == "bin" ]]; then
+		go get -u -v github.com/vugu/vgrun
         go get -u -v github.com/ChimeraCoder/gojson/gojson
         go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
         go get -u -v github.com/fatih/gomodifytags
@@ -36,7 +37,7 @@ if [[ $1 == "bin" ]]; then
         go get -u -v golang.org/x/lint/golint
         go get -u -v golang.org/x/tools/...
         go get -u -v honnef.co/go/tools/cmd/keyify
-
+		go get -u -v github.com/gopherjs/gopherjs
         exit 0
 fi
 
@@ -49,7 +50,6 @@ if [[ $1 == "pkg" ]]; then
         go get -u -v github.com/MontFerret/ferret
         go get -u -v github.com/u-root/u-root
 		go get -u -v fyne.io/fyne
-		go get -u -v fyne.io/fyne_demo
         #go get -u -v github.com/mattn/go-oci8
 
         exit 0

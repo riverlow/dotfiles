@@ -59,8 +59,8 @@ Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 Plug 'corylanou/vim-present', {'for' : 'present'}
 Plug 'plasticboy/vim-markdown'
 Plug 'roxma/vim-tmux-clipboard'
-Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
-Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
+"Plug 'tmux-plugins/vim-tmux-focus-events'
 " I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-scriptease'
@@ -77,10 +77,11 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'joshdick/onedark.vim'
 " Plug 'ayu-theme/ayu-vim'
-Plug 'cocopon/iceberg.vim',
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'bluz71/vim-moonfly-colors'
-Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'cocopon/iceberg.vim',
+" Plug 'NLKNguyen/papercolor-theme'
+" Plug 'bluz71/vim-moonfly-colors'
+" Plug 'drewtempelmeyer/palenight.vim'
+Plug 'kaicataldo/material.vim'
 " Plug 'connorholyday/vim-snazzy' 			" not clear
 " Plug 'sonph/onehalf' 						" buggy
 " Plug 'tyrannicaltoucan/vim-deep-space'
@@ -126,7 +127,7 @@ set completeopt-=preview,noselect
 set conceallevel=2           " Concealed text is completely hidden
 set cursorline
 set display=lastline
-set fileformats=unix,dos,mac " Prefer Unix over Windows over OS 9 formats
+set fileformats=unix,mac,dos " Prefer Unix over Windows over OS 9 formats
 set grepprg=grep\ -nH
 set hidden
 set hlsearch                 " Highlight found searches
@@ -191,13 +192,17 @@ nmap <silent> <leader>er :e $MYVIMRC<CR>
 " Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
 nmap <silent> <leader>re :source $MYVIMRC<CR>
 "
+"
+imap  <C-T> <Esc>gUiwea
+" imap  <C-T> <Esc>guiwea
+
 imap <C-A> <Esc>I
-imap <C-D> <Left>
-imap <C-F> <Right>
-nmap  <Leader>U <Esc>gUiwea
-nmap  <Leader>u <Esc>guiwea
 imap <C-E> <END>
 imap <C-O> <END><CR>
+
+imap <C-D> <Left>
+imap <C-F> <Right>
+
 
 " Intuitive cursor movement in wrapped line
 map j gj
@@ -218,10 +223,10 @@ nnoremap <space> zz
 imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 
 " Switch active window
-nmap <C-h> <C-w> h
-nmap <C-j> <C-w> j
-nmap <C-k> <C-w> k
-nmap <C-l> <C-w> l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 " Close all but the current one
 nmap <leader>o :only<CR>
 "
@@ -341,6 +346,7 @@ syntax on
 " ============================== vim-go ==============================
 map <Leader>goib :GoInstallBinaries<CR>
 map <Leader>goub :GoUpdateBinaries<CR>
+au Filetype go nmap <Leader>goi :GoInfo<CR>
 au Filetype go nmap <Leader>tt :GoTest<CR>
 au Filetype go nmap <Leader>tf :GoTestFunc<CR>
 au Filetype go nmap <Leader>cv :GoCoverageToggle -short<CR>
@@ -405,8 +411,8 @@ nnoremap <Leader>ff :FZF<Space>
 nnoremap <Leader>fz :FZF<CR>
 nnoremap <Leader>fl :Lines<CR>
 nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fL :BLines<CR>
-nnoremap <Leader>fT :BTags<CR>
+nnoremap <Leader>fbl :BLines<CR>
+nnoremap <Leader>fbt :BTags<CR>
 nnoremap <Leader>fh :FZF ~<CR>
 nnoremap <Leader>fg :FZF ~/go/src<CR>
 nnoremap <Leader>fc :FZF ~/.config<CR>
@@ -710,9 +716,7 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" ============================== color and theme ==============================
 set background=dark
-"
 "
 " colorscheme iceberg
 " let g:airline_theme='iceberg'
@@ -722,8 +726,11 @@ set background=dark
 " let g:airline_theme = 'moonfly'
 "
 "
-colorscheme palenight
-let g:airline_theme = "palenight"
+" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'palenight'
+colorscheme material
+let g:airline_theme = 'material'
 "
 " ============================== airline ==============================
 let g:airline#extensions#tabline#enabled = 1

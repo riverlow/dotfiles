@@ -1,70 +1,47 @@
-# shorthand variable initialization
-snippet k "v := value" b
-${1} := ${2}
-endsnippet
-
-# shorthand err co-equal
-snippet ke "err := value" b
-err := ${1}
-endsnippet
-
-# shorthand var, err co-equal
-snippet kk "v, err := value" b
-${1}, ${2:err} := ${3}
-endsnippet
-
 # variable initialization
-snippet v "var x Type" b
+snippet vi "var x Type" b
 var ${1:name} ${2:type}
 endsnippet
 
-# variable initialization
-snippet va "var x = Type{...}" b
-var ${1:name} = ${0:value}
-endsnippet
-
 # variable declaration
-snippet var "var x Type [= ...]"
+snippet vd "var x Type [= ...]"
 var ${1:name} ${2:Type} = ${3:value}
 endsnippet
 
 # variables declaration
-snippet vars "var ( ... )"
+snippet vds "var ( ... )"
 var (
 	${1:name} ${2:Type}${3: = ${4:value}}
 )
 ${0}
 endsnippet
 
-# put value
-snippet p "v = value" b
-${1} = ${2}
+# type alias
+snippet r "return value" b
+return ${0:v}
 endsnippet
 
-# shorthand variable assignment
-snippet pe "err = value" b
-err = ${0}
-endsnippet
-
-# shorthand variable assignment for 2 value
-snippet pp "v, err = value" b
-${1:name}, ${2:err} = ${3}
-endsnippet
 
 # type alias
-snippet r "return nil" b
+snippet rn "return nil" b
 return ${0:nil}
 endsnippet
 
 # type alias
 snippet re "return err" b
-return ${0:err}
+return err
 endsnippet
 
 # type alias
-snippet rr "return v, err" b
-return ${1:v}, ${0:err}
+snippet rvn "return v, nil" b
+return ${1:v}, nil
 endsnippet
+
+# type alias
+snippet rve "return v, err" b
+return ${1:v}, err
+endsnippet
+
 
 # type alias
 snippet t "type T Type" b
@@ -96,7 +73,7 @@ snippet bs "[]byte" w
 endsnippet
 
 # string slice
-snippet ss "[]byte" w
+snippet ss "[]string" w
 []string
 endsnippet
 
@@ -105,41 +82,22 @@ snippet tm "time.Time"
 time.Time
 endsnippet
 
-
 # append
 snippet ap "append(slice, value)"
 append(${1:slice}, ${0:value})
 endsnippet
 
-# append assignment
-snippet aa "a = append(a, value)" b
-${1:slice} = append($1, ${2:value})
-endsnippet
-
-# ok initialization
-snippet kk "value, ok := ..." b
-${1:value}, ok := ${2:value}
-endsnippet
-
 # inline if ok
-snippet iok "if v, ok := value; ok { ... }" b
+snippet ok "if v, ok := value; ok { ... }" b
 if ${1:x}, ok := ${2:value}; ok {
 	${2:${VISUAL}}
 }
 endsnippet
 
-# if ok
-snippet ok "if ok { ... }" b
-if ok {
-	${1:${VISUAL}}
-}
-endsnippet
-
-# if not ok
-snippet nok "if !ok { ... }" b
-if !ok {
-	${1:${VISUAL}}
-	${2:return}
+# inline if ok
+snippet ra "for _, v := range sth." b
+for ${1:k}, ${2:v} := range ${3:sth.} {
+	${0:do things.}
 }
 endsnippet
 
@@ -401,7 +359,6 @@ ${0}
 endsnippet
 
 
-
 snippet mw "func mw( next http.Handler ) http.Handler" !b
 func ${1:myMiddleware}(next http.Handler) http.Handler {
 
@@ -505,4 +462,19 @@ if ${1:err != nil} {
 	t.Fatalf("${2:message}")
 }
 ${0}
+endsnippet
+
+# vecty
+
+
+snippet comp "vecty Component"
+type ${1:name} struct {
+	vecty.Core
+	${2: prop}
+}
+
+// Render implements the vecty.Component interface.
+func (${3} *$1) Render() vecty.ComponentOrHTML {
+	${0}
+}
 endsnippet
