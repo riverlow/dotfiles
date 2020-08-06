@@ -1,0 +1,8 @@
+name: code
+root: ~/
+
+windows:
+    - code:
+        - cd ~/golll/
+    - pkg:
+        - cd ~/pkgs/

@@ -1,0 +1,16 @@
+# /Users/x/.config/tmuxinator/macos.yml
+
+name: init
+root: ~/
+
+windows:
+  - tor: tor
+  - mdbook:
+    - cd ~/haha/
+    - mdbook serve
+  - caddy:
+    - cd ~/dl/data_caddy
+    - caddy start
+  - new: 
+    - tmuxinator start fg
+    - tmuxinator start code

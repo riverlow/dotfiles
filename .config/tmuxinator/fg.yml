@@ -1,0 +1,9 @@
+name: fg
+root: ~/
+
+startup_window: cmd
+windows:
+    - haha:
+        - cd ~/haha/src/
+        - nvim SUMMARY.md
+    - cmd: echo cmd

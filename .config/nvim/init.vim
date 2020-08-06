@@ -347,6 +347,7 @@ syntax on
 map <Leader>goib :GoInstallBinaries<CR>
 map <Leader>goub :GoUpdateBinaries<CR>
 au Filetype go nmap <Leader>goi :GoInfo<CR>
+au Filetype go nmap <Leader>ru :GoRun<CR>
 au Filetype go nmap <Leader>tt :GoTest<CR>
 au Filetype go nmap <Leader>tf :GoTestFunc<CR>
 au Filetype go nmap <Leader>cv :GoCoverageToggle -short<CR>

@@ -1,3 +1,5 @@
+# keyword
+
 # variable initialization
 snippet vi "var x Type" b
 var ${1:name} ${2:type}
@@ -42,21 +44,20 @@ snippet rve "return v, err" b
 return ${1:v}, err
 endsnippet
 
-
 # type alias
 snippet t "type T Type" b
 type ${1:T} ${2:struct{}} 
 endsnippet
 
 # struct
-snippet ts "type T struct { ... }" b
+snippet struct "type T struct { ... }" b
 type ${1:Type} struct {
 	${2}
 }
 endsnippet
 
-# struct
-snippet ti "type T interface { ... }" b
+# interface
+snippet interface "type T interface { ... }" b
 type ${1:Type} interface {
 	${2}
 }
@@ -101,16 +102,11 @@ for ${1:k}, ${2:v} := range ${3:sth.} {
 }
 endsnippet
 
+# error
+
 # error snippet
 snippet er "Error return" !b
 if err != nil {
-	return err
-}
-endsnippet
-
-# error snippet
-snippet eer "Error return" 
-else if err != nil {
 	return err
 }
 endsnippet
@@ -122,78 +118,26 @@ if err != nil {
 }
 endsnippet
 
-# error multiple return
-snippet eer, "Error return with two return values" 
-else if err != nil {
-	return ${1:nil}, ${2:err}
+# error log.Fatal
+snippet erlf "if err != nil { log.Fatal(err)}" !b
+if err != nil {
+	log.Fatal(err)
 }
+${0}
+endsnippet
+
+# error log.Fatal
+snippet erlp "if err != nil { log.Println(err)}" !b
+if err != nil {
+	log.Println(err)
+}
+${0}
 endsnippet
 
 # error handle
-snippet eh "Error handle" !b
+snippet erh "Error handle" !b
 if err != nil {
 	${1}
-}
-${0}
-endsnippet
-
-# else error handle
-snippet eeh "else Error handle" 
-else if err != nil {
-	${1}
-}
-${0}
-endsnippet
-
-# error snippet
-snippet eis "if err == sth. {...}" b
-if err == ${1:sth} {
-	${2:handle err}
-} ${0}
-endsnippet
-
-# error snippet
-snippet eeis "if err == sth. {...}" 
-else if err == ${1:sth} {
-	${2:handle err}
-} ${0}
-endsnippet
-
-# if sth is nil
-snippet nl "Is nil handle" !b
-if ${1:condition} == nil {
-	${2:new(something)}
-}
-${0}
-endsnippet
-
-# if sth is not nil
-snippet nn "Is not nil handle" !b
-if ${1:condition} != nil {
-	${2:new(something)}
-}
-${0}
-endsnippet
-
-# if condition
-snippet if "if ... { ... }" b
-if ${1:condition} {
-	${2:${VISUAL}}
-}
-${0}
-endsnippet
-
-# else snippet
-snippet el "else { ... }" 
-else {
-	${2:${VISUAL}}
-} ${0}
-endsnippet
-
-# else if snippet
-snippet ei "else if {...}" 
-else if ${1:condition} {
-	${2:${VISUAL}}
 }
 ${0}
 endsnippet
@@ -222,14 +166,15 @@ defer func() {
 ${0}
 endsnippet
 
+# print
 
 # fmt Fprintf 
-snippet ff "fmt.Fprintf(...)"
+snippet fpf "fmt.Fprintf(...)"
 fmt.Fprintf(${1:w}, "${2:${VISUAL}} = %+v\n", $2)
 endsnippet
 
 # Fmt Fprintln 
-snippet fn "fmt.Println(...)"
+snippet fpn "fmt.Println(...)"
 fmt.Fprintln(${1:w}, "${2:${VISUAL}}")
 endsnippet
 
@@ -249,17 +194,17 @@ fmt.Println("${1:${VISUAL}}")
 endsnippet
 
 # Fmt Print debug
-snippet pr "fmt.Print(...)"
+snippet p "fmt.Print(...)"
 fmt.Print("${1:${VISUAL}}")
 endsnippet
 
 # sprintf
-snippet sf "fmt.Sprintf(...)"
+snippet spf "fmt.Sprintf(...)"
 fmt.Sprintf("${1:%s}", ${2:var})
 endsnippet
 
 # Fmt Sprintln 
-snippet sn "fmt.Sprintln(...)"
+snippet spn "fmt.Sprintln(...)"
 fmt.Sprintln("${1:${VISUAL}}")
 endsnippet
 
@@ -272,6 +217,39 @@ endsnippet
 snippet ef "fmt.Errorf(...)"
 fmt.Errorf("${1:${VISUAL}}")
 endsnippet
+
+# log.Fatal
+snippet lf "log.Fatal(v)"
+log.Fatal("${1:${value}}")
+endsnippet
+
+# log.Fatalln
+snippet lfn "log.Fatalln(v)"
+log.Fatalln("${1:${value}}")
+endsnippet
+
+# log.Fatalf
+snippet lff "log.Fatalf(format,v...)"
+log.Fatalf("${1:format},${2:${value}}")
+endsnippet
+
+# log.Print
+snippet lp "log.Print(v)"
+log.Print("${1:${value}}")
+endsnippet
+
+# log.Println
+snippet lpn "log.Println(v)"
+log.Println("${1:${value}}")
+endsnippet
+
+# log.Fatalf
+snippet lpf "log.Printf(format,v...)"
+log.Printf("${1:format},${2:${value}}")
+endsnippet
+
+
+# function
 
 snippet fu "function" b
 func ${1:funcName}(${2}) ${3:error} {
@@ -478,3 +456,44 @@ func (${3} *$1) Render() vecty.ComponentOrHTML {
 	${0}
 }
 endsnippet
+
+# time
+
+# time.Sleep
+snippet sleep "time.Sleep(duration)"
+time.Sleep(${1:1} * ${2:time.Second})
+endsnippet
+
+# now in unix
+snippet nowu "time.Now().Unix()" bw
+nowu := time.Now().Unix()
+endsnippet
+
+# now
+snippet now "time.Now()" bw
+now := time.Now()
+endsnippet
+
+
+# bufio
+
+#bufio.NewReader(io.Reader)
+snippet rd "reader := bufio.NewReader(io.Reader)"
+reader := bufio.NewReader(${1:os.Stdin})
+${0}
+endsnippet
+
+#bufio.NewScanner(io.Reader)
+snippet scn "scanner := bufio.NewScanner(io.Reader)"
+scanner := bufio.NewScanner(${1:os.Stdin})
+${0}
+endsnippet
+
+
+# rand
+
+snippet intn "intn := rand.Intn(${1:n})"
+intn := rand.Intn(${1:100})
+${0}
+endsnippet
+
