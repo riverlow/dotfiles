@@ -4,7 +4,13 @@ name: init
 root: ~/
 
 windows:
-  - tor: tor
+  - tor:
+    layout: main-vertical
+    panes:
+      - tor: tor
+      - ss:
+        - cd ~/ss/
+        - ss-local -v -c cn.json -l 12345
   - mdbook:
     - cd ~/haha/
     - mdbook serve
