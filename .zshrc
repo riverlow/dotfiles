@@ -17,7 +17,7 @@ export TERM=xterm-256color
 export EDITOR=vim
 
 typeset -U path
-path=(Library/Python/3.7/bin/ ~/nvim-osx64/bin/ ~/.local/bin ~/.cargo/bin ~/myscripts/bin/ ~/go/bin/ /usr/local/go/bin /usr/local/opt/openssl/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin $path[@])
+path=(/usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin Library/Python/3.7/bin/ ~/nvim-osx64/bin/ ~/.local/bin ~/.cargo/bin ~/myscripts/bin/ ~/go/bin/ /usr/local/go/bin /usr/local/opt/openssl/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin $path[@])
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 if test "$(uname)" = "Darwin" ; then
@@ -49,13 +49,14 @@ zle -N down-line-or-beginning-search
 # ============================== alias ==============================
 alias dotfiles="$(which git) --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
 
+
 if test "$(uname)" = "Darwin" ; then
-	alias ls='ls -G'
 	alias P=proxychains4
 else
-	alias ls='ls --color'
 	alias P=proxychains
 fi
+
+alias ls='ls --color=auto'
 
 alias gitpush='git add . && git commit -m a && git push'
 alias gitcommit='git add . && git commit -m a'

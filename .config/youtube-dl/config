@@ -1,9 +1,13 @@
+--continue
 --ignore-errors
+# Keep the video file on disk after the post- processing; the video is erased by default
+--keep-video
+#
 # --no-playlist
 #
 #--proxy socks5://127.0.0.1:1080
 
 # save path
--o ~/dl/youtube/%(title)s.%(ext)s
+-o ~/dl/youtube/%(title)s/%(title)s.%(ext)s
 
 --write-auto-sub

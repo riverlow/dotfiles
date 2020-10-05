@@ -3,3 +3,4 @@ $RECYCLE.BIN
 $UGM
 Autorun.inf
 System Volume Information
+.Trash

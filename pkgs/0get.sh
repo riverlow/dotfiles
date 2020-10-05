@@ -37,7 +37,7 @@ if [[ $1 == "bin" ]]; then
         go get -u -v golang.org/x/lint/golint
         go get -u -v golang.org/x/tools/...
         go get -u -v honnef.co/go/tools/cmd/keyify
-		go get -u -v github.com/gopherjs/gopherjs
+        go get -u -v github.com/gopherjs/gopherjs
         exit 0
 fi
 

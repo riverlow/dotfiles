@@ -19,6 +19,7 @@ dotfiles add $HOME/.config/nvim/UltiSnips/
 dotfiles add $HOME/.config/mpv/mpv.conf
 dotfiles add $HOME/.config/youtube-dl/config
 dotfiles add $HOME/.config/tmuxinator/
+dotfiles add $HOME/.config/fontconfig/fonts.conf
 
 
 dotfiles add $HOME/pkgs/0get.sh

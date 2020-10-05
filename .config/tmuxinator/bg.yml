@@ -1,21 +1,19 @@
 # /Users/x/.config/tmuxinator/macos.yml
 
-name: init
+name: bg
 root: ~/
 
 windows:
   - tor:
-    layout: main-vertical
-    panes:
-      - tor: tor
-      - ss:
-        - cd ~/ss/
-        - ss-local -v -c cn.json -l 12345
+    - tor
+  - ss:
+    - cd ~/ss/
+    - ss-local -v -c cn.json -l 12345
   - mdbook:
     - cd ~/haha/
     - mdbook serve
   - caddy:
-    - cd ~/dl/data_caddy
+    - cd ~/dl/data_caddy/
     - caddy start
   - new: 
     - tmuxinator start fg
