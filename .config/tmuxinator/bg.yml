@@ -16,5 +16,5 @@ windows:
     - cd ~/dl/data_caddy/
     - caddy start
   - new: 
-    - tmuxinator start fg
     - tmuxinator start code
+    - tmuxinator start fg

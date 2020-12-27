@@ -7,12 +7,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+"
 " ============================== fzf ==============================
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " ============================== ale ==============================
 Plug 'dense-analysis/ale'
-
+"
 " ============================== deoplete ==============================
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -26,7 +27,7 @@ endif
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
+"
 " ============================== for convenient ==============================
 " key: gS, gJ
 Plug 'AndrewRadev/splitjoin.vim'
@@ -406,19 +407,10 @@ let g:go_version_warning = 0
 " ============================== ultisnips ==============================
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+"
 " ============================== fzf ==============================
-nnoremap <Leader>fe :FZF -e<Space>
 nnoremap <Leader>ff :FZF<Space>
 nnoremap <Leader>fz :FZF<CR>
-nnoremap <Leader>fl :Lines<CR>
-nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fbl :BLines<CR>
-nnoremap <Leader>fbt :BTags<CR>
-nnoremap <Leader>fh :FZF ~<CR>
-nnoremap <Leader>fg :FZF ~/go/src<CR>
-nnoremap <Leader>fc :FZF ~/.config<CR>
-nnoremap <Leader>fv :FZF ~/.vim<CR>
-nnoremap <Leader>fm :FZF ~/go/pkg/mod/<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
 
@@ -634,34 +626,16 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" nmap ga <Plug>(EasyAlign)
 " Align GitHub-flavored Markdown tables
-au FileType markdown vmap <Leader>alb :EasyAlign *<Bar><CR>
+" au FileType markdown vmap <Leader>alb :EasyAlign *<Bar><CR>
 "
 " ============================== easymotion ==============================
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
-
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-" <Leader>f{char} to move to {char}
-map  <Leader>m <Plug>(easymotion-bd-f)
-nmap <Leader>m <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>M <Plug>(easymotion-bd-jk)
-nmap <Leader>M <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 "
 " ============================== vim-table-mode ==============================
 " For Markdown-compatible tables use
@@ -673,11 +647,7 @@ let g:table_mode_corner='|'
 "
 " ============================== tabular ==============================
 let g:tabular_loaded = 1
-nmap <Leader>ta\ :Tabularize /\\
-nmap <Leader>ta/ :Tabularize /
-nmap <Leader>ta, :Tabularize /,
-nmap <Leader>ta< :Tabularize /<
-nmap <Leader>ta: :Tabularize /:
+nmap <Leader>ta :Tabularize 
 "
 " ============================== vim-xkbswitch ==============================
 if has('mac')
@@ -730,12 +700,11 @@ set background=dark
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight'
 colorscheme material
-let g:airline_theme = 'material'
 "
 " ============================== airline ==============================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='papercolor'
+let g:airline_theme = 'material'
 "
 "
 " ============================== functiongs ==============================
