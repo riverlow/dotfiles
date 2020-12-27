@@ -9,6 +9,7 @@ dotfiles add $HOME/.gitignore
 
 dotfiles add $HOME/myscripts/
 
+dotfiles add $HOME/.config/fish/fish_plugins
 dotfiles add $HOME/.zshrc
 
 dotfiles add $HOME/.tmux.conf
