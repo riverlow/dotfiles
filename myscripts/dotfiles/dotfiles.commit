@@ -6,4 +6,3 @@ function dotfiles {
 
 dotfiles push
 dotfiles commit -m a
-dotfiles status
