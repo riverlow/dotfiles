@@ -4,5 +4,5 @@ function dotfiles {
    $(which git) --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME} $@
 }
 
-dotfiles push
-dotfiles commit -m a
+# dotfiles commit -m a
+# dotfiles push
