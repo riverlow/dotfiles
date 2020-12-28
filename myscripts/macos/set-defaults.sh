@@ -211,8 +211,8 @@ defaults write org.m0k.transmission WarningLegal -bool false
 echo "  › Auto-resize the window to fit transfers"
 defaults write org.m0k.transmission AutoSize -bool true
 
-echo "  › Auto update to betas"
-defaults write org.m0k.transmission AutoUpdateBeta -bool true
+# echo "  › Auto update to betas"
+# defaults write org.m0k.transmission AutoUpdateBeta -bool true
 
 echo "  › Set up the best block list"
 defaults write org.m0k.transmission EncryptionRequire -bool true
