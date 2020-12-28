@@ -87,11 +87,11 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo "  › Set dark interface style"
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
-echo "  › Set graphite appearance"
-defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+# echo "  › Set graphite appearance"
+# defaults write NSGlobalDomain AppleAquaColorVariant -int 6
 
-echo "  › Set graphite highlight color"
-defaults write NSGlobalDomain AppleHighlightColor -string "0.847059 0.847059 0.862745"
+# echo "  › Set graphite highlight color"
+# defaults write NSGlobalDomain AppleHighlightColor -string "0.847059 0.847059 0.862745"
 
 echo "  › Show battery percent"
 defaults write com.apple.menuextra.battery ShowPercent -bool true
@@ -118,8 +118,8 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 echo "  › Expand save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
-echo "  › Set sidebar icon size to small"
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+# echo "  › Set sidebar icon size to small"
+# defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
 echo "  › Show status bar"
 defaults write com.apple.finder ShowStatusBar -bool true
