@@ -75,8 +75,8 @@ echo "  › Disable auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo "  › Set up trackpad & mouse speed to a reasonable number"
-defaults write -g com.apple.trackpad.scaling 2
-defaults write -g com.apple.mouse.scaling 2.5
+defaults write -g com.apple.trackpad.scaling 3
+defaults write -g com.apple.mouse.scaling 3
 
 echo "  › Avoid the creation of .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

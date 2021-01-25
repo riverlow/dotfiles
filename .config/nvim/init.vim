@@ -1,7 +1,15 @@
-call plug#begin('~/.vim/plugged')
-
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin(stdpath('data') . '/plugged')
+"call plug#begin('~/.vim/plugged')
+"
+" ========================== nvim-treesitter ============================
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+"
 " ============================== vim-go ==============================
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 
 " ============================== ultisnips ==============================
 Plug 'SirVer/ultisnips'
@@ -75,14 +83,17 @@ Plug 'tpope/vim-haml'
 " ============================== color and theme ==============================
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'joshdick/onedark.vim'
 " Plug 'ayu-theme/ayu-vim'
 " Plug 'cocopon/iceberg.vim',
+" Plug 'gkeep/iceberg-dark'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'bluz71/vim-moonfly-colors'
 " Plug 'drewtempelmeyer/palenight.vim'
 Plug 'kaicataldo/material.vim'
+Plug 'joshdick/onedark.vim'
 " Plug 'connorholyday/vim-snazzy' 			" not clear
 " Plug 'sonph/onehalf' 						" buggy
 " Plug 'tyrannicaltoucan/vim-deep-space'
@@ -345,8 +356,6 @@ filetype plugin indent on
 syntax on
 
 " ============================== vim-go ==============================
-map <Leader>goib :GoInstallBinaries<CR>
-map <Leader>goub :GoUpdateBinaries<CR>
 au Filetype go nmap <Leader>goi :GoInfo<CR>
 au Filetype go nmap <Leader>ru :GoRun<CR>
 au Filetype go nmap <Leader>tt :GoTest<CR>
@@ -372,6 +381,7 @@ let g:go_test_prepend_name = 1
 let g:go_list_type = "quickfix"
 let g:go_auto_type_info = 0
 
+let g:go_imports_mode = "gopls"
 let g:go_gopls_complete_unimported = 1
 
 let g:go_null_module_warning = 0
@@ -400,9 +410,6 @@ let g:go_highlight_debug = 1
 
 let g:go_modifytags_transform = 'camelcase'
 " let g:go_fold_enable = []
-
-let g:go_version_warning = 0
-
 "
 " ============================== ultisnips ==============================
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -432,8 +439,8 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 nmap <silent> <Leader>ap <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>an <Plug>(ale_next_wrap)
 
+let g:ale_enabled = 0
 let g:ale_completion_enabled = 0
-let g:ale_enabled = 1
 let g:ale_disable_lsp = 0
 " MUST SET THIS
 let g:ale_linters_explicit = 1
@@ -669,6 +676,10 @@ let g:vim_json_syntax_conceal = 0
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 "
 "
+" ============================== airline ==============================
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+"
 " ============================== color and theme ==============================
   if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -697,14 +708,15 @@ set background=dark
 "
 "
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_terminal_italics = 1
+" let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight'
 colorscheme material
-"
-" ============================== airline ==============================
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
 let g:airline_theme = 'material'
+
+" let g:onedark_terminal_italics = 1
+" colorscheme onedark
+" let g:airline_theme='onedark'
+"
 "
 "
 " ============================== functiongs ==============================

@@ -1,0 +1,16 @@
+[Interface]
+MTU = 1280
+Address = SERVER_IP_ADDR
+ListenPort = 8080
+PrivateKey = SERVER_PRIVATE_KEY
+
+# note - substitute eth0 in the following lines to match the Internet-facing interface
+# if the server is behind a router and receive traffic via NAT, this iptables rules are not needed
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o OUT_INTERFACE -j MASQUERADE;ip6tables -A FORWARD -i %i -j ACCEPT; ip6tables -t nat -A POSTROUTING -o OUT_INTERFACE -j MASQUERADE
+
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o OUT_INTERFACE -j MASQUERADE;ip6tables -D FORWARD -i %i -j ACCEPT; ip6tables -t nat -D POSTROUTING -o OUT_INTERFACE -j MASQUERADE
+
+
+[Peer]
+PublicKey = PEER_PUBLIC_KEY
+AllowedIPs = CLIENT_IP_ADDR

@@ -4,3 +4,4 @@ $UGM
 Autorun.inf
 System Volume Information
 .Trash
+RARBG_DO_NOT_MIRROR.exe

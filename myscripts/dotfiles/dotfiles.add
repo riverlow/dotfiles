@@ -31,5 +31,10 @@ dotfiles add $HOME/pkgs/1privget.sh
 dotfiles add $HOME/pkgs/2gitget.sh
 dotfiles add $HOME/pkgs/main.go
 
+# x11
+dotfiles add $HOME/.Xresources
+
+
+
 dotfiles status
 
