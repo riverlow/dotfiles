@@ -13,3 +13,5 @@
 -o ~/dl/youtube/'%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'
 
 --write-auto-sub
+
+--merge-output-format mp4

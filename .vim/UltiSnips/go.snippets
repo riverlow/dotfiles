@@ -1,0 +1,43 @@
+# error
+
+# error snippet
+snippet er "Error return" !b
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+# error multiple return
+snippet er, "Error return with two return values" !b
+if err != nil {
+	return ${1:nil}, ${2:err}
+}
+${0}
+endsnippet
+
+# error log.Fatal
+snippet ef "if err != nil { log.Fatal(err)}" !b
+if err != nil {
+	log.Fatal(err)
+}
+${0}
+endsnippet
+
+# error log.Fatal
+snippet ep "if err != nil { log.Println(err)}" !b
+if err != nil {
+	log.Println(err)
+}
+${0}
+endsnippet
+
+# error handle
+snippet eh "Error handle" !b
+if err != nil {
+	${1}
+}
+${0}
+endsnippet
+
+

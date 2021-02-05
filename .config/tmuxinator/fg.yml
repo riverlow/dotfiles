@@ -5,5 +5,5 @@ startup_window: cmd
 windows:
     - haha:
         - cd ~/haha/src/
-        - nvim SUMMARY.md
+        - vim SUMMARY.md
     - cmd: echo cmd

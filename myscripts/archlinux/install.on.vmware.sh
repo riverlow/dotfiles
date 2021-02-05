@@ -60,7 +60,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install app
 # libfido2 for U2F authentication
-pacman -S base-devel alsa-utils ranger man vi vim dosfstools ntfs-3g exfat-utils parted openssh screen tmux p7zip zip unzip git gnupg lsof ntp gnu-netcat nmap cronie bc dstat tree fish dhclient neofetch lshw libfido2 sysstat linux-headers imagemagick python-pip
+pacman -S base-devel fish alsa-utils ranger man vim dosfstools ntfs-3g exfat-utils parted openssh screen tmux p7zip zip unzip git gnupg lsof ntp gnu-netcat nmap cronie bc dstat tree dhclient neofetch lshw libfido2 sysstat linux-headers imagemagick python-pip wireguard-tools
 
 # Display drivers
 
@@ -72,9 +72,15 @@ pacman -S mesa xf86-input-vmmouse xf86-input-libinput xf86-video-vmware open-vm-
 systemctl enable vmtoolsd 
 systemctl enable vmware-vmblock-fuse
 
-pacman -S xorg-server xorg-apps xorg-xinit i3-wm rofi alacritty noto-fonts noto-fonts-cjk ttf-opensans firefox telegram-desktop pcmanfm gtk4 mupdf 
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
+# pacman -S xorg-server xorg-apps xorg-xinit i3-wm rofi
+# cp /etc/X11/xinit/xinitrc ~/.xinitrc
 # add exec i3 in .xinitrc, then run startx
+
+# sway
+pacman -S sway swaylock swayidle swaybg wofi
+
+# app
+pacman -S alacritty noto-fonts noto-fonts-cjk ttf-opensans pcmanfm gtk4 mupdf firefox telegram-desktop mpv
 
 # enable sshd
 systemctl enable sshd systemd-networkd system-resolved
