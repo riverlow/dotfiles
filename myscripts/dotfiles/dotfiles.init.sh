@@ -8,8 +8,6 @@ if [ $? != 0 ]; then
 	exit 1;
 fi
 
-which rsync
-
 if ! command -v rsync; then
 	echo "no command rsync.";
 	exit 2;

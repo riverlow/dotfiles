@@ -7,3 +7,4 @@ rsync -avh --progress --exclude-from ~/myscripts/exclude-list.txt ~/lshows ${tar
 rsync -avh --progress --exclude-from ~/myscripts/exclude-list.txt ~/lmusic ${targetdir}
 rsync -avh --progress --exclude-from ~/myscripts/exclude-list.txt ~/lpics ${targetdir}
 rsync -avh --progress --exclude-from ~/myscripts/exclude-list.txt ~/ldocs ${targetdir}
+rsync -avh --progress --exclude-from ~/myscripts/exclude-list.txt ~/Documents/Calibre.Library ${targetdir}

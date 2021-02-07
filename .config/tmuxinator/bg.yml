@@ -11,7 +11,7 @@ windows:
     - ss-local -v -c cn.json -l 12345
   - mdbook:
     - cd ~/haha/
-    - mdbook serve
+    - mdbook serve -n 192.168.0.136
   - caddy:
     - cd ~/dl/data_caddy/
     - caddy start
