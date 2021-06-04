@@ -1,5 +1,20 @@
 #!/bin/bash
 
+if [[ ${1}x == ""x ]]; then
+        echo "Usage:"
+        echo "$0 gen <out_interface>"
+        echo "$0 add <out_interface> <number> <name>"
+
+        exit 1;
+
+fi
+
+if ! command -v qrencode &> /dev/null
+then
+    echo "qrencode could not be found"
+    exit 2;
+fi
+
 
 OUT_INTERFACE=${2}
 
@@ -9,17 +24,8 @@ realserverip=${serverip%%/*}
 Endpoint=$realserverip:8080
 SERVER_IP_ADDR=10.200.200.1/24,fd42:42:42::1/64
 CLIENT_IP_ADDR=10.200.200.2/32,fd42:42:42::2/128
-SERVER_IP_ADDR=${SERVER_IP_ADDR//\//\\/}
-CLIENT_IP_ADDR=${CLIENT_IP_ADDR//\//\\/}
-
-if [[ ${1}x == ""x ]]; then
-	echo "Usage:"
-	echo "$0 gen <out_interface>"
-	echo "$0 add <out_interface> <number> <name>"
-
-	exit 1;
-
-fi
+escSERVER_IP_ADDR=${SERVER_IP_ADDR//\//\\/}
+escCLIENT_IP_ADDR=${CLIENT_IP_ADDR//\//\\/}
 
 if [[ ${1} == "gen" ]]; then
 

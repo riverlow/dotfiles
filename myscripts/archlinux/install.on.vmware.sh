@@ -60,7 +60,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install app
 # libfido2 for U2F authentication
-pacman -S base-devel fish alsa-utils ranger man vim dosfstools ntfs-3g exfat-utils parted openssh screen tmux p7zip zip unzip git gnupg lsof ntp gnu-netcat nmap cronie bc dstat tree dhclient neofetch lshw libfido2 sysstat linux-headers imagemagick python-pip wireguard-tools
+pacman -S base-devel fish alsa-utils ranger man vim dosfstools ntfs-3g exfat-utils parted openssh screen tmux p7zip zip unzip git gnupg lsof ntp gnu-netcat nmap bc dstat tree dhclient neofetch lshw libfido2 sysstat linux-headers imagemagick python-pip wireguard-tools
 
 # Display drivers
 

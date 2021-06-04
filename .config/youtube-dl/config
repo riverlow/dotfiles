@@ -8,9 +8,8 @@
 #--proxy socks5://127.0.0.1:1080
 
 # save path
-# -o ~/dl/youtube/%(title)s/%(title)s.%(ext)s
-# -o ~/dl/youtube/'%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'
--o ~/dl/youtube/'%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'
+-o ~/dl/youtube/'%(uploader)s/%(title)s/%(title)s.%(ext)s'
+# -o ~/dl/youtube/'%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'
 
 --write-auto-sub
 

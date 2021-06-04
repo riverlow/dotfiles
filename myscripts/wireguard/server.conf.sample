@@ -1,5 +1,4 @@
 [Interface]
-MTU = 1280
 Address = SERVER_IP_ADDR
 ListenPort = 8080
 PrivateKey = SERVER_PRIVATE_KEY

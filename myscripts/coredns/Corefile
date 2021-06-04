@@ -1,0 +1,42 @@
+(acl1) {
+	acl {
+		allow net 10.200.200.0/24 fd42:42:42::0/96 192.168.0.0/24 127.0.0.1/32 ::1/128
+		block
+	}
+}
+
+https://.:853 {
+	tls /etc/coredns/ssl/coredns.aaa.pem /etc/coredns/ssl/coredns.aaa-key.pem {
+	 	client_auth nocert
+	}
+	forward . 127.0.0.1:53
+	log
+	import acl1
+}
+
+
+. {
+       forward . tls://45.90.28.0 tls://45.90.30.0 {
+               tls_servername dns.nextdns.io
+	           except aaa
+       }
+       cache {
+               success 4096
+               denial  1024
+               prefetch 512
+       }
+       prometheus :9153
+       errors
+       log
+	   import acl1
+
+
+}
+
+aaa {
+    file /etc/coredns/db.aaa
+    log
+	import acl1
+}
+
+

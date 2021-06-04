@@ -1,21 +1,21 @@
 #!/bin/bash
 
 username="${1}"
-password="${2}"
+port="${2}"
 homedir=/home/${username}
 sshkeyfile="id_rsa.pub"
 
 # update system
-[ -f /etc/apt/sources.list.d/busterbackports.list ] && /bin/rm -f /etc/apt/sources.list.d/busterbackports.list
-echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/busterbackports.list
+# [ -f /etc/apt/sources.list.d/busterbackports.list ] && /bin/rm -f /etc/apt/sources.list.d/busterbackports.list
+# echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/busterbackports.list
 apt-get update && apt-get -y upgrade
 
 # install fish
 apt-get -y install fish
 
 # create user
-useradd -ms /bin/fish ${username}
-echo "${username}:${newpasswd}" | chpasswd
+useradd -ms /usr/bin/fish ${username}
+# echo "${username}:${newpasswd}" | chpasswd
 
 # config sudoers
 echo "${username}    ALL=(ALL:ALL) ALL" >> /etc/sudoers
@@ -33,12 +33,12 @@ sed -i '/^PermitRootLogin.*/d' /etc/ssh/sshd_config
 sed -i '/^PubkeyAuthentication.*/d' /etc/ssh/sshd_config
 sed -i '/^PasswordAuthentication.*/d' /etc/ssh/sshd_config
 
-echo 'Port 26271' >> /etc/ssh/sshd_config
+echo "Port ${port}" >> /etc/ssh/sshd_config
 echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
 echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
 echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
+echo "AllowUsers ${username}" >> /etc/ssh/sshd_config
 
-systemctl restart sshd
 
 # Optimize network
 
@@ -103,3 +103,7 @@ EOF
 # relogin into shell to apply, doesn't need to reboot server.
 # To show:
 # ulimit -n
+
+echo MUST SET ${username} PASSWORD!!!
+echo MUST SET ${username} PASSWORD!!!
+echo MUST SET ${username} PASSWORD!!!

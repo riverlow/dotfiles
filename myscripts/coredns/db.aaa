@@ -1,0 +1,20 @@
+$ORIGIN aaa.
+@	3600 IN	SOA sns.dns.icann.org. noc.dns.icann.org. (
+				2017042745 ; serial
+				7200       ; refresh (2 hours)
+				3600       ; retry (1 hour)
+				1209600    ; expire (2 weeks)
+				3600       ; minimum (1 hour)
+				)
+
+	3600 IN NS aaa.
+;        IN A     10.200.200.1
+        IN A     192.168.0.100
+
+www     IN A     127.0.0.1
+        IN AAAA  ::1
+
+f IN A 192.168.0.100
+jf IN A 192.168.0.100
+mb IN A 192.168.0.100
+coredns IN A 192.168.0.100
