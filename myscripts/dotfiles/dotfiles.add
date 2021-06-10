@@ -32,8 +32,6 @@ dotfiles add $HOME/.config/fontconfig/fonts.conf
 
 
 dotfiles add $HOME/pkgs/0get.sh
-dotfiles add $HOME/pkgs/1privget.sh
-dotfiles add $HOME/pkgs/2gitget.sh
 dotfiles add $HOME/pkgs/main.go
 
 # x11
