@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/bash
+
+if [ $# -eq 0 ]; then
+	echo "Usage: $0 username port"
+	exit 1;
+fi
 
 username="${1}"
 port="${2}"
@@ -11,7 +16,7 @@ sshkeyfile="id_rsa.pub"
 apt-get update && apt-get -y upgrade
 
 # install fish
-apt-get -y install fish
+apt-get -y install fish vim qrencode
 
 # create user
 useradd -ms /usr/bin/fish ${username}
@@ -39,6 +44,8 @@ echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
 echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
 echo "AllowUsers ${username}" >> /etc/ssh/sshd_config
 
+# restart ssh
+systemctl restart sshd
 
 # Optimize network
 
@@ -100,10 +107,12 @@ cat <<EOF >> /etc/security/limits.conf
 *               soft    noproc          64000
 EOF
 
-# relogin into shell to apply, doesn't need to reboot server.
-# To show:
-# ulimit -n
+echo "relogin into shell to apply /etc/security/limits.conf, doesn't need to reboot server."
+echo "To show:"
+echo "ulimit -n"
 
-echo MUST SET ${username} PASSWORD!!!
-echo MUST SET ${username} PASSWORD!!!
-echo MUST SET ${username} PASSWORD!!!
+echo "MUST SET ${username} PASSWORD!!!"
+echo "MUST SET ${username} PASSWORD!!!"
+echo "MUST SET ${username} PASSWORD!!!"
+
+

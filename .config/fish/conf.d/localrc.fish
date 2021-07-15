@@ -42,3 +42,8 @@ set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
 set -x ANDROID_SDK_ROOT "$HOME/Library/Android/sdk"
 set -g fish_user_paths $ANDROID_SDK_ROOT/platform-tools $ANDROID_SDK_ROOT/emulator $ANDROID_SDK_ROOT/tools/bin $fish_user_paths
 set -x ANDROID_NDK_HOME "$ANDROID_SDK_ROOT/ndk-bundle/"
+
+# c++
+set -g fish_user_paths  "/usr/local/opt/gettext/bin" $fish_user_paths
+set -gx LDFLAGS "-L/usr/local/opt/gettext/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/gettext/include"

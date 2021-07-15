@@ -46,7 +46,7 @@ if [[ ${1} == "gen" ]]; then
 
 
 
-	cp server.conf.sample server.conf
+	cp tmpl.server.conf server.conf
 
 	sed -i "s/SERVER_PRIVATE_KEY/${escSERVER_PRIVATE_KEY}/" server.conf
 	sed -i "s/PEER_PUBLIC_KEY/${escCLIENT_PUBLIC_KEY}/" server.conf
@@ -55,7 +55,7 @@ if [[ ${1} == "gen" ]]; then
 	sed -i "s/OUT_INTERFACE/${OUT_INTERFACE}/g" server.conf
 
 
-	cp client.conf.sample client.conf
+	cp tmpl.client.conf client.conf
 
 	sed -i "s/PEER_PRIVATE_KEY/${escCLIENT_PRIVATE_KEY}/" client.conf
 	sed -i "s/SERVER_PUBLIC_KEY/${escSERVER_PUBLIC_KEY}/" client.conf
@@ -86,7 +86,7 @@ if [[ ${1} == "add" ]]; then
 	escCLIENT_PUBLIC_KEY=${CLIENT_PUBLIC_KEY//\//\\/}
 
 
-	cp client.conf.sample ${CLIENT_NAME}.conf
+	cp tmpl.client.conf ${CLIENT_NAME}.conf
 
 	sed -i "s/PEER_PRIVATE_KEY/${escCLIENT_PRIVATE_KEY}/" ${CLIENT_NAME}.conf
 	sed -i "s/SERVER_PUBLIC_KEY/${escSERVER_PUBLIC_KEY}/" ${CLIENT_NAME}.conf
