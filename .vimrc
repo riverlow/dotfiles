@@ -11,15 +11,17 @@ endif
 if has('nvim')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 endif
+
+
 "
 " ============================== vim-go ==============================
-"Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go'
 
 " ============================== ultisnips ==============================
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 "
 " ============================== fzf ==============================
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -28,14 +30,19 @@ Plug 'junegunn/fzf.vim'
 " ============================== ale ==============================
 " Plug 'dense-analysis/ale'
 "
+"
+
+" ============================== coc.nvim ==============================
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " ============================== deoplete ==============================
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 "
 " ============================== tagbar ==============================
 Plug 'majutsushi/tagbar'
@@ -127,12 +134,67 @@ set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
 " tcroqwan2vblmMB1j
 set formatoptions+=cqnmMB1j
 set formatoptions-=trowa2vbl
+
+
+set nocompatible
+set nobackup                 " Don't create annoying backup files
+set nowritebackup
+set noswapfile               " Don't use swapfile
+set mouse=a                  " Enable mouse mode
+
+
+" To get hover working in the terminal we need to set ttymouse. See
+"
+" :help ttymouse
+"
+" for the appropriate setting for your terminal. Note that despite the
+" automated tests using xterm as the terminal, a setting of ttymouse=xterm
+" does not work correctly beyond a certain column number (citation needed)
+" hence we use ttymouse=sgr
+set ttymouse=sgr
+
+" Suggestion: By default, govim populates the quickfix window with diagnostics
+" reported by gopls after a period of inactivity, the time period being
+" defined by updatetime (help updatetime). Here we suggest a short updatetime
+" time in order that govim/Vim are more responsive/IDE-like
+set updatetime=500
+
+" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
+" balloondelay
+set balloondelay=250
+
+" Suggestion: Turn on the sign column so you can see error marks on lines
+" where there are quickfix errors. Some users who already show line number
+" might prefer to instead have the signs shown in the number column; in which
+" case set signcolumn=number
+set signcolumn=number
+
+syntax on
+filetype plugin on
+
+" Suggestion: turn on auto-indenting. If you want closing parentheses, braces
+" etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
+" include this by default in govim.
+set autoindent
+set smartindent
+filetype indent on
+
+" Suggestion: define sensible backspace behaviour. See :help backspace for
+" more details
+set backspace=2
+
+" Suggestion: show info for completion candidates in a popup menu
+if has("patch-8.1.1904")
+  set completeopt+=popup
+  set completepopup=align:menu,border:off,highlight:Pmenu
+endif
+
+
+
 scriptencoding utf-8
 set encoding=utf-8
-set nocompatible
 set number                   " Show line numbers
-set numberwidth=5
-set autoindent
+" set numberwidth=5
 set noexpandtab
 set shiftwidth=4
 set tabstop=4
@@ -158,8 +220,6 @@ set lazyredraw
 "set listchars=eol:¬,tab:▸\
 set list listchars=tab:\|\ 
 set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
-set mouse=a                  " Enable mouse mode
-set nobackup                 " Don't create annoying backup files
 set nocursorcolumn           " speed up syntax highlighting
 set noerrorbells             " No beeps
 set noimcmdline
@@ -167,7 +227,6 @@ set noimdisable
 set noshowmatch              " Do not show matching brackets by flickering
 set noshowmode               " We show the mode with airline or lightline
 set nosmartindent
-set noswapfile               " Don't use swapfile
 set nrformats-=octal
 set scrolloff=8
 set shiftround
@@ -180,7 +239,6 @@ set sidescrolloff=16
 set smartcase                " ... but not it begins with upper case
 set splitbelow               " Split horizontal windows below to the current windows
 set splitright               " Split vertical windows right to the current windows
-set updatetime=300
 set virtualedit=block
 set wildmenu
 set wrapscan
@@ -339,65 +397,56 @@ augroup insertonenter
 	endif
 augroup END
 
-"
-" ============================== golang ==============================
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to reload them.
-filetype off
-filetype plugin indent off
-filetype plugin indent on
-syntax on
-
 " ============================== vim-go ==============================
 " https://github.com/fatih/vim-go-tutorial
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "goimports"
-let g:go_debug_windows = {
-      \ 'vars':  'leftabove 35vnew',
-      \ 'stack': 'botright 10new',
-\ }
+"let g:go_fmt_fail_silently = 1
+"let g:go_fmt_command = "goimports"
+"let g:go_debug_windows = {
+"      \ 'vars':  'leftabove 35vnew',
+"      \ 'stack': 'botright 10new',
+"\ }
 
-let g:go_test_prepend_name = 1
-let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 0
+"let g:go_test_prepend_name = 1
+"let g:go_list_type = "quickfix"
+"let g:go_auto_type_info = 0
 
-let g:go_imports_mode = "gopls"
-let g:go_gopls_complete_unimported = 1
+"let g:go_imports_mode = "gopls"
+"let g:go_gopls_complete_unimported = 1
 
-let g:go_null_module_warning = 0
-let g:go_echo_command_info = 1
+"let g:go_null_module_warning = 0
+"let g:go_echo_command_info = 1
 
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_chan_whitespace_error = 0
-let g:go_highlight_extra_types = 1
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_string_spellcheck = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_highlight_diagnostic_errors = 1
-let g:go_highlight_diagnostic_warnings = 1
-let g:go_highlight_debug = 1
+"let g:go_highlight_array_whitespace_error = 0
+"let g:go_highlight_chan_whitespace_error = 0
+"let g:go_highlight_extra_types = 1
+"let g:go_highlight_space_tab_error = 0
+"let g:go_highlight_trailing_whitespace_error = 0
+"let g:go_highlight_operators = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_function_parameters = 1
+"let g:go_highlight_function_calls = 1
+"let g:go_highlight_types = 1
+"let g:go_highlight_fields = 1
+"let g:go_highlight_build_constraints = 1
+"let g:go_highlight_generate_tags = 1
+"let g:go_highlight_string_spellcheck = 1
+"let g:go_highlight_format_strings = 1
+"let g:go_highlight_variable_declarations = 1
+"let g:go_highlight_variable_assignments = 1
+"let g:go_highlight_diagnostic_errors = 1
+"let g:go_highlight_diagnostic_warnings = 1
+"let g:go_highlight_debug = 1
 
-let g:go_modifytags_transform = 'camelcase'
-" let g:go_fold_enable = []
-"
-autocmd FileType go nmap <leader>bu  <Plug>(go-build)
-autocmd FileType go nmap <leader>ru <Plug>(go-run)
-autocmd FileType go nmap <leader>tt  <Plug>(go-test)
+"let g:go_modifytags_transform = 'camelcase'
+"" let g:go_fold_enable = []
+""
+"autocmd FileType go nmap <leader>bu  <Plug>(go-build)
+"autocmd FileType go nmap <leader>ru <Plug>(go-run)
+"autocmd FileType go nmap <leader>tt  <Plug>(go-test)
 "
 " ============================== ultisnips ==============================
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
 "
 " ============================== fzf ==============================
 nnoremap <Leader>ff :FZF<Space>
@@ -419,10 +468,48 @@ command! -bang -nargs=* Rg
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-" ============================== deoplete ==============================
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-autocmd VimEnter * inoremap <expr> <cr> ((pumvisible()) ? (deoplete#close_popup()) : ("\<cr>"))
+" " ============================== deoplete ==============================
+" let g:deoplete#enable_at_startup = 1
+" autocmd VimEnter * inoremap <expr> <cr> ((pumvisible()) ? (deoplete#close_popup()) : ("\<cr>"))
+"
+"
+
+" " ============================== coc.nvim ==============================
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" inoremap <silent><expr> <Tab>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+
+" inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+inoremap <expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+inoremap <expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
+"
+"
+"
+" ============================== coc-snippets ==============================
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " ============================== linediff ==============================
 let g:linediff_first_buffer_command = 'new'

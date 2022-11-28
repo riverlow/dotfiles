@@ -3,7 +3,4 @@ root: ~/
 
 startup_window: cmd
 windows:
-    - haha:
-        - cd ~/haha/src/
-        - vim SUMMARY.md
     - cmd: echo cmd

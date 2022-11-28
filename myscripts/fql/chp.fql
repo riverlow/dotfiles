@@ -1,4 +1,6 @@
-LET doc = DOCUMENT('https://chp.shadiao.app/',true) 
+LET doc = DOCUMENT('https://chp.shadiao.app/',{
+    driver: 'cdp'
+})
 
 WAIT_ELEMENT(doc, '.mdl-textfield', 5000)
 

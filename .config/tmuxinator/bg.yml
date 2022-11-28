@@ -8,10 +8,10 @@ windows:
     - tor
   - ss:
     - cd ~/ss/
-    - ss-local -v -c cn.json -l 12345
-  - mdbook:
-    - cd ~/haha/
-    - mdbook serve
+    - ss-local -v -c dv.json -l 12345
+  # - mdbook:
+  #   - cd ~/haha/
+  #   - mdbook serve
   - caddy:
     - cd ~/dl/data_caddy/
     - caddy start

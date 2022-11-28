@@ -13,9 +13,10 @@ dotfiles add $HOME/myscripts/
 dotfiles add $HOME/.config/fish/fish_plugins
 dotfiles add $HOME/.config/fish/conf.d/localrc.fish
 
-# tmux
-dotfiles add $HOME/.tmux.conf
+# zsh
+# dotfiles add $HOME/.zshrc
 
+dotfiles add $HOME/.tmux.conf
 dotfiles add $HOME/.screenrc
 dotfiles add $HOME/.poliporc
 
@@ -29,9 +30,23 @@ dotfiles add $HOME/.config/youtube-dl/config
 dotfiles add $HOME/.config/yt-dlp.conf
 dotfiles add $HOME/.config/tmuxinator/
 
-# Go
+
+
 dotfiles add $HOME/pkgs/0get.sh
 dotfiles add $HOME/pkgs/main.go
+
+# linux
+
+dotfiles add $HOME/.config/fontconfig/fonts.conf
+
+# x11
+dotfiles add $HOME/.Xresources
+dotfiles add $HOME/.xinitrc
+
+# wayland
+# sway
+dotfiles add $HOME/.config/sway/config
+dotfiles add $HOME/.Xdefaults
 
 dotfiles status
 
