@@ -12,28 +12,34 @@ if has('nvim')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 endif
 
+" ============================== govim ==============================
+" Plug 'govim/govim'
 
-"
 " ============================== vim-go ==============================
-" Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'yami-beta/asyncomplete-omni.vim'
+"Plug 'prabirshrestha/asyncomplete-gocode.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 " ============================== ultisnips ==============================
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 "
 " ============================== fzf ==============================
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 "
 " ============================== ale ==============================
 " Plug 'dense-analysis/ale'
 "
 "
-
 " ============================== coc.nvim ==============================
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " ============================== deoplete ==============================
 " if has('nvim')
@@ -55,7 +61,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 " vim-bracketed-paste enables transparent pasting into vim. (i.e. no more :set paste!)
 Plug 'ConradIrwin/vim-bracketed-paste'
 " This plug-in provides automatic closing of quotes, parenthesis, brackets, etc.,
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
 " https://github.com/godlygeek/tabular
 Plug 'godlygeek/tabular'
 " A simple, easy-to-use Vim alignment plugin.
@@ -63,16 +69,18 @@ Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 " Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. 
 " cs"', cst"(total), ds"(delete), etc.
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 " gc, gc<motion>, gcap
 Plug 'tpope/vim-commentary'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plug 'tpope/vim-eunuch'
-" https://github.com/easymotion/vim-easymotion
-Plug 'easymotion/vim-easymotion'
 Plug 't9md/vim-choosewin'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-repeat'
+
+" ============================== vim-sneak ==============================
+Plug 'justinmk/vim-sneak'
+'
 "
 " ============================== specific ==============================
 Plug 'cespare/vim-toml'
@@ -80,7 +88,7 @@ Plug 'elzr/vim-json', {'for' : 'json'}
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 Plug 'corylanou/vim-present', {'for' : 'present'}
 Plug 'plasticboy/vim-markdown'
-Plug 'roxma/vim-tmux-clipboard'
+" Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 "Plug 'tmux-plugins/vim-tmux-focus-events'
 " I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. 
@@ -139,9 +147,11 @@ set formatoptions-=trowa2vbl
 set nocompatible
 set nobackup                 " Don't create annoying backup files
 set nowritebackup
+set autowrite                " Automatically save before :next, :make etc.
 set noswapfile               " Don't use swapfile
 set mouse=a                  " Enable mouse mode
 
+set updatetime=100
 
 " To get hover working in the terminal we need to set ttymouse. See
 "
@@ -152,12 +162,6 @@ set mouse=a                  " Enable mouse mode
 " does not work correctly beyond a certain column number (citation needed)
 " hence we use ttymouse=sgr
 set ttymouse=sgr
-
-" Suggestion: By default, govim populates the quickfix window with diagnostics
-" reported by gopls after a period of inactivity, the time period being
-" defined by updatetime (help updatetime). Here we suggest a short updatetime
-" time in order that govim/Vim are more responsive/IDE-like
-set updatetime=500
 
 " Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
 " balloondelay
@@ -183,11 +187,6 @@ filetype indent on
 " more details
 set backspace=2
 
-" Suggestion: show info for completion candidates in a popup menu
-if has("patch-8.1.1904")
-  set completeopt+=popup
-  set completepopup=align:menu,border:off,highlight:Pmenu
-endif
 
 
 
@@ -195,15 +194,14 @@ scriptencoding utf-8
 set encoding=utf-8
 set number                   " Show line numbers
 " set numberwidth=5
-set noexpandtab
 set shiftwidth=4
-set tabstop=4
+set softtabstop=4
+set tabstop=8
+set noexpandtab
 
-set autowrite                " Automatically save before :next, :make etc.
+
 set belloff+=ctrlg           " If Vim beeps during completion
 set cmdheight=2
-set completeopt=menu,menuone,noinsert
-set completeopt-=preview,noselect
 set conceallevel=2           " Concealed text is completely hidden
 set cursorline
 set display=lastline
@@ -268,17 +266,6 @@ nmap <silent> <leader>er :e $MYVIMRC<CR>
 " Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
 nmap <silent> <leader>re :source $MYVIMRC<CR>
 "
-"
-imap  <C-T> <Esc>gUiwea
-" imap  <C-T> <Esc>guiwea
-
-imap <C-A> <Esc>I
-imap <C-E> <END>
-imap <C-O> <END><CR>
-
-imap <C-D> <Left>
-imap <C-F> <Right>
-
 
 " Intuitive cursor movement in wrapped line
 map j gj
@@ -315,17 +302,16 @@ cmap <C-n> <Down>
 "
 nnoremap <silent> <leader>wr :w<CR>
 nnoremap <silent> <leader>q :q<CR>
-" Remove search highlight
-" nnoremap <leader><space> :nohlsearch<CR>
-function! s:clear_highlight()
-  let @/ = ""
-  call go#guru#ClearSameIds()
-endfunction
-nnoremap <silent> <leader><space> :<C-u>call <SID>clear_highlight()<CR>
 
 map P "*p
 map Y "*y
 "
+"" reverse word
+vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+" clear highlight
+nmap <leader><space> :noh<CR>
+
+
 " ============================== tab ==============================
 nmap <silent> <leader>tn :tabnew<CR>
 " ============================== buffer ==============================
@@ -397,56 +383,15 @@ augroup insertonenter
 	endif
 augroup END
 
-" ============================== vim-go ==============================
-" https://github.com/fatih/vim-go-tutorial
-"let g:go_fmt_fail_silently = 1
-"let g:go_fmt_command = "goimports"
-"let g:go_debug_windows = {
-"      \ 'vars':  'leftabove 35vnew',
-"      \ 'stack': 'botright 10new',
-"\ }
-
-"let g:go_test_prepend_name = 1
-"let g:go_list_type = "quickfix"
-"let g:go_auto_type_info = 0
-
-"let g:go_imports_mode = "gopls"
-"let g:go_gopls_complete_unimported = 1
-
-"let g:go_null_module_warning = 0
-"let g:go_echo_command_info = 1
-
-"let g:go_highlight_array_whitespace_error = 0
-"let g:go_highlight_chan_whitespace_error = 0
-"let g:go_highlight_extra_types = 1
-"let g:go_highlight_space_tab_error = 0
-"let g:go_highlight_trailing_whitespace_error = 0
-"let g:go_highlight_operators = 1
-"let g:go_highlight_functions = 1
-"let g:go_highlight_function_parameters = 1
-"let g:go_highlight_function_calls = 1
-"let g:go_highlight_types = 1
-"let g:go_highlight_fields = 1
-"let g:go_highlight_build_constraints = 1
-"let g:go_highlight_generate_tags = 1
-"let g:go_highlight_string_spellcheck = 1
-"let g:go_highlight_format_strings = 1
-"let g:go_highlight_variable_declarations = 1
-"let g:go_highlight_variable_assignments = 1
-"let g:go_highlight_diagnostic_errors = 1
-"let g:go_highlight_diagnostic_warnings = 1
-"let g:go_highlight_debug = 1
-
-"let g:go_modifytags_transform = 'camelcase'
-"" let g:go_fold_enable = []
-""
-"autocmd FileType go nmap <leader>bu  <Plug>(go-build)
-"autocmd FileType go nmap <leader>ru <Plug>(go-run)
-"autocmd FileType go nmap <leader>tt  <Plug>(go-test)
-"
 " ============================== ultisnips ==============================
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
+" let g:UltiSnipsExpandTrigger               <tab>
+" let g:UltiSnipsListSnippets                <c-tab>
+" let g:UltiSnipsJumpForwardTrigger          <c-j>
+" let g:UltiSnipsJumpBackwardTrigger         <c-k>
 "
 " ============================== fzf ==============================
 nnoremap <Leader>ff :FZF<Space>
@@ -468,48 +413,126 @@ command! -bang -nargs=* Rg
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
+
+" ============================== vim-sneak ==============================
+let g:sneak#label = 1
+
 " " ============================== deoplete ==============================
 " let g:deoplete#enable_at_startup = 1
 " autocmd VimEnter * inoremap <expr> <cr> ((pumvisible()) ? (deoplete#close_popup()) : ("\<cr>"))
 "
+" ============================== FileType ==============================
+autocmd BufNewFile,BufRead *.{yml,yaml} setlocal expandtab softtabstop=2 shiftwidth=2 
 "
+" ============================== vim-go ==============================
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+" let g:go_def_mapping_enabled = 0
+
+
+" ============================== asyncomplete.vim =======================
+" function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? "\<C-n>" :
+"   \ <SID>check_back_space() ? "\<TAB>" :
+"   \ asyncomplete#force_refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+"
+set completeopt=menuone,noinsert,noselect,preview
+set completeopt+=popup
+set completepopup=align:menu,border:off,highlight:Pmenu
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+
+" ============================== vim-lsp =======================
+augroup LspGo
+  au!
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'go-lang',
+      \ 'cmd': {server_info->['gopls']},
+      \ 'whitelist': ['go'],
+      \ })
+  autocmd FileType go setlocal omnifunc=lsp#complete
+  autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+  autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+  autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+  autocmd FileType go nmap <buffer> ,h :LspHover<CR>
+augroup END
+
+" call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
+"     \ 'name': 'gocode',
+"     \ 'allowlist': ['go'],
+"     \ 'completor': function('asyncomplete#sources#gocode#completor'),
+"     \ 'config': {
+"     \    'gocode_path': expand('~/go/bin/gocode')
+"     \  },
+"     \ }))
+
+" call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+" 	\ 'name': 'omni',
+" 	\ 'whitelist': ['go'],
+" 	\ 'completor': function('asyncomplete#sources#omni#completor')
+" 	\  }))
 
 " " ============================== coc.nvim ==============================
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-" use <tab> for trigger completion and navigate to the next complete item
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" " use <tab> for trigger completion and navigate to the next complete item
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
-" inoremap <silent><expr> <Tab>
-"       \ coc#pum#visible() ? coc#pum#next(1) :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
+" " inoremap <silent><expr> <Tab>
+" "       \ coc#pum#visible() ? coc#pum#next(1) :
+" "       \ CheckBackspace() ? "\<Tab>" :
+" "       \ coc#refresh()
 
-" inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
-inoremap <expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
-inoremap <expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
+" " inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" inoremap <expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+" inoremap <expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
 "
 "
 "
 " ============================== coc-snippets ==============================
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+" imap <C-l> <Plug>(coc-snippets-expand)
 
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackSpace() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ CheckBackSpace() ? "\<TAB>" :
+"       \ coc#refresh()
 
-function! CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! CheckBackSpace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
-let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_next = '<tab>'
 
 " ============================== linediff ==============================
 let g:linediff_first_buffer_command = 'new'
@@ -612,11 +635,6 @@ nmap <leader>ea <Plug>(EasyAlign)
 " nmap ga <Plug>(EasyAlign)
 " Align GitHub-flavored Markdown tables
 " au FileType markdown vmap <Leader>alb :EasyAlign *<Bar><CR>
-"
-" ============================== easymotion ==============================
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
 "
 " ============================== vim-table-mode ==============================
 " For Markdown-compatible tables use

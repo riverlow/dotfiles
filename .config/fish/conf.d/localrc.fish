@@ -9,6 +9,7 @@ set fish_greeting
 # alias
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias ls="ls --color=auto"
+alias pas="gopass"
 
 # sway
 set -x WLR_NO_HARDWARE_CURSORS 1
@@ -40,6 +41,8 @@ fish_add_path $HOME/go/bin/ /usr/local/go/bin
 # Rust 
 fish_add_path $HOME/.cargo/bin
 
+# python
+fish_add_path $HOME/Library/Python/3.11/bin
 
 # pyenv
 set -Ux PYENV_ROOT $HOME/.pyenv
@@ -76,7 +79,7 @@ set -gx LDFLAGS "-L/usr/local/opt/llvm/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
 
 # tizen
-fish_add_path "$HOME/tizen-studio/tools/ide/bin"
+fish_add_path "$HOME/Downloads/tizen-studio/tools/ide/bin"
 
 # curl
 fish_add_path /usr/local/opt/curl/bin

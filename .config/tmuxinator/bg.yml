@@ -1,20 +1,18 @@
 # /Users/x/.config/tmuxinator/macos.yml
 
 name: bg
-root: ~/
+root: ~
 
 windows:
-  - tor:
-    - tor
-  - ss:
-    - cd ~/ss/
-    - ss-local -v -c dv.json -l 12345
-  # - mdbook:
-  #   - cd ~/haha/
-  #   - mdbook serve
-  - caddy:
-    - cd ~/dl/data_caddy/
-    - caddy start
-  - new: 
-    - tmuxinator start code
-    - tmuxinator start fg
+- tor:
+  - tor
+- ss:
+    root: ~/ss/
+    layout: main-vertical
+    panes:
+    - bv:
+      - ss-local -v -c bv.json -l 12345
+    - rack:
+      - ss-local -v -c rack.json -l 12346
+- new: 
+  - tmuxinator start fg
