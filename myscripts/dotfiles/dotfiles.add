@@ -15,19 +15,20 @@ dotfiles add $HOME/.config/fish/conf.d/localrc.fish
 
 # tmux
 dotfiles add $HOME/.tmux.conf
+dotfiles add $HOME/.config/tmuxinator/
 
 dotfiles add $HOME/.screenrc
 dotfiles add $HOME/.poliporc
 
-
+# vim
 dotfiles add $HOME/.vimrc
 dotfiles add $HOME/.vim/UltiSnips/
 
-dotfiles add $HOME/.config/nvim/init.vim
-dotfiles add $HOME/.config/mpv/mpv.conf
+# mpv
+dotfiles add $HOME/.config/mpv/
+
 dotfiles add $HOME/.config/youtube-dl/config
 dotfiles add $HOME/.config/yt-dlp.conf
-dotfiles add $HOME/.config/tmuxinator/
 
 # Go
 dotfiles add $HOME/pkgs/0get.sh

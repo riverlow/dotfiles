@@ -79,7 +79,7 @@ set -gx LDFLAGS "-L/usr/local/opt/llvm/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
 
 # tizen
-fish_add_path "$HOME/Downloads/tizen-studio/tools/ide/bin"
+fish_add_path "~/tizen-studio/tools/ide/bin"  "~/tizen-studio/tools/"
 
 # curl
 fish_add_path /usr/local/opt/curl/bin
