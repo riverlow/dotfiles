@@ -1,0 +1,63 @@
+import:
+  - ~/.config/alacritty/themes/themes/tokyo-night-storm.yaml
+
+  # Live config reload (changes require restart)
+live_config_reload: true
+
+window:
+  # padding:
+  #   x: 10
+  #   y: 10
+  decorations: buttonless
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: SimpleFullscreen
+
+
+window.opacity: 0.8  # value range is 0 ~ 1
+
+# Font configuration (changes require restart)
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: Cascadia Code PL
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: Cascadia Code PL
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: Cascadia Code PL
+    # Style can be specified to pick a specific face.
+    style: Italic
+
+  bold_italic:
+    family: Cascadia Code PL
+    style: Bold Italic
+  size: 16.0
+
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: true
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
