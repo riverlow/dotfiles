@@ -114,6 +114,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'bluz71/vim-moonfly-colors'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'arcticicestudio/nord-vim'
 " Plug 'joshdick/onedark.vim'
 " Plug 'connorholyday/vim-snazzy' 			" not clear
 " Plug 'sonph/onehalf' 						" buggy
@@ -395,6 +396,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
 " ============================== fzf ==============================
 nnoremap <Leader>ff :FZF<Space>
+nnoremap <Leader>fh :FZF ~<CR>
 nnoremap <Leader>fz :FZF<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
@@ -432,11 +434,18 @@ autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
 let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_highlight_functions = 1
+let g:go_highlight_functions_parameters = 1
+let g:go_highlight_function_calls = 1
+
+let g:go_highlight_operators = 1
+
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'

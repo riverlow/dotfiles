@@ -37,5 +37,9 @@ dotfiles add $HOME/.config/yt-dlp.conf
 dotfiles add $HOME/pkgs/0get.sh
 dotfiles add $HOME/pkgs/main.go
 
+# zhengma
+dotfiles add $HOME/Library/Rime/default.custom.yaml
+dotfiles add $HOME/Library/Rime/zhengma.custom.yaml
+
 dotfiles status
 
