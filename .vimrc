@@ -1,19 +1,6 @@
 " Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-if has('nvim')
-call plug#begin(stdpath('data') . '/plugged')
-else
 call plug#begin('~/.vim/plugged')
-endif
-"
-" ========================== nvim-treesitter ============================
-if has('nvim')
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-endif
-
-" ============================== govim ==============================
-" Plug 'govim/govim'
 
 " ============================== vim-go ==============================
 Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
@@ -74,7 +61,6 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-commentary'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plug 'tpope/vim-eunuch'
-Plug 't9md/vim-choosewin'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-repeat'
 
@@ -96,25 +82,37 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-sensible'
 "Plug 'ervandew/supertab'
-Plug 'lyokha/vim-xkbswitch'
+"Plug 'lyokha/vim-xkbswitch'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-haml'
 "
-" ============================== color and theme ==============================
+
+" ============================== airline ==============================
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"
+
+
+" ============================== vim-xkbswitch ==============================
+Plug 'lyokha/vim-xkbswitch'
+
+" ============================== color and theme ==============================
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'arcticicestudio/nord-vim'
+
+" Plug 'jacoborus/tender.vim'
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+" Plug 'edkolev/tmuxline.vim'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'joshdick/onedark.vim'
 " Plug 'ayu-theme/ayu-vim'
-" Plug 'cocopon/iceberg.vim',
 " Plug 'gkeep/iceberg-dark'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'bluz71/vim-moonfly-colors'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'arcticicestudio/nord-vim'
+" Plug 'ghifarit53/tokyonight-vim'
+" Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 " Plug 'joshdick/onedark.vim'
 " Plug 'connorholyday/vim-snazzy' 			" not clear
 " Plug 'sonph/onehalf' 						" buggy
@@ -122,267 +120,17 @@ Plug 'arcticicestudio/nord-vim'
 " Plug 'endel/vim-github-colorscheme'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'bling/vim-bufferline'
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+" Plug 'cocopon/iceberg.vim',
+
 call plug#end()
 "
-" ============================== setttings ==============================
-" ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
-" recently opened files, :FzfHistory uses it
-set viminfo='1000
-if has('persistent_undo')
-  set undofile
-  set undodir=~/.cache/vim
-endif
-
-if exists('&breakindent')
-	set breakindent
-endif
-set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
-
-" r       Automatically insert the current comment leader after hitting <Enter> in Insert mode.  
-" o       Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
-" tcroqwan2vblmMB1j
-set formatoptions+=cqnmMB1j
-set formatoptions-=trowa2vbl
-
-
-set nocompatible
-set nobackup                 " Don't create annoying backup files
-set nowritebackup
-set autowrite                " Automatically save before :next, :make etc.
-set noswapfile               " Don't use swapfile
-set mouse=a                  " Enable mouse mode
-
-set updatetime=100
-
-" To get hover working in the terminal we need to set ttymouse. See
 "
-" :help ttymouse
-"
-" for the appropriate setting for your terminal. Note that despite the
-" automated tests using xterm as the terminal, a setting of ttymouse=xterm
-" does not work correctly beyond a certain column number (citation needed)
-" hence we use ttymouse=sgr
-set ttymouse=sgr
-
-" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
-" balloondelay
-set balloondelay=250
-
-" Suggestion: Turn on the sign column so you can see error marks on lines
-" where there are quickfix errors. Some users who already show line number
-" might prefer to instead have the signs shown in the number column; in which
-" case set signcolumn=number
-set signcolumn=number
-
-syntax on
-filetype plugin on
-
-" Suggestion: turn on auto-indenting. If you want closing parentheses, braces
-" etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
-" include this by default in govim.
-set autoindent
-set smartindent
-filetype indent on
-
-" Suggestion: define sensible backspace behaviour. See :help backspace for
-" more details
-set backspace=2
-
-
-
-
-scriptencoding utf-8
-set encoding=utf-8
-set number                   " Show line numbers
-" set numberwidth=5
-set shiftwidth=4
-set softtabstop=4
-set tabstop=8
-set noexpandtab
-
-
-set belloff+=ctrlg           " If Vim beeps during completion
-set cmdheight=2
-set conceallevel=2           " Concealed text is completely hidden
-set cursorline
-set display=lastline
-set fileformats=unix,mac,dos " Prefer Unix over Windows over OS 9 formats
-set grepprg=grep\ -nH
-set hidden
-set hlsearch                 " Highlight found searches
-set ignorecase               " Search case insensitive...
-set iminsert=0
-set imsearch=-1
-set incsearch                " Shows the match while typing
-set laststatus=2
-set lazyredraw
-"set listchars=eol:¬,tab:▸\
-set list listchars=tab:\|\ 
-set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
-set nocursorcolumn           " speed up syntax highlighting
-set noerrorbells             " No beeps
-set noimcmdline
-set noimdisable
-set noshowmatch              " Do not show matching brackets by flickering
-set noshowmode               " We show the mode with airline or lightline
-set nosmartindent
-set nrformats-=octal
-set scrolloff=8
-set shiftround
-set shortmess+=c             " Shut off completion messages
-set shortmess=acTI
-set showcmd
-set showmatch
-set sidescroll=1
-set sidescrolloff=16
-set smartcase                " ... but not it begins with upper case
-set splitbelow               " Split horizontal windows below to the current windows
-set splitright               " Split vertical windows right to the current windows
-set virtualedit=block
-set wildmenu
-set wrapscan
-set wrap
-
-"
-"
-"
-" ============================== mapping ==============================
+" ============================== Leader ==============================
 " let mapleader = "\<space>"
 " let mapleader=";"
 let mapleader=","
-"
-" I don't like it. Not easy to fzf current dir.
-" Enter automatically into the files directory
-" autocmd BufEnter * silent! lcd %:p:h
-" map <Leader>cd :pwd<cr>
-"map <Leader>wp :echo expand("%:p")<cr>
-map <Leader>lc :lcd %:p:h<cr>
-"
-" Automatically resize screens to be equally the same
-autocmd VimResized * wincmd =
 
-"
-" Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
-nmap <silent> <leader>er :e $MYVIMRC<CR>
-" Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
-nmap <silent> <leader>re :source $MYVIMRC<CR>
-"
-
-" Intuitive cursor movement in wrapped line
-map j gj
-map k gk
-"
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nmap n nzzzv
-nmap N Nzzzv
-" Same when moving up and down
-map <C-d> <C-d>zz
-map <C-u> <C-u>zz
-
-" Center the screen
-nnoremap <space> zz
-"
-" Turn off the IME when escaping from Insert mode
-imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
-
-" Switch active window
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-" Close all but the current one
-nmap <leader>o :only<CR>
-"
-"
-" Refer to history in command-line mode
-cmap <C-p> <Up>
-" cmap <Up> <C-p>
-cmap <C-n> <Down>
-" cmap <Down> <C-n>
-"
-nnoremap <silent> <leader>wr :w<CR>
-nnoremap <silent> <leader>q :q<CR>
-
-map P "*p
-map Y "*y
-"
-"" reverse word
-vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
-" clear highlight
-nmap <leader><space> :noh<CR>
-
-
-" ============================== tab ==============================
-nmap <silent> <leader>tn :tabnew<CR>
-" ============================== buffer ==============================
-" Mappings to access buffers (don't use "\p" because a
-" delay before pressing "p" would accidentally paste).
-" \l       : list buffers
-" \b \f \g : go back/forward/last-used
-" \1 \2 \3 : go to buffer 1/2/3 etc
-"
-" list buffers
-" nn == nnoremap
-"To define a mapping which will not be echoed on the command line, add
-"<silent>" as the first argument. 
-nmap <Leader>ls :ls<CR>
-" list and select buffer
-nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
-
-" go to next/previous buffer
-" https://github.com/neovim/neovim/issues/2048
-nmap <C-n> :bn<CR>
-nmap <C-p> :bp<CR>
-imap <C-n> <ESC>:bn<CR>
-imap <C-p> <ESC>:bp<CR>
-
-" Unload buffer and delete it from the buffer list.
-nmap <silent> <leader>bd :bd<CR>
-nmap <silent> <leader>bk :bd!<CR>
-" first && last
-nmap <silent> <leader>br :br<CR>
-nmap <silent> <leader>bf :bf<CR>
-nmap <silent> <leader>bl :bl<CR>
-
-nmap <silent> <Leader>ma :marks<CR>
-
-" ============================== explore ==============================
-nmap <silent> <Leader>ex :Explore<CR>
-
-nmap <silent> <leader>te :terminal<CR>
-tmap <C-x> <C-\><C-n><C-w>q
-" improved keyboard support for navigation (especially terminal)
-" https://neovim.io/doc/user/nvim_terminal_emulator.html
-tmap <Esc> <C-\><C-n>
-" Terminal settings
-if has('terminal')
-" Kill job and close terminal window
-tmap <Leader>q <C-w><C-C><C-w>c<cr>
-
-" switch to normal mode with esc
-tmap <Esc> <C-W>N
-
-" mappings to move out from terminal to other views
-tmap <C-h> <C-w>h
-tmap <C-j> <C-w>j
-tmap <C-k> <C-w>k
-tmap <C-l> <C-w>l
-endif
-
-" https://www.reddit.com/r/neovim/comments/akcp97/how_to_automatically_enter_insert_mode_on_opening/
-augroup insertonenter
-	function! InsertOnTerminal()
-		if &buftype ==# "terminal"
-			normal i
-		endif
-	endfunction
-
-	autocmd! BufEnter * call InsertOnTerminal()
-	if has('nvim')
-		autocmd! TermOpen * call InsertOnTerminal()
-	endif
-augroup END
 
 " ============================== ultisnips ==============================
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -395,6 +143,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " let g:UltiSnipsJumpBackwardTrigger         <c-k>
 "
 " ============================== fzf ==============================
+nnoremap <Leader>fe :History:<CR>
 nnoremap <Leader>ff :FZF<Space>
 nnoremap <Leader>fh :FZF ~<CR>
 nnoremap <Leader>fz :FZF<CR>
@@ -418,6 +167,12 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 
 " ============================== vim-sneak ==============================
 let g:sneak#label = 1
+map <leader>/ <Plug>Sneak_s
+map <leader>? <Plug>Sneak_S
+map <leader>f <Plug>Sneak_f
+map <leader>F <Plug>Sneak_F
+map <leader>t <Plug>Sneak_t
+map <leader>T <Plug>Sneak_T
 
 " " ============================== deoplete ==============================
 " let g:deoplete#enable_at_startup = 1
@@ -658,17 +413,14 @@ let g:tabular_loaded = 1
 nmap <Leader>ta :Tabularize 
 "
 " ============================== vim-xkbswitch ==============================
-if has('mac')
-	let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
-endif
-let g:XkbSwitchEnabled = 1
+" if has('mac')
+" 	let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+" endif
+" let g:XkbSwitchEnabled = 1
 "
 " ============================== emmet-vim ==============================
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,tmpl EmmetInstall
-
-" ============================== choosewin ==============================
-nmap W <Plug>(choosewin)
 
 " ============================== vim-json ==============================
 let g:vim_json_syntax_conceal = 0
@@ -680,42 +432,290 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " ============================== airline ==============================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+" let g:airline_theme='jellybeans'
+"
+" ============================== vim-xkbswitch ==============================
+let g:XkbSwitchEnabled = 1
+let g:airline_detect_iminsert = 1
+
 "
 " ============================== color and theme ==============================
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
   set termguicolors
 endif
 
-"
-" colorscheme iceberg
-" let g:airline_theme='iceberg'
-"
-
-" colorscheme moonfly 			" it is weird.
-" let g:airline_theme = 'moonfly'
-"
-"
-" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'palenight'
-let g:airline_theme = 'material'
-
 set background=dark
-colorscheme material
 
-" let g:onedark_terminal_italics = 1
-" colorscheme onedark
-" let g:airline_theme='onedark'
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'palenight-community'
+" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
+colorscheme material
+let g:airline_theme='material'
+
+"
+" ============================== setttings ==============================
+" ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
+" recently opened files, :FzfHistory uses it
+set viminfo='1000
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.cache/vim
+endif
+
+if exists('&breakindent')
+	set breakindent
+endif
+set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
+
+" r       Automatically insert the current comment leader after hitting <Enter> in Insert mode.  
+" o       Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
+" tcroqwan2vblmMB1j
+set formatoptions+=cqnmMB1j
+set formatoptions-=trowa2vbl
+
+
+set nocompatible
+set nobackup                 " Don't create annoying backup files
+set nowritebackup
+set autowrite                " Automatically save before :next, :make etc.
+set noswapfile               " Don't use swapfile
+set mouse=a                  " Enable mouse mode
+
+set updatetime=100
+
+" To get hover working in the terminal we need to set ttymouse. See
+"
+" :help ttymouse
+"
+" for the appropriate setting for your terminal. Note that despite the
+" automated tests using xterm as the terminal, a setting of ttymouse=xterm
+" does not work correctly beyond a certain column number (citation needed)
+" hence we use ttymouse=sgr
+set ttymouse=sgr
+
+" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
+" balloondelay
+set balloondelay=250
+
+" Suggestion: Turn on the sign column so you can see error marks on lines
+" where there are quickfix errors. Some users who already show line number
+" might prefer to instead have the signs shown in the number column; in which
+" case set signcolumn=number
+set signcolumn=number
+
+syntax on
+filetype plugin on
+
+" Suggestion: turn on auto-indenting. If you want closing parentheses, braces
+" etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
+" include this by default in govim.
+set autoindent
+set smartindent
+filetype indent on
+
+" Suggestion: define sensible backspace behaviour. See :help backspace for
+" more details
+set backspace=2
+
+
+
+
+scriptencoding utf-8
+set encoding=utf-8
+set number                   " Show line numbers
+" set numberwidth=5
+set shiftwidth=4
+set softtabstop=4
+set tabstop=8
+set noexpandtab
+
+
+set belloff+=ctrlg           " If Vim beeps during completion
+set conceallevel=2           " Concealed text is completely hidden
+set cursorline
+set display=lastline
+set fileformats=unix,mac,dos " Prefer Unix over Windows over OS 9 formats
+set grepprg=grep\ -nH
+set hidden
+set hlsearch                 " Highlight found searches
+set ignorecase               " Search case insensitive...
+set iminsert=0
+set imsearch=-1
+set incsearch                " Shows the match while typing
+set laststatus=2
+set lazyredraw
+"set listchars=eol:¬,tab:▸\
+set list listchars=tab:\|\ 
+set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
+set nocursorcolumn           " speed up syntax highlighting
+set noerrorbells             " No beeps
+set noimcmdline
+set noimdisable
+set noshowmatch              " Do not show matching brackets by flickering
+set noshowmode               " We show the mode with airline or lightline
+set nosmartindent
+set nrformats-=octal
+set scrolloff=8
+set shiftround
+set shortmess+=c             " Shut off completion messages
+set shortmess=acTI
+set showcmd
+set showmatch
+set sidescroll=1
+set sidescrolloff=16
+set smartcase                " ... but not it begins with upper case
+set splitbelow               " Split horizontal windows below to the current windows
+set splitright               " Split vertical windows right to the current windows
+set virtualedit=block
+set wildmenu
+set wrapscan
+set wrap
+
 "
 "
+"
+" ============================== mapping ==============================
+"
+" I don't like it. Not easy to fzf current dir.
+" Enter automatically into the files directory
+" autocmd BufEnter * silent! lcd %:p:h
+" map <Leader>cd :pwd<cr>
+"map <Leader>wp :echo expand("%:p")<cr>
+map <Leader>lc :lcd %:p:h<cr>
+map <Leader>h :help<space>
+"
+" Automatically resize screens to be equally the same
+autocmd VimResized * wincmd =
+
+"
+" Shortcut to edit THIS configuration file
+nmap <silent> <leader>er :e $MYVIMRC<CR>
+" Shortcut to source (reload) THIS configuration file after editing it
+nmap <silent> <leader>re :source $MYVIMRC<CR>
+"
+
+" Intuitive cursor movement in wrapped line
+map j gj
+map k gk
+"
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nmap n nzzzv
+nmap N Nzzzv
+
+" Center the screen
+nnoremap <space> zz
+ 
+" Turn off the IME when escaping from Insert mode
+" imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
+
+" ============================== windwos ==============================
+" Switch active window
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+" Close all but the current one
+nmap <leader>o :only<CR>
+
+" close window
+nmap <leader>x :clo<CR>
+"
+"
+" Refer to history in command-line mode
+cmap <C-p> <Up>
+" cmap <Up> <C-p>
+cmap <C-n> <Down>
+" cmap <Down> <C-n>
+"
+nnoremap <silent> <leader>wr :w<CR>
+nnoremap <silent> <leader>q :q<CR>
+
+
+" ============================== copy&paste ==============================
+map <leader>p "*p
+map <leader>y "*y
+map Y y$
+"
+"" reverse word
+vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+
+" clear highlight
+nmap <leader><space> :noh<CR>
+
+nmap <leader>j :jumps<CR>
+nmap <leader>m :marks<CR>
+
+" ============================== buffer ==============================
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+"
+" list buffers
+" nn == nnoremap
+"To define a mapping which will not be echoed on the command line, add
+"<silent>" as the first argument. 
+nmap <Leader>ls :ls<CR>
+" list and select buffer
+nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
+
+" go to next/previous buffer
+" https://github.com/neovim/neovim/issues/2048
+nmap <C-n> :bn<CR>
+nmap <C-p> :bp<CR>
+imap <C-n> <ESC>:bn<CR>
+imap <C-p> <ESC>:bp<CR>
+
+" Unload buffer and delete it from the buffer list.
+nmap <silent> <leader>bd :bd<CR>
+nmap <silent> <leader>bk :bd!<CR>
+" first && last
+nmap <silent> <leader>br :br<CR>
+nmap <silent> <leader>bf :bf<CR>
+nmap <silent> <leader>bl :bl<CR>
+
+" ============================== explore ==============================
+nmap <silent> <Leader>ex :Explore<CR>
+
+nmap <silent> <leader>te :terminal<CR>
+tmap <C-x> <C-\><C-n><C-w>q
+" improved keyboard support for navigation (especially terminal)
+" https://neovim.io/doc/user/nvim_terminal_emulator.html
+tmap <Esc> <C-\><C-n>
+" Terminal settings
+if has('terminal')
+" Kill job and close terminal window
+tmap <Leader>q <C-w><C-C><C-w>c<cr>
+
+" switch to normal mode with esc
+tmap <Esc> <C-W>N
+
+" mappings to move out from terminal to other views
+tmap <C-h> <C-w>h
+tmap <C-j> <C-w>j
+tmap <C-k> <C-w>k
+tmap <C-l> <C-w>l
+endif
+
+" https://www.reddit.com/r/neovim/comments/akcp97/how_to_automatically_enter_insert_mode_on_opening/
+augroup insertonenter
+	function! InsertOnTerminal()
+		if &buftype ==# "terminal"
+			normal i
+		endif
+	endfunction
+
+	autocmd! BufEnter * call InsertOnTerminal()
+	if has('nvim')
+		autocmd! TermOpen * call InsertOnTerminal()
+	endif
+augroup END
+
 "
 " ============================== functiongs ==============================
+" autocmd VimEnter,VimLeave * silent !tmux set status

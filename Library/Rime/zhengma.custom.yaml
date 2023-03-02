@@ -6,6 +6,15 @@ patch:
 
   "speller/auto_select": true # k動上屛
 
+  "switches/@0/states": [ 中文, EN ]
+
+  "switches/@2":
+    name: ascii_punct
+    states: ["。，", "．，"]
+
+  "translator/enable_sentence": false
+
+    
   # "key_binder/bindings":
   #   - { when: composing, accept: Return, send: Escape }
   #   - { when: has_menu, accept: semicolon, send: 2 }
@@ -13,9 +22,6 @@ patch:
 
   # "switches/@0/reset": 1  #表示將 switcher 列表中的第一個元素（即 ascii_mode 開關）的初始值重設爲狀態1（即「英文」）。
 
-  "translator/enable_completion": true
+  "style/horizontal": false
 
-  "speller/auto_select": true # k動上屛
-
-  style: 
-    horizontal: true
+  "recognizer/patterns/punct": "^/([A-Z|a-z]*|[0-9]|10)$"
