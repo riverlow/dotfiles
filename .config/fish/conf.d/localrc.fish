@@ -10,6 +10,7 @@ set fish_greeting
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias ls="ls --color=auto"
 alias pas="gopass"
+alias mux="tmuxinator"
 
 # sway
 set -x WLR_NO_HARDWARE_CURSORS 1
@@ -55,18 +56,15 @@ set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
 
 
 # android
-fish_add_path $ANDROID_SDK_ROOT/emulator $ANDROID_SDK_ROOT/platform-tools  $ANDROID_SDK_ROOT/tools/bin
-set -x ANDROID_SDK_ROOT "$HOME/Library/Android/sdk"
-
+fish_add_path "$HOME/.local/platform-tools/"
 
 # c++
-set -g fish_user_paths  "/usr/local/opt/gettext/bin" $fish_user_paths
+fish_add_path  "/usr/local/opt/gettext/bin"
 set -gx LDFLAGS "-L/usr/local/opt/gettext/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/gettext/include"
 
 # openssl
 fish_add_path '/usr/local/opt/openssl@3/bin'
-set -gx LDFLAGS "-L/usr/local/opt/openssl@3/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/openssl@3/include"
 
 set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl@3/lib/pkgconfig"
@@ -75,7 +73,6 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl@3/lib/pkgconfig"
 fish_add_path /usr/local/opt/llvm/bin
 # To use the bundled libc++ please add the following LDFLAGS:
 # LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
-set -gx LDFLAGS "-L/usr/local/opt/llvm/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
 
 # tizen
@@ -84,12 +81,11 @@ fish_add_path "~/tizen-studio/tools/ide/bin"
 # curl
 fish_add_path /usr/local/opt/curl/bin
 
-set -gx LDFLAGS "-L/usr/local/opt/curl/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/curl/include"
 set -gx PKG_CONFIG_PATH "/usr/local/opt/curl/lib/pkgconfig"
 
 # libgstreamer
-set -gx LDFLAGS "-L/usr/local/Cellar/gstreamer/1.20.1/lib/ -L/usr/local/Cellar/gst-plugins-base//1.20.1/lib/"
+set -gx LDFLAGS ""
 set -gx CPPFLAGS "-I/usr/local/Cellar/gstreamer/1.20.1/include -I/usr/local/Cellar/gst-plugins-base//1.20.1/lib/include"
 
 # qt5
@@ -98,3 +94,6 @@ fish_add_path /usr/local/opt/qt@5/bin
 set -gx LDFLAGS "-L/usr/local/opt/qt@5/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/qt@5/include"
 set -gx PKG_CONFIG_PATH "/usr/local/opt/qt@5/lib/pkgconfig"
+
+# fzf
+set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'

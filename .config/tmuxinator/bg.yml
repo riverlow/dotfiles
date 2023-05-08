@@ -8,11 +8,9 @@ windows:
   - tor
 - ss:
     root: ~/ss/
-    layout: main-vertical
+    layout: even-horizontal
     panes:
     - bv:
       - ss-local -v -c bv.json -l 12345
     - rack:
       - ss-local -v -c rack.json -l 12346
-- new: 
-  - tmuxinator start fg

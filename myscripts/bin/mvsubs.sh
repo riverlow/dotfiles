@@ -1,15 +1,72 @@
 #!/usr/local/bin/bash
 #
+#
+shopt -s extglob
 
-if [[ $(basename "${1}") != $(basename "$PWD") ]]; then
-	exit 1;
+dirname=$(basename ${1})
+
+
+if [[ ${dirname} != $(basename "$PWD") ]]; then
 	echo not the correct pwd.
+	exit 1;
 fi
 
-cd Subs;
+ 
+for i in Subs/*;do
 
-for i in *;do
-	for j in ${i}/*English*; do
-		mv "${j}" "$(dirname ../${j})_$(basename ${j})";
-	done
+	if [ -d ${i} ]; then
+	    dirname=$(basename ${i})
+
+	    for j in ${i}/*.*; do
+		if [ -f ${j} ]; then
+
+
+		    basename_i=$(basename ${j})
+
+		    if echo ${basename_i} | grep -Eq '[[:digit:]]+_[[:alpha:]]+\..+'; then
+
+				noexti=${basename_i%.*}
+				exti=${basename_i##*.}
+
+				echo noexti exti  is ${noexti} ${exti}
+
+				number=$(echo ${noexti}|tr -d -c [:digit:])
+				alpha=$(echo ${noexti}| tr -d -c [:alpha:])
+
+				echo number alpha is  ${number} ${alpha}
+
+				filename="${dirname}".${number}.${alpha}.${exti}
+				echo "${i}" ${filename}
+
+
+			    else
+				    echo nothing
+		    fi
+
+		fi
+	    done
+
+     elif [ -f ${i} ]; then
+
+	 basename_i=$(basename ${i})
+
+
+		    if echo ${basename_i} | grep -Eq '[[:digit:]]+_[[:alpha:]]+\..+'; then
+
+				noexti=${basename_i%.*}
+				exti=${basename_i##*.}
+
+
+				number=$(echo ${noexti}|tr -d -c [:digit:])
+				alpha=$(echo ${noexti}| tr -d -c [:alpha:])
+
+				filename="${dirname}".${number}.${alpha}.${exti}
+				mv "${i}" ${filename}
+
+
+			    else
+				    echo nothing
+		    fi
+	fi
+
 done

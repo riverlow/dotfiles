@@ -28,7 +28,8 @@ dotfiles add $HOME/.vimrc
 dotfiles add $HOME/.vim/UltiSnips/
 
 # mpv
-dotfiles add $HOME/.config/mpv/
+dotfiles add $HOME/.config/mpv/mpv.conf
+dotfiles add $HOME/.config/mpv/scripts
 
 dotfiles add $HOME/.config/youtube-dl/config
 dotfiles add $HOME/.config/yt-dlp.conf

@@ -17,7 +17,7 @@ ${0}
 endsnippet
 
 # error log.Fatal
-snippet ef "if err != nil { log.Fatal(err)}" !b
+snippet elf "if err != nil { log.Fatal(err)}" !b
 if err != nil {
 	log.Fatal(err)
 }
@@ -25,7 +25,7 @@ ${0}
 endsnippet
 
 # error log.Fatal
-snippet ep "if err != nil { log.Println(err)}" !b
+snippet elp "if err != nil { log.Println(err)}" !b
 if err != nil {
 	log.Println(err)
 }
@@ -40,4 +40,7 @@ if err != nil {
 ${0}
 endsnippet
 
-
+# template 
+snippet .t "template" 
+{{template ${1} .}}${0}
+endsnippet

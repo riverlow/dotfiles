@@ -2,15 +2,23 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+
+" ============================== indent-guides ==============================
+" Plug 'preservim/vim-indent-guides'
+"set listchars=eol:¬,tab:▸\
+set list listchars=tab:\|\ 
+" set list listchars=tab:»-,trail:·,extends:»,precedes:«
+
 " ============================== vim-go ==============================
 Plug 'fatih/vim-go', {  'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'yami-beta/asyncomplete-omni.vim'
-"Plug 'prabirshrestha/asyncomplete-gocode.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+" Plug 'jaxbot/semantic-highlight.vim'
 
 " ============================== ultisnips ==============================
 Plug 'SirVer/ultisnips'
@@ -20,6 +28,7 @@ Plug 'honza/vim-snippets'
 " ============================== fzf ==============================
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
 "
 " ============================== ale ==============================
 " Plug 'dense-analysis/ale'
@@ -27,15 +36,6 @@ Plug 'junegunn/fzf.vim'
 "
 " ============================== coc.nvim ==============================
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" ============================== deoplete ==============================
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
 "
 " ============================== tagbar ==============================
 Plug 'majutsushi/tagbar'
@@ -59,8 +59,6 @@ Plug 'dhruvasagar/vim-table-mode'
 "Plug 'tpope/vim-surround'
 " gc, gc<motion>, gcap
 Plug 'tpope/vim-commentary'
-" Vim sugar for the UNIX shell commands that need it the most.
-Plug 'tpope/vim-eunuch'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-repeat'
 
@@ -74,29 +72,25 @@ Plug 'elzr/vim-json', {'for' : 'json'}
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 Plug 'corylanou/vim-present', {'for' : 'present'}
 Plug 'plasticboy/vim-markdown'
-" Plug 'roxma/vim-tmux-clipboard'
-"Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
-"Plug 'tmux-plugins/vim-tmux-focus-events'
-" I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-sensible'
-"Plug 'ervandew/supertab'
-"Plug 'lyokha/vim-xkbswitch'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-haml'
 "
 
-" ============================== airline ==============================
+" ============================== vim-airline ==============================
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" ============================== goyo ==============================
+Plug 'junegunn/goyo.vim'
 
 " ============================== vim-xkbswitch ==============================
 Plug 'lyokha/vim-xkbswitch'
 
-" ============================== color and theme ==============================
+" ============================== colorscheme ==============================
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'arcticicestudio/nord-vim'
 
@@ -109,8 +103,8 @@ Plug 'arcticicestudio/nord-vim'
 " Plug 'joshdick/onedark.vim'
 " Plug 'ayu-theme/ayu-vim'
 " Plug 'gkeep/iceberg-dark'
-" Plug 'NLKNguyen/papercolor-theme'
-" Plug 'bluz71/vim-moonfly-colors'
+" plug 'nlknguyen/papercolor-theme'
+" plug 'bluz71/vim-moonfly-colors'
 " Plug 'ghifarit53/tokyonight-vim'
 " Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 " Plug 'joshdick/onedark.vim'
@@ -126,16 +120,298 @@ Plug 'arcticicestudio/nord-vim'
 call plug#end()
 "
 "
-" ============================== Leader ==============================
+" ============================== leader ==============================
 " let mapleader = "\<space>"
 " let mapleader=";"
 let mapleader=","
+noremap \ ,
 
 
+" ============================== setttings ==============================
+" ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
+" recently opened files, :FzfHistory uses it
+set viminfo='1000
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.cache/vim
+endif
+
+if exists('&breakindent')
+	set breakindent
+endif
+set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
+
+" r       Automatically insert the current comment leader after hitting <Enter> in Insert mode.  
+" o       Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
+" tcroqwan2vblmMB1j
+set formatoptions+=cqnmMB1j
+set formatoptions-=trowa2vbl
+
+
+set nocompatible
+set nobackup                 " Don't create annoying backup files
+set nowritebackup
+set autowrite                " Automatically save before :next, :make etc.
+set noswapfile               " Don't use swapfile
+set mouse=a                  " Enable mouse mode
+
+set updatetime=100
+
+" To get hover working in the terminal we need to set ttymouse. See
+"
+" :help ttymouse
+"
+" for the appropriate setting for your terminal. Note that despite the
+" automated tests using xterm as the terminal, a setting of ttymouse=xterm
+" does not work correctly beyond a certain column number (citation needed)
+" hence we use ttymouse=sgr
+set ttymouse=sgr
+
+" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
+" balloondelay
+set balloondelay=250
+
+" Suggestion: Turn on the sign column so you can see error marks on lines
+" where there are quickfix errors. Some users who already show line number
+" might prefer to instead have the signs shown in the number column; in which
+" case set signcolumn=number
+set signcolumn=number
+
+syntax on
+filetype plugin on
+
+set autoindent
+set smartindent
+filetype indent on
+
+" Suggestion: define sensible backspace behaviour. See :help backspace for
+" more details
+set backspace=2
+
+
+
+
+scriptencoding utf-8
+set encoding=utf-8
+set number                   " Show line numbers
+set shiftwidth=4 softtabstop=4 
+set noexpandtab
+
+
+set belloff+=ctrlg           " If Vim beeps during completion
+set conceallevel=2           " Concealed text is completely hidden
+set cursorline
+set display=lastline
+set fileformats=unix,mac,dos " Prefer Unix over Windows over OS 9 formats
+set grepprg=grep\ -nH
+set hidden
+set hlsearch                 " Highlight found searches
+set ignorecase               " Search case insensitive...
+set iminsert=0
+set imsearch=-1
+set incsearch                " Shows the match while typing
+set lazyredraw
+set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
+set nocursorcolumn           " speed up syntax highlighting
+set noerrorbells             " No beeps
+set noimcmdline
+set noimdisable
+set noshowmatch              " Do not show matching brackets by flickering
+set noshowmode               " We show the mode with airline or lightline
+set nosmartindent
+set nrformats-=octal
+set scrolloff=8
+set shiftround
+set shortmess+=c             " Shut off completion messages
+set shortmess=acTI
+set showcmd
+set showmatch
+set sidescroll=1
+set sidescrolloff=16
+set smartcase                " ... but not it begins with upper case
+set splitbelow               " Split horizontal windows below to the current windows
+set splitright               " Split vertical windows right to the current windows
+set virtualedit=block
+set wildmenu
+set wrapscan
+set wrap
+
+"
+"
+"
+" ============================== mappings ==============================
+nmap <leader>vm :verbose map<space>
+"
+
+" ============================== help ==============================
+nmap <Leader>H :tab h<space>
+nmap <Leader>hu :tab help user-manual<CR>
+"
+" Automatically resize screens to be equally the same
+autocmd VimResized * wincmd =
+
+"
+" Shortcut to edit THIS configuration file
+nmap <silent> <leader>er :tabnew $MYVIMRC<CR>
+" Shortcut to source (reload) THIS configuration file after editing it
+nmap <silent> <leader>re :source $MYVIMRC<CR>
+"
+
+" Intuitive cursor movement in wrapped line
+map j gj
+map k gk
+"
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nmap n nzzzv
+nmap N Nzzzv
+
+" Center the screen
+nnoremap <space> zz
+ 
+" Turn off the IME when escaping from Insert mode
+" imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
+
+" ============================== editing ==============================
+nmap <silent> <leader>wr :update<CR>
+nmap <silent> <leader>wa :wall<CR>
+
+" Enter automatically into the files directory
+" autocmd BufEnter * silent! lcd %:p:h
+" map <Leader>cd :pwd<cr>
+"map <Leader>wp :echo expand("%:p")<cr>
+nmap <Leader>lcd :lcd %:p:h<cr>:pwd<cr>
+nmap <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+inoremap (<cr> (<CR>)<C-c>O
+inoremap {<cr> {<CR>}<C-c>O
+inoremap [<cr> [<CR>]<C-c>O
+
+
+" ============================== windows ==============================
+" Switch active window
+" nmap <C-h> <C-w>h
+" nmap <C-j> <C-w>j
+" nmap <C-k> <C-w>k
+" nmap <C-l> <C-w>l
+
+nmap <silent> <leader>x :close<cr>
+nmap <silent> <leader>X :confirm xall<cr>
+
+" Move the current window to a new tab page.
+nmap <leader>wt CTRL-W_T
+"
+"
+" Refer to history in command-line mode
+cmap <C-p> <Up>
+" cmap <Up> <C-p>
+cmap <C-n> <Down>
+" cmap <Down> <C-n>
+"
+
+" ============================== tabs ==============================
+nmap <leader>tn :tabnew<CR>
+nmap <leader>tf :tabfind<space>
+nmap <leader>tr :tabrewind<CR>
+nmap <leader>tl :tablast<CR>
+nmap <leader>tx :tabclose<CR>
+nmap <leader>to :tabonly<CR>
+nmap <leader>ts :tabs<CR>
+nmap <leader>tm :tabmove<Space>
+nmap <leader>t^ :tabmove 0<CR>
+nmap <leader>t$ :tabmove $<CR>
+
+nmap gp gT
+
+" ============================== registers ==============================
+" map <leader>P "*p
+" map <leader>Y "*y
+map Y y$
+"
+"" reverse word
+vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+
+" clear highlight
+nmap <leader><space> :noh<CR>
+
+nmap <leader>js :jumps<CR>
+nmap <leader>ms :marks<CR>
+
+" ============================== buffers ==============================
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+"
+" list buffers
+" nn == nnoremap
+"To define a mapping which will not be echoed on the command line, add
+"<silent>" as the first argument. 
+nmap <Leader>ls :ls<CR>
+nmap <Leader>bs :buffers<CR>
+" list and select buffer
+nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
+
+" go to next/previous buffer
+" https://github.com/neovim/neovim/issues/2048
+nmap <C-n> :bn<CR>
+nmap <C-p> :bp<CR>
+imap <C-n> <ESC>:bn<CR>
+imap <C-p> <ESC>:bp<CR>
+
+" Unload buffer and delete it from the buffer list.
+nmap <silent> <leader>bd :bd<CR>
+nmap <silent> <leader>bu :bu<CR>
+nmap <silent> <leader>bk :bd!<CR>
+" first && last
+nmap <silent> <leader>br :br<CR>
+nmap <silent> <leader>b1 :bf<CR>
+nmap <silent> <leader>bl :bl<CR>
+
+" ============================== terminal ==============================
+nmap <silent> <leader>te :tab terminal<CR>
+tmap <C-x> <C-\><C-n><C-w>q
+" improved keyboard support for navigation (especially terminal)
+" https://neovim.io/doc/user/nvim_terminal_emulator.html
+tmap <Esc> <C-\><C-n>
+" Terminal settings
+if has('terminal')
+" Kill job and close terminal window
+tmap <Leader>q <C-w><C-C><C-w>c<cr>
+
+" switch to normal mode with esc
+tmap <Esc> <C-W>N
+
+" mappings to move out from terminal to other views
+tmap <C-h> <C-w>h
+tmap <C-j> <C-w>j
+tmap <C-k> <C-w>k
+tmap <C-l> <C-w>l
+endif
+
+" https://www.reddit.com/r/neovim/comments/akcp97/how_to_automatically_enter_insert_mode_on_opening/
+augroup insertonenter
+	function! InsertOnTerminal()
+		if &buftype ==# "terminal"
+			normal i
+		endif
+	endfunction
+
+	autocmd! BufEnter * call InsertOnTerminal()
+	if has('nvim')
+		autocmd! TermOpen * call InsertOnTerminal()
+	endif
+augroup END
+
+"
+" ============================== functiongs ==============================
+" autocmd VimEnter,VimLeave * silent !tmux set status
+"
 " ============================== ultisnips ==============================
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
 " let g:UltiSnipsExpandTrigger               <tab>
 " let g:UltiSnipsListSnippets                <c-tab>
@@ -146,7 +422,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nnoremap <Leader>fe :History:<CR>
 nnoremap <Leader>ff :FZF<Space>
 nnoremap <Leader>fh :FZF ~<CR>
-nnoremap <Leader>fz :FZF<CR>
+nnoremap <Leader>F :FZF<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
 
@@ -167,25 +443,19 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 
 " ============================== vim-sneak ==============================
 let g:sneak#label = 1
-map <leader>/ <Plug>Sneak_s
-map <leader>? <Plug>Sneak_S
-map <leader>f <Plug>Sneak_f
-map <leader>F <Plug>Sneak_F
-map <leader>t <Plug>Sneak_t
-map <leader>T <Plug>Sneak_T
-
-" " ============================== deoplete ==============================
-" let g:deoplete#enable_at_startup = 1
-" autocmd VimEnter * inoremap <expr> <cr> ((pumvisible()) ? (deoplete#close_popup()) : ("\<cr>"))
 "
 " ============================== FileType ==============================
 autocmd BufNewFile,BufRead *.{yml,yaml} setlocal expandtab softtabstop=2 shiftwidth=2 
+
+
+" ============================== indent-guides ==============================
+let g:indent_guides_enable_on_vim_startup = 0
 "
 " ============================== vim-go ==============================
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <leader>gob  <Plug>(go-build)
+autocmd FileType go nmap <leader>gor  <Plug>(go-run)
+autocmd FileType go nmap <leader>got  <Plug>(go-test)
+autocmd FileType go nmap <Leader>goc <Plug>(go-coverage-toggle)
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
 let g:go_highlight_types = 1
@@ -204,8 +474,13 @@ let g:go_highlight_variable_assignments = 1
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_auto_type_info = 0
+
+let g:go_doc_popup_window = 1
+let g:go_doc_balloon = 1
 
 " let g:go_def_mapping_enabled = 0
+"
 
 
 " ============================== asyncomplete.vim =======================
@@ -220,17 +495,49 @@ let g:go_info_mode='gopls'
 "   \ asyncomplete#force_refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
 "
 set completeopt=menuone,noinsert,noselect,preview
 set completeopt+=popup
 set completepopup=align:menu,border:off,highlight:Pmenu
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'allowlist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
+au User asynccomplete_setup  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    \ 'name': 'ultisnips',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
+
 
 " ============================== vim-lsp =======================
+let g:lsp_use_lua = 1
+let g:lsp_use_native_client = 1
+let g:lsp_semantic_enabled = 1
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 0
+let g:lsp_diagnostics_float_insert_mode_enabled = 0
+let g:lsp_diagnostics_signs_insert_mode_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
+
+let g:lsp_inlay_hints_enabled = 0
+" let g:lsp_inlay_hints_mode = {
+" \  'normal': ['curline'],
+" \}
+
+
+
 augroup LspGo
   au!
   autocmd User lsp_setup call lsp#register_server({
@@ -239,10 +546,12 @@ augroup LspGo
       \ 'whitelist': ['go'],
       \ })
   autocmd FileType go setlocal omnifunc=lsp#complete
-  autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-  autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
-  autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
-  autocmd FileType go nmap <buffer> ,h :LspHover<CR>
+  autocmd FileType go nmap <buffer> <leader>ne <plug>(lsp-next-error)
+  autocmd FileType go nmap <buffer> <leader>nw <plug>(lsp-next-warning)
+  autocmd FileType go nmap <buffer> <leader>pe <plug>(lsp-previous-error)
+  autocmd FileType go nmap <buffer> <leader>pw <plug>(lsp-previous-warning)
+  autocmd FileType go nmap <buffer> <leader>K <plug>(lsp-hover-float)
+  " autocmd CursorHold,CursorHoldI *.go LspHover
 augroup END
 
 " call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
@@ -303,7 +612,7 @@ let g:linediff_first_buffer_command = 'new'
 let g:linediff_further_buffer_command = 'vertical new'
 
 " ============================== tagbar ==============================
-nmap <silent> <leader>wt :TagbarToggle<CR>
+nmap <silent> <leader>T :TagbarToggle<CR>
 " https://github.com/jstemmer/gotags
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
@@ -334,8 +643,10 @@ let g:tagbar_type_go = {
 	\ }
 
 " ============================== nerdtree ==============================
-map <Leader>wn :NERDTreeToggle<cr>
-map <Leader>nf :NERDTreeFind<cr>
+nmap <leader>nk :NERDTreeFocus<CR>
+nmap <leader>nd :NERDTree<CR>
+nmap <leader>N :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR>
 
 let NERDTreeShowHidden=1
 " Auto start NERD tree when opening a directory
@@ -362,13 +673,20 @@ let g:NERDTreeGitStatusShowIgnored = 1
 "
 
 " ============================== delimitMate ==============================
-" let g:delimitMate_expand_cr = 0   
+" let g:delimitMate_expand_cr = 1   
 " let g:delimitMate_expand_space = 1    
 " let g:delimitMate_smart_quotes = 1    
 " let g:delimitMate_expand_inside_quotes = 1
 " let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'   
+" let delimitMate_matchpairs = "(:),[:],{:},<:>"
+" au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" imap <Backspace> <Plug>delimitMateBS
+" imap <S-Backspace> <Plug>delimitMateS-BS
+" imap <S-Tab> <Plug>delimitMateS-Tab
+" imap <CTRL-G>_g <Plug>delimitMateJumpMany
+
 
 
 " ============================== vim-markdown ==============================
@@ -412,11 +730,6 @@ let g:table_mode_corner='|'
 let g:tabular_loaded = 1
 nmap <Leader>ta :Tabularize 
 "
-" ============================== vim-xkbswitch ==============================
-" if has('mac')
-" 	let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
-" endif
-" let g:XkbSwitchEnabled = 1
 "
 " ============================== emmet-vim ==============================
 let g:user_emmet_install_global = 0
@@ -430,16 +743,25 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 "
 "
 " ============================== airline ==============================
+set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='jellybeans'
 "
 " ============================== vim-xkbswitch ==============================
+" Must Use Input Source Switcher.
+let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
 let g:XkbSwitchEnabled = 1
 let g:airline_detect_iminsert = 1
 
+" ============================== goyo ==============================
+map <leader>gy :Goyo<CR>
+map <leader>yg :Goyo!<CR>
+
+" ============================== vim-airline ==============================
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline_theme='material'
 "
-" ============================== color and theme ==============================
+" ============================== colorscheme ==============================
 " For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
 " Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
 " https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
@@ -453,269 +775,9 @@ let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight-community'
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
 colorscheme material
-let g:airline_theme='material'
+
+" vim.cmd.colorscheme "catppuccin-mocha"
+" colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+" let g:airline_theme = 'catppuccin'
 
 "
-" ============================== setttings ==============================
-" ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
-" recently opened files, :FzfHistory uses it
-set viminfo='1000
-if has('persistent_undo')
-  set undofile
-  set undodir=~/.cache/vim
-endif
-
-if exists('&breakindent')
-	set breakindent
-endif
-set tw=0 " If it is zero then 79 is used :verbose setlocal formatoptions?
-
-" r       Automatically insert the current comment leader after hitting <Enter> in Insert mode.  
-" o       Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
-" tcroqwan2vblmMB1j
-set formatoptions+=cqnmMB1j
-set formatoptions-=trowa2vbl
-
-
-set nocompatible
-set nobackup                 " Don't create annoying backup files
-set nowritebackup
-set autowrite                " Automatically save before :next, :make etc.
-set noswapfile               " Don't use swapfile
-set mouse=a                  " Enable mouse mode
-
-set updatetime=100
-
-" To get hover working in the terminal we need to set ttymouse. See
-"
-" :help ttymouse
-"
-" for the appropriate setting for your terminal. Note that despite the
-" automated tests using xterm as the terminal, a setting of ttymouse=xterm
-" does not work correctly beyond a certain column number (citation needed)
-" hence we use ttymouse=sgr
-set ttymouse=sgr
-
-" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
-" balloondelay
-set balloondelay=250
-
-" Suggestion: Turn on the sign column so you can see error marks on lines
-" where there are quickfix errors. Some users who already show line number
-" might prefer to instead have the signs shown in the number column; in which
-" case set signcolumn=number
-set signcolumn=number
-
-syntax on
-filetype plugin on
-
-" Suggestion: turn on auto-indenting. If you want closing parentheses, braces
-" etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
-" include this by default in govim.
-set autoindent
-set smartindent
-filetype indent on
-
-" Suggestion: define sensible backspace behaviour. See :help backspace for
-" more details
-set backspace=2
-
-
-
-
-scriptencoding utf-8
-set encoding=utf-8
-set number                   " Show line numbers
-" set numberwidth=5
-set shiftwidth=4
-set softtabstop=4
-set tabstop=8
-set noexpandtab
-
-
-set belloff+=ctrlg           " If Vim beeps during completion
-set conceallevel=2           " Concealed text is completely hidden
-set cursorline
-set display=lastline
-set fileformats=unix,mac,dos " Prefer Unix over Windows over OS 9 formats
-set grepprg=grep\ -nH
-set hidden
-set hlsearch                 " Highlight found searches
-set ignorecase               " Search case insensitive...
-set iminsert=0
-set imsearch=-1
-set incsearch                " Shows the match while typing
-set laststatus=2
-set lazyredraw
-"set listchars=eol:¬,tab:▸\
-set list listchars=tab:\|\ 
-set maxmempattern=20000      " increase max memory to show syntax highlighting for large files
-set nocursorcolumn           " speed up syntax highlighting
-set noerrorbells             " No beeps
-set noimcmdline
-set noimdisable
-set noshowmatch              " Do not show matching brackets by flickering
-set noshowmode               " We show the mode with airline or lightline
-set nosmartindent
-set nrformats-=octal
-set scrolloff=8
-set shiftround
-set shortmess+=c             " Shut off completion messages
-set shortmess=acTI
-set showcmd
-set showmatch
-set sidescroll=1
-set sidescrolloff=16
-set smartcase                " ... but not it begins with upper case
-set splitbelow               " Split horizontal windows below to the current windows
-set splitright               " Split vertical windows right to the current windows
-set virtualedit=block
-set wildmenu
-set wrapscan
-set wrap
-
-"
-"
-"
-" ============================== mapping ==============================
-"
-" I don't like it. Not easy to fzf current dir.
-" Enter automatically into the files directory
-" autocmd BufEnter * silent! lcd %:p:h
-" map <Leader>cd :pwd<cr>
-"map <Leader>wp :echo expand("%:p")<cr>
-map <Leader>lc :lcd %:p:h<cr>
-map <Leader>h :help<space>
-"
-" Automatically resize screens to be equally the same
-autocmd VimResized * wincmd =
-
-"
-" Shortcut to edit THIS configuration file
-nmap <silent> <leader>er :e $MYVIMRC<CR>
-" Shortcut to source (reload) THIS configuration file after editing it
-nmap <silent> <leader>re :source $MYVIMRC<CR>
-"
-
-" Intuitive cursor movement in wrapped line
-map j gj
-map k gk
-"
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nmap n nzzzv
-nmap N Nzzzv
-
-" Center the screen
-nnoremap <space> zz
- 
-" Turn off the IME when escaping from Insert mode
-" imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
-
-" ============================== windwos ==============================
-" Switch active window
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-" Close all but the current one
-nmap <leader>o :only<CR>
-
-" close window
-nmap <leader>x :clo<CR>
-"
-"
-" Refer to history in command-line mode
-cmap <C-p> <Up>
-" cmap <Up> <C-p>
-cmap <C-n> <Down>
-" cmap <Down> <C-n>
-"
-nnoremap <silent> <leader>wr :w<CR>
-nnoremap <silent> <leader>q :q<CR>
-
-
-" ============================== copy&paste ==============================
-map <leader>p "*p
-map <leader>y "*y
-map Y y$
-"
-"" reverse word
-vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
-
-" clear highlight
-nmap <leader><space> :noh<CR>
-
-nmap <leader>j :jumps<CR>
-nmap <leader>m :marks<CR>
-
-" ============================== buffer ==============================
-" Mappings to access buffers (don't use "\p" because a
-" delay before pressing "p" would accidentally paste).
-" \l       : list buffers
-" \b \f \g : go back/forward/last-used
-" \1 \2 \3 : go to buffer 1/2/3 etc
-"
-" list buffers
-" nn == nnoremap
-"To define a mapping which will not be echoed on the command line, add
-"<silent>" as the first argument. 
-nmap <Leader>ls :ls<CR>
-" list and select buffer
-nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
-
-" go to next/previous buffer
-" https://github.com/neovim/neovim/issues/2048
-nmap <C-n> :bn<CR>
-nmap <C-p> :bp<CR>
-imap <C-n> <ESC>:bn<CR>
-imap <C-p> <ESC>:bp<CR>
-
-" Unload buffer and delete it from the buffer list.
-nmap <silent> <leader>bd :bd<CR>
-nmap <silent> <leader>bk :bd!<CR>
-" first && last
-nmap <silent> <leader>br :br<CR>
-nmap <silent> <leader>bf :bf<CR>
-nmap <silent> <leader>bl :bl<CR>
-
-" ============================== explore ==============================
-nmap <silent> <Leader>ex :Explore<CR>
-
-nmap <silent> <leader>te :terminal<CR>
-tmap <C-x> <C-\><C-n><C-w>q
-" improved keyboard support for navigation (especially terminal)
-" https://neovim.io/doc/user/nvim_terminal_emulator.html
-tmap <Esc> <C-\><C-n>
-" Terminal settings
-if has('terminal')
-" Kill job and close terminal window
-tmap <Leader>q <C-w><C-C><C-w>c<cr>
-
-" switch to normal mode with esc
-tmap <Esc> <C-W>N
-
-" mappings to move out from terminal to other views
-tmap <C-h> <C-w>h
-tmap <C-j> <C-w>j
-tmap <C-k> <C-w>k
-tmap <C-l> <C-w>l
-endif
-
-" https://www.reddit.com/r/neovim/comments/akcp97/how_to_automatically_enter_insert_mode_on_opening/
-augroup insertonenter
-	function! InsertOnTerminal()
-		if &buftype ==# "terminal"
-			normal i
-		endif
-	endfunction
-
-	autocmd! BufEnter * call InsertOnTerminal()
-	if has('nvim')
-		autocmd! TermOpen * call InsertOnTerminal()
-	endif
-augroup END
-
-"
-" ============================== functiongs ==============================
-" autocmd VimEnter,VimLeave * silent !tmux set status
