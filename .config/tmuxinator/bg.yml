@@ -6,6 +6,9 @@ root: ~
 windows:
 - tor:
   - tor
+- blocky:
+    root: /usr/local/etc/blocky
+    - blocky serve
 - ss:
     root: ~/ss/
     layout: even-horizontal

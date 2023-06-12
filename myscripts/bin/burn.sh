@@ -20,15 +20,11 @@ blank='false'
 audiotype="wav"
 targetdir=""
 
-while getopts "d:bt:u:ec:" options; do 
+while getopts "d:bt:u:c:" options; do 
 
 	case "${options}" in
 		d)
 			device=${OPTARG}
-		;;
-		e)
-			cdrecord -eject dev="${device}"
-			exit 0;
 		;;
 		t)
 			audiotype=${OPTARG}
@@ -61,6 +57,7 @@ done
 if ${blank} ; then
 
 	cdrecord -blank=fast dev="${device}"
+	exit 0;
 
 fi
 

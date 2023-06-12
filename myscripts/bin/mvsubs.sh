@@ -15,6 +15,7 @@ fi
 for i in Subs/*;do
 
 	if [ -d ${i} ]; then
+
 	    dirname=$(basename ${i})
 
 	    for j in ${i}/*.*; do
@@ -28,12 +29,8 @@ for i in Subs/*;do
 				noexti=${basename_i%.*}
 				exti=${basename_i##*.}
 
-				echo noexti exti  is ${noexti} ${exti}
-
 				number=$(echo ${noexti}|tr -d -c [:digit:])
 				alpha=$(echo ${noexti}| tr -d -c [:alpha:])
-
-				echo number alpha is  ${number} ${alpha}
 
 				filename="${dirname}".${number}.${alpha}.${exti}
 				echo "${i}" ${filename}
@@ -49,6 +46,7 @@ for i in Subs/*;do
      elif [ -f ${i} ]; then
 
 	 basename_i=$(basename ${i})
+	 dirname_i=$(dirname ${i})
 
 
 		    if echo ${basename_i} | grep -Eq '[[:digit:]]+_[[:alpha:]]+\..+'; then
@@ -61,7 +59,7 @@ for i in Subs/*;do
 				alpha=$(echo ${noexti}| tr -d -c [:alpha:])
 
 				filename="${dirname}".${number}.${alpha}.${exti}
-				mv "${i}" ${filename}
+				mv "${i}" ${dirname_i}/${filename}
 
 
 			    else
