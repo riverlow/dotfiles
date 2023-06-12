@@ -18,4 +18,6 @@ add remote:
 dotfiles remote add origin git@github.com:<repo>.git
 ```
 
+# On New System
 
+run dotfiles.init.sh

@@ -62,3 +62,6 @@ override.tf.json
 
 # mpv
 ~/.config/mpv/watch_later
+
+# dotfiles
+.dotfiles
