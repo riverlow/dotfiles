@@ -47,6 +47,9 @@ dotfiles add $HOME/Library/Rime/squirrel.custom.yaml
 
 
 # Linux
+#
+# alacritty
+dotfiles add $HOME/.dotfiles_linux/username/.config/alacritty/alacritty.yml
 
 # fontconfig
 dotfiles add $HOME/.dotfiles_linux/username/.config/fontconfig/fonts.conf
