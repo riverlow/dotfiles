@@ -4,20 +4,13 @@
 
 * [How to store dotfiles | Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials/dotfiles)
 
-# Overview
+# On New System
 
-how to install:
+run `dotfiles.init.sh`
 
-```
-git clone --bare https://bitbucket.org/durdn/cfg.git $HOME/.dotfiles
-```
+# Add Remote Git
 
-add remote:
-
-```
+```sh
 dotfiles remote add origin git@github.com:<repo>.git
 ```
 
-# On New System
-
-run dotfiles.init.sh
