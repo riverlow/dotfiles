@@ -87,8 +87,10 @@ Plug 'vim-airline/vim-airline-themes'
 " ============================== goyo ==============================
 Plug 'junegunn/goyo.vim'
 
-" ============================== vim-xkbswitch ==============================
+" ============================== vim-xkbswitch =============================
+if has("mac")
 Plug 'lyokha/vim-xkbswitch'
+endif
 
 " ============================== colorscheme ==============================
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
@@ -749,9 +751,11 @@ let g:airline_powerline_fonts = 1
 "
 " ============================== vim-xkbswitch ==============================
 " Must Use Input Source Switcher.
+if has("mac")
 let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
 let g:XkbSwitchEnabled = 1
 let g:airline_detect_iminsert = 1
+endif
 
 " ============================== goyo ==============================
 map <leader>gy :Goyo<CR>
