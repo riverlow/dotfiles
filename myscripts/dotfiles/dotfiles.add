@@ -9,12 +9,16 @@ dotfiles add $HOME/.gitignore
 
 dotfiles add $HOME/myscripts/
 
+# Linux
+dotfiles add $HOME/.dotfiles_linux/
+
 # alcaritty
 dotfiles add $HOME/.config/alacritty/alacritty.yml
 
 #fish
 dotfiles add $HOME/.config/fish/fish_plugins
 dotfiles add $HOME/.config/fish/conf.d/localrc.fish
+dotfiles add $HOME/.config/fish/conf.d/{macOS,linux}.fish
 
 # tmux
 dotfiles add $HOME/.tmux.conf
@@ -44,24 +48,10 @@ dotfiles add $HOME/pkgs/main.go
 dotfiles add $HOME/Library/Rime/default.custom.yaml
 dotfiles add $HOME/Library/Rime/zhengma.custom.yaml
 dotfiles add $HOME/Library/Rime/squirrel.custom.yaml
+dotfiles add $HOME/Library/Rime/zhengma.dict.yaml
+dotfiles add $HOME/Library/Rime/zhengma.schema.yaml
 
 
-# Linux
-#
-# alacritty
-dotfiles add $HOME/.dotfiles_linux/username/.config/alacritty/alacritty.yml
-
-# fontconfig
-dotfiles add $HOME/.dotfiles_linux/username/.config/fontconfig/fonts.conf
-
-# x11
-dotfiles add $HOME/.dotfiles_linux/username/.Xresources
-dotfiles add $HOME/.dotfiles_linux/username/.xinitrc
-
-# wayland
-# sway
-dotfiles add $HOME/.dotfiles_linux/username/.config/sway/config
-dotfiles add $HOME/.dotfiles_linux/username/.Xdefaults
 
 dotfiles status
 
