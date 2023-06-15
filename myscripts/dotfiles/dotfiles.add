@@ -51,7 +51,8 @@ dotfiles add $HOME/Library/Rime/squirrel.custom.yaml
 dotfiles add $HOME/Library/Rime/zhengma.dict.yaml
 dotfiles add $HOME/Library/Rime/zhengma.schema.yaml
 
-
+# X11 for xQuartz
+dotfiles add $HOME/.Xresources
 
 dotfiles status
 
