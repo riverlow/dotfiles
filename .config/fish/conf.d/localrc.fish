@@ -5,6 +5,10 @@ set fish_greeting
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias pas="gopass"
 alias mux="tmuxinator"
+alias dk=docker
+
+# path
+fish_add_path /usr/local/bin /usr/local/sbin
 
 # local
 fish_add_path $HOME/myscripts/bin/ $HOME/.local/bin
@@ -21,4 +25,5 @@ set -Ux PYENV_ROOT $HOME/.pyenv
 # fzf
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
-
+source ~/.config/fish/conf.d/linux.fish
+source ~/.config/fish/conf.d/macOS.fish

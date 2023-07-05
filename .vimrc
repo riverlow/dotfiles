@@ -94,8 +94,7 @@ endif
 
 " ============================== colorscheme ==============================
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'arcticicestudio/nord-vim'
-
+Plug 'nordtheme/vim'
 " Plug 'jacoborus/tender.vim'
 " Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " Plug 'dracula/vim', { 'as': 'dracula' }
@@ -247,7 +246,7 @@ nmap <leader>vm :verbose map<space>
 
 " ============================== help ==============================
 nmap <Leader>H :tab h<space>
-nmap <Leader>hu :tab help user-manual<CR>
+nmap <Leader>hm :tab help user-manual<CR>
 "
 " Automatically resize screens to be equally the same
 autocmd VimResized * wincmd =
@@ -267,16 +266,13 @@ map k gk
 " search will center on the line it's found in.
 nmap n nzzzv
 nmap N Nzzzv
-
-" Center the screen
-nnoremap <space> zz
  
 " Turn off the IME when escaping from Insert mode
 " imap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 
 " ============================== editing ==============================
-nmap <silent> <leader>wr :update<CR>
-nmap <silent> <leader>wa :wall<CR>
+nmap <silent> <leader>w :update<CR>
+nmap <silent> <leader>W :wall<CR>
 
 " Enter automatically into the files directory
 " autocmd BufEnter * silent! lcd %:p:h
@@ -289,36 +285,32 @@ inoremap (<cr> (<CR>)<C-c>O
 inoremap {<cr> {<CR>}<C-c>O
 inoremap [<cr> [<CR>]<C-c>O
 
-
-" ============================== windows ==============================
-" Switch active window
-" nmap <C-h> <C-w>h
-" nmap <C-j> <C-w>j
-" nmap <C-k> <C-w>k
-" nmap <C-l> <C-w>l
-
-nmap <silent> <leader>x :close<cr>
-nmap <silent> <leader>X :confirm xall<cr>
-
-" Move the current window to a new tab page.
-nmap <leader>wt CTRL-W_T
-"
-"
+" ============================== commandline =========================
 " Refer to history in command-line mode
 cmap <C-p> <Up>
 " cmap <Up> <C-p>
 cmap <C-n> <Down>
 " cmap <Down> <C-n>
-"
+
+" ============================== windows ==============================
+" Switch active window
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+nmap <silent> <leader>x :close<cr>
 
 " ============================== tabs ==============================
+nmap <leader>x :tabclose<CR>
+
+nmap <leader>ta :tabs<CR>
+nmap <leader>t<space> :tab 
 nmap <leader>tn :tabnew<CR>
 nmap <leader>tf :tabfind<space>
 nmap <leader>tr :tabrewind<CR>
 nmap <leader>tl :tablast<CR>
-nmap <leader>tx :tabclose<CR>
 nmap <leader>to :tabonly<CR>
-nmap <leader>ts :tabs<CR>
 nmap <leader>tm :tabmove<Space>
 nmap <leader>t^ :tabmove 0<CR>
 nmap <leader>t$ :tabmove $<CR>
@@ -336,8 +328,8 @@ vnoremap <Leader>r c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 " clear highlight
 nmap <leader><space> :noh<CR>
 
-nmap <leader>js :jumps<CR>
-nmap <leader>ms :marks<CR>
+nmap <leader>J :jumps<CR>
+nmap <leader>M :marks<CR>
 
 " ============================== buffers ==============================
 " Mappings to access buffers (don't use "\p" because a
@@ -351,9 +343,9 @@ nmap <leader>ms :marks<CR>
 "To define a mapping which will not be echoed on the command line, add
 "<silent>" as the first argument. 
 nmap <Leader>ls :ls<CR>
-nmap <Leader>bs :buffers<CR>
+" nmap <Leader>B :buffers<CR>
 " list and select buffer
-nmap <silent> <leader>bb<Space> :buffers<CR>:buffer<Space>
+nmap <silent> <leader>b<Space> :buffers<CR>:buffer<Space>
 
 " go to next/previous buffer
 " https://github.com/neovim/neovim/issues/2048
@@ -401,9 +393,6 @@ augroup insertonenter
 	endfunction
 
 	autocmd! BufEnter * call InsertOnTerminal()
-	if has('nvim')
-		autocmd! TermOpen * call InsertOnTerminal()
-	endif
 augroup END
 
 "
@@ -422,8 +411,9 @@ augroup END
 "
 " ============================== fzf ==============================
 nnoremap <Leader>fe :History:<CR>
-nnoremap <Leader>ff :FZF<Space>
+nnoremap <Leader>f<space> :FZF<Space>
 nnoremap <Leader>fh :FZF ~<CR>
+nnoremap <Leader>fc :FZF ~/.config/<CR>
 nnoremap <Leader>F :FZF<CR>
 nnoremap <Leader>rg :Rg<space>
 let g:fzf_layout = { 'down': '~20%' }
@@ -445,6 +435,16 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 
 " ============================== vim-sneak ==============================
 let g:sneak#label = 1
+" 2-character Sneak (default)
+nmap <leader>s <Plug>Sneak_s
+nmap <leader>S <Plug>Sneak_S
+" visual-mode
+xmap <leader>s <Plug>Sneak_s
+xmap <leader>S <Plug>Sneak_S
+" operator-pending-mode
+omap <leader>s <Plug>Sneak_s
+omap <leader>S <Plug>Sneak_S
+
 "
 " ============================== FileType ==============================
 autocmd BufNewFile,BufRead *.{yml,yaml} setlocal expandtab softtabstop=2 shiftwidth=2 
@@ -454,10 +454,10 @@ autocmd BufNewFile,BufRead *.{yml,yaml} setlocal expandtab softtabstop=2 shiftwi
 let g:indent_guides_enable_on_vim_startup = 0
 "
 " ============================== vim-go ==============================
-autocmd FileType go nmap <leader>gob  <Plug>(go-build)
-autocmd FileType go nmap <leader>gor  <Plug>(go-run)
-autocmd FileType go nmap <leader>got  <Plug>(go-test)
-autocmd FileType go nmap <Leader>goc <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+autocmd FileType go nmap <leader>gt  <Plug>(go-test)
+autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
 let g:go_highlight_types = 1
@@ -480,6 +480,8 @@ let g:go_auto_type_info = 0
 
 let g:go_doc_popup_window = 1
 let g:go_doc_balloon = 1
+
+let g:go_term_enabled = 0
 
 " let g:go_def_mapping_enabled = 0
 "
@@ -552,7 +554,7 @@ augroup LspGo
   autocmd FileType go nmap <buffer> <leader>nw <plug>(lsp-next-warning)
   autocmd FileType go nmap <buffer> <leader>pe <plug>(lsp-previous-error)
   autocmd FileType go nmap <buffer> <leader>pw <plug>(lsp-previous-warning)
-  autocmd FileType go nmap <buffer> <leader>K <plug>(lsp-hover-float)
+  autocmd FileType go nmap <buffer> <leader>I <plug>(lsp-hover-float)
   " autocmd CursorHold,CursorHoldI *.go LspHover
 augroup END
 
@@ -763,7 +765,6 @@ map <leader>yg :Goyo!<CR>
 
 " ============================== vim-airline ==============================
 let g:airline#extensions#bufferline#enabled = 1
-let g:airline_theme='material'
 "
 " ============================== colorscheme ==============================
 " For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
@@ -775,13 +776,16 @@ endif
 
 set background=dark
 
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'palenight-community'
+" let g:material_terminal_italics = 1
+" let g:material_theme_style = 'palenight-community'
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-colorscheme material
+" colorscheme material
+colorscheme nord
+let g:airline_theme='nord'
 
 " vim.cmd.colorscheme "catppuccin-mocha"
 " colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 " let g:airline_theme = 'catppuccin'
 
 "
+" ============================== functions ==============================

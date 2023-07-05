@@ -1,14 +1,11 @@
 # /Users/x/.config/tmuxinator/macos.yml
 
-name: bg
+name: macos
 root: ~
 
 windows:
-- tor:
-  - tor
 - blocky:
-    root: /usr/local/etc/blocky
-    - blocky serve
+j - blocky serve -c /usr/local/etc/blocky/
 - ss:
     root: ~/ss/
     layout: even-horizontal
@@ -17,3 +14,5 @@ windows:
       - ss-local -v -c bv.json -l 12345
     - rack:
       - ss-local -v -c rack.json -l 12346
+- new:
+  - mux start fg

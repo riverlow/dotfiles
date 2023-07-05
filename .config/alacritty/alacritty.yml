@@ -1,6 +1,6 @@
 import:
-  - ~/.config/alacritty/themes/themes/tokyo-night-storm.yaml
-  # - ~/.config/alacritty/themes/themes/nord.yaml
+  # - ~/.config/alacritty/themes/themes/tokyo-night-storm.yaml
+  - ~/.config/alacritty/themes/themes/nord.yaml
 
   # Live config reload (changes require restart)
 live_config_reload: true

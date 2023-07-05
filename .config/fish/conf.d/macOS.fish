@@ -1,10 +1,10 @@
 if test (uname) = "Darwin";
 
-# PATH
-set -U fish_user_paths  /usr/local/bin /usr/local/sbin /usr/local/opt/iftop/sbin /usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin 
-
 # alias
-alias ls="ls --color=auto";
+alias ls="ls --color=always"
+
+# PATH
+fish_add_path /usr/local/opt/iftop/sbin /usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin 
 
 # python
 fish_add_path $HOME/Library/Python/3.11/bin

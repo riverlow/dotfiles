@@ -1,0 +1,7 @@
+services:
+  tor:
+    image: tor
+    ports:
+      - 9050:9050
+    restart: always
+
