@@ -554,7 +554,7 @@ augroup LspGo
   autocmd FileType go nmap <buffer> <leader>nw <plug>(lsp-next-warning)
   autocmd FileType go nmap <buffer> <leader>pe <plug>(lsp-previous-error)
   autocmd FileType go nmap <buffer> <leader>pw <plug>(lsp-previous-warning)
-  autocmd FileType go nmap <buffer> <leader>I <plug>(lsp-hover-float)
+  autocmd FileType go nmap <buffer> K <plug>(lsp-hover-float)
   " autocmd CursorHold,CursorHoldI *.go LspHover
 augroup END
 

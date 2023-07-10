@@ -1,0 +1,41 @@
+services:
+  bv8443:
+    image: ghcr.io/shadowsocks/sslocal-rust:latest
+    command: sslocal -vv
+    ports:
+      - "12345:1080/tcp"
+    restart: always
+    volumes:
+      - ~/ss/bv.json:/etc/shadowsocks-rust/config.json
+    networks:
+      - sslocal
+
+  bv443:
+    image: ghcr.io/shadowsocks/sslocal-rust:latest
+    command: sslocal -vv
+    ports:
+      - "12347:1080/tcp"
+    restart: always
+    volumes:
+      - ~/ss/bv443.json:/etc/shadowsocks-rust/config.json
+    networks:
+      - sslocal
+
+  rack:
+    image: ghcr.io/shadowsocks/sslocal-rust:latest
+    command: sslocal -vv
+    ports:
+      - "12346:1080/tcp"
+    restart: always
+    volumes:
+      - ~/ss/rack.json:/etc/shadowsocks-rust/config.json
+    networks:
+      - sslocal
+
+
+networks:
+  sslocal:
+    name: sslocal
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: sslocal

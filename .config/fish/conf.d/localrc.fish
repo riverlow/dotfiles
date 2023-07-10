@@ -1,4 +1,5 @@
 set -gx TERM xterm-256color
+set -gx EDITOR vim
 set fish_greeting
 
 # alias
@@ -6,6 +7,7 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias pas="gopass"
 alias mux="tmuxinator"
 alias dk=docker
+alias compose="docker compose"
 
 # path
 fish_add_path /usr/local/bin /usr/local/sbin

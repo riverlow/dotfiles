@@ -3,6 +3,9 @@ if test (uname) = "Darwin";
 # alias
 alias ls="ls --color=always"
 
+# bin_macos
+fish_add_path $HOME/myscripts/bin_macos
+
 # PATH
 fish_add_path /usr/local/opt/iftop/sbin /usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin 
 
