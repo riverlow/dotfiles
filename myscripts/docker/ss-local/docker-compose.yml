@@ -1,5 +1,5 @@
 services:
-  bv8443:
+  vps1:
     image: ghcr.io/shadowsocks/sslocal-rust:latest
     command: sslocal -vv
     ports:
@@ -10,18 +10,7 @@ services:
     networks:
       - sslocal
 
-  bv443:
-    image: ghcr.io/shadowsocks/sslocal-rust:latest
-    command: sslocal -vv
-    ports:
-      - "12347:1080/tcp"
-    restart: always
-    volumes:
-      - ~/ss/bv443.json:/etc/shadowsocks-rust/config.json
-    networks:
-      - sslocal
-
-  rack:
+  vps2:
     image: ghcr.io/shadowsocks/sslocal-rust:latest
     command: sslocal -vv
     ports:
