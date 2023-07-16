@@ -6,7 +6,7 @@
 
 # On New System
 
-run `dotfiles.init.sh`
+run [dotfiles.init.sh](myscripts/dotfiles/dotfiles.init.sh)
 
 # Add Remote Git
 

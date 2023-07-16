@@ -1,0 +1,6 @@
+name: fg
+root: ~/
+
+startup_window: cmd
+windows:
+    - cmd: echo cmd

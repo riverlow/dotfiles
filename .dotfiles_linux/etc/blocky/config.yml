@@ -1,0 +1,50 @@
+upstream:
+  default:
+    - https://dns11.quad9.net/dns-query
+
+bootstrapDns:
+  - upstream: https://dns11.quad9.net/dns-query
+    ips:
+    - 9.9.9.11
+
+ports:
+  dns: 53
+  http: 4000
+
+blocking:
+  blackLists:
+    ads:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.txt
+  clientGroupsBlock:
+    default:
+      - ads
+
+caching:
+  minTime: 5m
+  maxTime: 30m
+  maxItemsCount: 0
+  prefetching: false
+  prefetchExpires: 2h
+  prefetchThreshold: 5
+  prefetchMaxItemsCount: 0
+  cacheTimeNegative: 30m
+
+log:
+  level: info
+  format: text
+  timestamp: true
+  privacy: false
+
+queryLog:
+  type: console
+  target: /logs
+  logRetentionDays: 7
+  fields:
+  - clientIP
+  - question
+  - duration
+
+prometheus:
+  enable: true
+  path: /metrics

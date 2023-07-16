@@ -16,7 +16,7 @@ fish_add_path /usr/local/bin /usr/local/sbin
 fish_add_path $HOME/myscripts/bin/ $HOME/.local/bin
 
 # go
-fish_add_path $HOME/go/bin/ /usr/local/go/bin
+fish_add_path $HOME/go/bin/ $HOME/.local/go/bin /usr/local/go/bin
 
 # Rust 
 fish_add_path $HOME/.cargo/bin
