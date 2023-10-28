@@ -1,5 +1,0 @@
-ExcludeNodes {cn},{hk},{mo},{kp},{ir},{sy},{pk},{cu},{vn}
-StrictNodes  1
-SocksPort 0.0.0.0:9050
-
-Log info stdout
