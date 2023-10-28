@@ -89,6 +89,7 @@ fi
 if [[ "$audiotype" == "data" ]]; then
 
 tempdir=$(mktemp -d)
+mp3gain -r -c  ${targetdir}/*.mp3
 mkisofs -R -joliet-long -o ${tempdir}/mydata.iso "${targetdir}"
 cdrecord -v dev="${device}" speed=16 -eject ${tempdir}/mydata.iso
 rm -rf "${tempdir}"

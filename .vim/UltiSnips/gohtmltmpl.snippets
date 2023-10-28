@@ -1,0 +1,57 @@
+# template 
+snippet t "template" 
+{{template ${1} ${0:.}}}
+{{end}}
+endsnippet
+
+snippet ti "template" 
+{{template ${1} ${0:.}}} {{end}} 
+endsnippet
+
+
+snippet di "define template inline" 
+{{define "${1:name}"}} ${0:{{.}}}{{end}}
+endsnippet
+
+snippet d "define template" 
+{{define "${1:name}"}}
+    ${0:{{.}}}
+{{end}}
+endsnippet
+
+snippet if "if ... end" 
+{{if (${1:eq} ${2:.value})}}
+    ${0:todo}
+{{end}}
+endsnippet
+
+snippet ifi "if ... end inline" 
+{{if (${1:eq} ${2:.value})}}${0:todo}{{end}}
+endsnippet
+
+
+snippet wi "with ... end" 
+{{with ${1:.value}}}
+    ${0:{{.}}}
+{{end}}
+endsnippet
+
+snippet wii "with ... end inline" 
+{{with ${1:.value}}} ${0:{{.}}} {{end}}
+endsnippet
+
+
+snippet e "{{end}}" 
+{{end}}
+${0}
+endsnippet
+
+snippet { "{{VISUAL}}" i
+{{${0:${VISUAL}}}}
+endsnippet
+
+snippet . "{{VISUAL}}" i
+{{${0:.}}}
+endsnippet
+
+

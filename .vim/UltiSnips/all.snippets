@@ -1,8 +1,12 @@
-snippet " "vim comment" b
-" ============================= ${1:foo} ======================================
+snippet m "marker {{{ ${0} }}}" b
+" ${1:name} {{{
+${0}
+" }}}
 endsnippet
 
-snippet # "sharp comment" b
-# ============================= ${1:foo} ======================================
+snippet #m "marker {{{ ${0} }}} with #" b
+# ${1:name} {{{
+${0}
+# }}}
 endsnippet
 

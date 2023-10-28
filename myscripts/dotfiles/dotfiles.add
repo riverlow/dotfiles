@@ -33,6 +33,9 @@ dotfiles add $HOME/.poliporc
 dotfiles add $HOME/.vimrc
 dotfiles add $HOME/.vim/UltiSnips/
 
+# blocky
+dotfiles add $HOME/.config/blocky/config.yml
+
 # mpv
 dotfiles add $HOME/.config/mpv/mpv.conf
 dotfiles add $HOME/.config/mpv/scripts
@@ -44,12 +47,15 @@ dotfiles add $HOME/.config/yt-dlp.conf
 dotfiles add $HOME/pkgs/0get.sh
 dotfiles add $HOME/pkgs/main.go
 
+# npm
+dotfiles add $HOME/.npmrc
+
 # zhengma
-dotfiles add $HOME/Library/Rime/default.custom.yaml
-dotfiles add $HOME/Library/Rime/zhengma.custom.yaml
-dotfiles add $HOME/Library/Rime/squirrel.custom.yaml
-dotfiles add $HOME/Library/Rime/zhengma.dict.yaml
-dotfiles add $HOME/Library/Rime/zhengma.schema.yaml
+# dotfiles add $HOME/Library/Rime/default.custom.yaml
+# dotfiles add $HOME/Library/Rime/zhengma.custom.yaml
+# dotfiles add $HOME/Library/Rime/squirrel.custom.yaml
+# dotfiles add $HOME/Library/Rime/zhengma.dict.yaml
+# dotfiles add $HOME/Library/Rime/zhengma.schema.yaml
 
 # X11 for xQuartz
 dotfiles add $HOME/.Xresources

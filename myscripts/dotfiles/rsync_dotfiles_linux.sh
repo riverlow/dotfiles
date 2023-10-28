@@ -1,6 +1,9 @@
 #!/user/bin/bash
 #
 rsync -av ~/.dotfiles_linux/username/ ~
-rsync -av ~/.dotfiles_linux/etc/ /etc/
 
-rsync -av ~/Library/Rime/{zhengma.*,default.*} ~/.local/share/fcitx5/rime/
+RIME_DIR="~/.local/share/fcitx5/rime'
+mkdir -p  "${RIME_DIR}" && rsync -av ~/myscripts/Rime/ "${RIME_DIR}"
+
+
+sudo rsync -av ~/.dotfiles_linux/etc/ /etc

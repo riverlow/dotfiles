@@ -7,7 +7,12 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias pas="gopass"
 alias mux="tmuxinator"
 alias dk=docker
+alias yd=yt-dlp
+alias py=python3
 alias compose="docker compose"
+
+# lang
+set -gx LANG en_US.UTF-8
 
 # path
 fish_add_path /usr/local/bin /usr/local/sbin
@@ -23,6 +28,8 @@ fish_add_path $HOME/.cargo/bin
 
 # pyenv
 set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+
 
 # fzf
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'

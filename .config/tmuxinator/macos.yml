@@ -7,14 +7,17 @@ windows:
 - tor: 
   - tor -c /usr/local/etc/torrc
 - blocky:
-  - blocky serve -c ~/.dotfiles_linux/etc/blocky/config.yml
+  - blocky serve -c ~/.config/blocky/config.yml
 - ss:
     root: ~/ss/
     layout: even-horizontal
     panes:
     - bv:
-      - sslocal -v -c bv.json -b 127.0.0.1:12345
+      - sslocal -vc bv.json
+    - bv6:
+      - sslocal -vc bv6.json
+
     - rack:
-      - sslocal -v -c rack.json -b 127.0.0.1:12346
-# - new:
-#   - mux start fg
+      - sslocal -vc rack.json
+- new:
+  - mux start fg

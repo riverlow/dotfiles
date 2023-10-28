@@ -20,7 +20,7 @@ if [ $? != 0 ]; then
 	exit 1;
 fi
 
-function dotfiles {
+dotfiles () {
         $(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 

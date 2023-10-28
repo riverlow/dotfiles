@@ -199,3 +199,4 @@ selection:
 key_bindings:
   # Vi Mode
 - { key: Escape,  mods: Shift, mode: ~Search,    action: ToggleViMode }
+- { key: Key6,        mods: Control, chars: "\x1e"                     }
