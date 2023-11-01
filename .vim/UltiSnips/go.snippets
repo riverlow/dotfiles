@@ -1,4 +1,18 @@
 # operater {{{
+# +    sum                    integers, floats, complex values, strings
+# -    difference             integers, floats, complex values
+# *    product                integers, floats, complex values
+# /    quotient               integers, floats, complex values
+# %    remainder              integers
+
+# &    bitwise AND            integers
+# |    bitwise OR             integers
+# ^    bitwise XOR            integers
+# &^   bit clear (AND NOT)    integers
+
+# <<   left shift             integer << integer >= 0
+# >>   right shift            integer >> integer >= 0
+
 # shorthand variable declaration
 snippet : "name := value"
 ${1} := ${0}
@@ -7,6 +21,23 @@ endsnippet
 snippet = "name = value"
 ${1} = ${0}
 endsnippet
+
+snippet += "name += value"
+${1} += ${0}
+endsnippet
+
+snippet -= "name -= value"
+${1} -= ${0}
+endsnippet
+
+snippet *= "name *= value"
+${1} -= ${0}
+endsnippet
+
+snippet /= "name /= value"
+${1} /= ${0}
+endsnippet
+
 
 snippet eq "name == value"
 ${1} == ${0}
@@ -45,7 +76,7 @@ break
 endsnippet
 
 # case
-snippet c "case ...:"
+snippet ca "case ...:"
 case ${1:value}:
 	${0:${VISUAL}}
 endsnippet
@@ -57,7 +88,7 @@ endsnippet
 
 # constant
 snippet co "const XXX Type = ..."
-const ${1:NAME} ${2:Type} = ${0:0}
+const ${1:NAME_Type} = ${0:value}
 endsnippet
 
 # constants
@@ -69,7 +100,7 @@ const (
 endsnippet
 
 # constants with iota
-snippet io "const ( ... = iota )"
+snippet ci "const ( ... = iota )"
 const (
 	${1:NAME} ${2:Type} = iota
 	${0}
@@ -78,11 +109,6 @@ endsnippet
 
 # continue
 snippet cn "continue"
-continue
-endsnippet
-
-# continue
-snippet ct "continue"
 continue
 endsnippet
 
@@ -97,6 +123,23 @@ snippet df "defer someFunction()"
 defer ${1:func}(${2})
 ${0}
 endsnippet
+
+snippet fs "for select"
+for {
+    select {
+	case ${2:${1:result} := }<- ${3:channel}:
+	    ${0}
+    }
+}
+endsnippet
+
+snippet sl "select {case ...}"
+select {
+    case ${2:${1:result} := }<- ${3:channel}:
+	${0}
+}
+endsnippet
+
 
 # if condition
 snippet if "if ... { ... }"
@@ -138,26 +181,25 @@ if ${1:condition} {
 }
 endsnippet
 
-snippet r "return" 
+snippet r "return" b
 return 
 endsnippet
 
-snippet re "return err" 
+snippet re "return err" b
 return err
 endsnippet
 
-snippet rn "return nil" 
+snippet rn "return nil" b
 return nil
 endsnippet
 
-snippet r, "return nil, err" 
+snippet r, "return nil, err" b
 return ${1:nil}, ${2:err}
 endsnippet
 
 snippet ra "range" 
 range 
 endsnippet
-
 
 # for range loop
 snippet rk "for v := range items { ... }"
@@ -173,10 +215,18 @@ for _, ${2:v} := range ${1} {
 }
 endsnippet
 
-
+# switch
+snippet sw "switch x { ... }"
+switch ${1:var} {
+case ${2:value1}:
+    ${3}
+default:
+    ${0}
+}
+endsnippet
 
 # map
-snippet m "map[Type]Type" 
+snippet ma "map[Type]Type" w
 map[${1:string}]${0:string}
 endsnippet
 
@@ -190,26 +240,51 @@ endsnippet
 
 
 # struct
-snippet st "type T struct { ... }"
+snippet s "type T struct { ... }" b
 type ${1:Type} struct {
-	${0}
+    ${0:/* TODO: add fields */}
 }
 endsnippet
 
+
+
+# full interface snippet
+snippet i "interface I { ... }" b
+type ${1:Interface} interface {
+    ${0:/* TODO: add methods */}
+}
+endsnippet
+
+
+# type
+snippet ty "type" b
+type
+endsnippet
+
+snippet st "struct" 
+struct{${0}}
+endsnippet
+
+snippet in "interface" 
+interface{${0}}
+endsnippet
+
+
+
 # variable declaration
 snippet v "var x Type" b
-var ${1:x} ${2:Type}
+var ${0:name_type}
 endsnippet
 
-# variable initialization
-snippet vv "var x Type [= ...]" b
-var ${1:x} ${2:Type}${3: = ${0:value}}
+snippet vv "var x Type = value" b
+var ${1:name_type} = ${0:value}
 endsnippet
+
 
 # variables declaration
-snippet vs "var ( ... )" b
+snippet vs "var ( name type = value )" b
 var (
-	${1:x} ${2:Type}${3: = ${0:value}}
+    ${0:name}
 )
 endsnippet
 
@@ -217,76 +292,141 @@ endsnippet
 # }}}
 
 # built-in function {{{
+# Functions:
+# 	append cap clear close complex copy delete imag len
+# 	make max min new panic print println real recover
+
+# append
+snippet ap "append(slice, value)"
+append(${1:slice}, ${0:value})
+endsnippet
+
+
+# copy
+snippet cp "copy(any)"
+copy(${0:any})
+endsnippet
+
+# delete
+snippet dl "delete(any)"
+delete(${0:any})
+endsnippet
+
+# len
+snippet l "len(any)"
+len(${0:any})
+endsnippet
+
 # make
 snippet mk "make(any)"
-make(${0})
+make(${0:any})
 endsnippet
+
 
 # panic
 snippet pn "panic(err)"
 panic(${1:err})
 ${0}
 endsnippet
-
 # }}}
 
 # data type {{{
+# Types:
+# 	any bool byte comparable
+# 	complex64 complex128 error float32 float64
+# 	int int8 int16 int32 int64 rune string
+# 	uint uint8 uint16 uint32 uint64 uintptr
 
-snippet by "byte" 
+# Constants:
+# 	true false iota
+
+# Zero value:
+# 	nil
+
+# Functions:
+# 	append cap clear close complex copy delete imag len
+# 	make max min new panic print println real recover
+
+snippet a "any" w
+any
+endsnippet
+
+snippet b "byte" w
 byte
 endsnippet
 
-snippet bo "bool" i
+snippet bl "bool" w
 bool
 endsnippet
 
-# snippet i "int"
-# int 
-# endsnippet
-
-snippet sr "string" 
-string 
+snippet cm "comparable" w
+comparable
 endsnippet
 
-snippet er "error" 
-error 
+snippet er "error" w
+error
 endsnippet
 
-snippet tr "true" 
-true 
+snippet i "int" w
+int
 endsnippet
 
-snippet fa "false" 
-false 
+
+snippet ui "uint" w
+uint
 endsnippet
 
-snippet [b "[]byte"  i
+snippet s "string" w
+string
+endsnippet
+
+snippet t "true" w
+true
+endsnippet
+
+snippet f "false" w
+false
+endsnippet
+
+snippet n "nil" w
+nil
+endsnippet
+
+snippet fl "float" w
+float
+endsnippet
+
+
+snippet [b "[]byte"  
 []byte
 endsnippet
 
-snippet [s "[]string" i
+snippet [s "[]string" 
 []string
 endsnippet
 
-snippet [i "[]int" i
+snippet [i "[]int" 
 []int
 endsnippet
 
+snippet [f "[]float" 
+[]float
+endsnippet
 
 
 
 # json field tag
-snippet js "\`json:key\`"
+snippet js "\`json:key\`" 
 \`json:"${1:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
 # yaml field tag
-snippet ya "\`yaml:key\`"
+snippet yl "\`yaml:key\`" 
 \`yaml:"${1:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
 #  field tag
-snippet ` "\`input:key\`"
+snippet ` "\`input:key\`" 
 \`${1:input}:"${2:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
@@ -294,7 +434,7 @@ endsnippet
 
 # error {{{
 # error snippet
-snippet e "if err != nil { return  err }" !b
+snippet e "if err != nil { return  err }" b
 if err != nil {
     ${1:return err}
 }
@@ -302,16 +442,8 @@ ${0}
 endsnippet
 
 
-snippet e, "if err != nil { return nil, err }" !b
-if err != nil {
-    return nil, err
-}
-${0}
-endsnippet
-
-
 # error multiple return
-snippet e, "Error return with two return values" !b
+snippet e, "Error return with two return values" b
 if err != nil {
 	return ${1:nil}, ${2:err}
 }
@@ -319,7 +451,7 @@ ${0}
 endsnippet
 
 # error log.Fatal
-snippet ef "if err != nil { log.Fatal(err)}" !b
+snippet ef "if err != nil { log.Fatal(err)}" b
 if err != nil {
 	log.Fatal(err)
 }
@@ -327,7 +459,7 @@ ${0}
 endsnippet
 
 # error log.Fatal
-snippet ep "if err != nil { log.Println(err)}" !b
+snippet ep "if err != nil { log.Println(err)}" b
 if err != nil {
 	log.Println(err)
 }
@@ -337,14 +469,29 @@ endsnippet
 
 # function and method {{{
 # function
-snippet fn "func Function(...) [error] { ... }"
+snippet fn "func Function(...) [error] { ... }" b
 // $1 ${4:DOC ...}
 func ${1:name}(${2:params})${3/(.+)/ /}`!p opening_par(snip, 3)`$3`!p closing_par(snip, 3)` {
 	${0:${VISUAL}}
 }
 endsnippet
 
-snippet me "func (self Type) Method(...) [error] { ... }"
+snippet af "func(...) [error] { ... }" 
+func(${1:params})${2/(.+)/ /}`!p opening_par(snip, 2)`$2`!p closing_par(snip, 2)` {
+	${0:${VISUAL}}
+}
+endsnippet
+
+
+snippet gf "func Function[generics] (...) [error] { ... }" b
+// $1 ${5:DOC ...}
+func ${1:name}[${2:constraints}](${3:params})${4/(.+)/ /}`!p opening_par(snip, 4)`$4`!p closing_par(snip, 4)` {
+	${0:${VISUAL}}
+}
+endsnippet
+
+
+snippet me "func (self Type) Method(...) [error] { ... }" b
 // $3 ${6:DOC ...}
 func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}`!p opening_par(snip, 5)`$5`!p closing_par(snip, 5)` {
 	${0:${VISUAL}}
@@ -353,25 +500,49 @@ endsnippet
 # }}}
 
 # standard library {{{
-snippet ss "strings"
-strings
+
+# b. bytes {{{
+snippet b. "bytes" w
+bytes.
+endsnippet
+# }}}
+# c. context {{{
+snippet c. "context"
+context.
 endsnippet
 
-snippet sv "strconv"
-strconv
+snippet c.wc "context.WithValue"
+${1:ctx}.WithContext(${0:ctx})
 endsnippet
 
-snippet es "errors"
-errors
+snippet c.wv "context.WithValue"
+context.WithValue(${1:r.Context()}, ${2:key}, ${0:val})
+endsnippet
+# }}}
+# e. errors {{{
+
+snippet e. "errors" w
+errors.
 endsnippet
 
-snippet tm "time"
-time
+snippet e.is "if errors.Is(err,...)"
+if errors.Is(err,${1:some error}) {
+    ${0:handle err}
+}
 endsnippet
 
+snippet e.as "if errors.As(err,...)"
+if errors.As(err,${1:some error}) {
+    ${0:handle err}
+}
+endsnippet
+# }}}
+# f. fmt {{{
 
+snippet f. "fmt" w
+fmt.
+endsnippet
 
-# fmt {{{
 # Fmt Printf debug
 snippet pf "fmt.Printf(...)"
 fmt.Printf("$1 = %+v\n", ${1:${VISUAL}})
@@ -388,27 +559,24 @@ fmt.Errorf("${1:${VISUAL}}")
 endsnippet
 
 # }}}
-
-
-# }}}
-
-# http {{{
-snippet hf "http.HandlerFunc"
+# h. http {{{
+# func {{{
+snippet hf "http.HandlerFunc" b
 // $1 ${2:DOC ...}
 func ${1:HandlerFunc}(w http.ResponseWriter, r *http.Request) {
-	${0:fmt.Fprintf(w, "hello world")}
+	${0:fmt.Fprintln(w, "hello world")}
 }
 endsnippet
 
-snippet hm "http.HandlerFunc method"
+
+snippet hm "http.HandlerFunc method" b
 // $3 ${4:DOC ...}
 func (${1:receiver} ${2:type}) ${3:HandlerFunc}(w http.ResponseWriter, r *http.Request) {
-	${0:fmt.Fprintf(w, "hello world")}
+	${0:fmt.Fprintln(w, "hello world")}
 }
 endsnippet
 
-
-snippet mw "middleware"
+snippet mf "middleware" b
 // $1 ${2:DOC ...}
 func ${1:myMiddleware}(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -420,7 +588,7 @@ func ${1:myMiddleware}(h http.Handler) http.Handler {
 endsnippet
 
 # method
-snippet mwm "func (self Type) middleware(h http.Handler) http.Handler"
+snippet mm "func (self Type) middleware(h http.Handler) http.Handler" b
 // $3 ${4:DOC ...}
 func (${1:receiver} ${2:type}) ${3:myMiddleware}(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -429,7 +597,148 @@ func (${1:receiver} ${2:type}) ${3:myMiddleware}(h http.Handler) http.Handler {
 		h.ServeHTTP(w, r) 
 	})
 }
+
 endsnippet
+# }}}
+snippet h. "http."
+http.
+endsnippet
+
+snippet h.hf "call http.HandlerFunc" 
+http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	${0:fmt.Fprintln(w, "hello world")}
+})
+endsnippet
+
+snippet hl "http.Handler" 
+http.Handler
+endsnippet
+
+snippet h.rq "http.Request" w
+http.Request
+endsnippet
+
+snippet h.nrq "http.NewRequest(...)"
+http.NewRequest(http.${1:MethodGet},"${2:/}",${3:body})
+endsnippet
+
+snippet h.rp "http.Response" w
+http.Response
+endsnippet
+
+snippet h.g "http.MethodGet" w
+http.MethodGet
+endsnippet
+
+snippet h.p "http.MethodPost" w
+http.MethodPost
+endsnippet
+
+snippet h.ok "http.StatusOK" w
+http.StatusOK
+endsnippet
+
+snippet h.nf "http.NotFound" w
+http.StatusNotFound
+endsnippet
+
+# }}}
+
+# ht. httptest {{{
+snippet ht. "httptest." w
+httptest.
+endsnippet
+
+snippet ht.nrr "httptest.NewRecorder()"
+httptest.NewRecorder()
+endsnippet
+
+# }}}
+# i. io {{{
+snippet i. "io" w
+io.
+endsnippet
+
+snippet i.ra "io.ReadAll(...)" w
+io.ReadAll(${1:Reader})
+endsnippet
+# }}}
+# r. regexp {{{
+snippet r. "regexp" w
+regexp.
+endsnippet
+# }}}
+# s. strings {{{
+snippet s. "strings" w
+strings.
+endsnippet
+# }}}
+# sc. strconv {{{
+snippet sc. "strconv" w
+strconv.
+endsnippet
+# }}}
+# t. time {{{
+
+snippet t. "time" w
+time.
+endsnippet
+# }}}
+# te. testing {{{
+snippet te. "testing" w
+testing.
+endsnippet
+
+snippet tf "func TestXYZ(t *testing.T) { ... }" b
+// Test$1 ${2:DOC ...}
+func Test${1:Function}(t *testing.T) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+# test t.Run
+snippet t.r "call t.Run(XYZ, func(t *testing.T){ ... })"
+t.Run("${1:name}", func(t *testing.T){
+    ${0:/* TODO: test */}
+})
+endsnippet
+
+# test table snippet
+snippet tt "test table"
+var tests = []struct{
+    name string
+    ${1:any}
+}{
+    {
+	name: "${2:name}",
+	${3:any_1},
+    },
+}
+for _, v := range tests {
+    t.Run(v.name, func(t *testing.T){
+
+    ${0:/* TODO: test_body */}
+
+    })
+}
+endsnippet
+
+snippet Equal "func Equal[T comparable](t *testing.T, actual, expected T)" b
+// Equal used for test 
+func Equal[T comparable](t *testing.T, actual, expected T) {
+
+	t.Helper()
+
+	if actual != expected {
+		t.Errorf("actual: %v; expected: %v", actual, expected)
+	}
+
+}
+endsnippet
+
+
+# }}}
+
 # }}}
 
 # global {{{
@@ -458,3 +767,5 @@ def closing_par(snip, pos):
 
 endglobal
 # }}}
+
+
