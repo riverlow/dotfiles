@@ -10,6 +10,7 @@ alias dk=docker
 alias yd=yt-dlp
 alias py=python3
 alias compose="docker compose"
+alias bat="bat --color=always"
 
 # lang
 set -gx LANG en_US.UTF-8

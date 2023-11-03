@@ -18,7 +18,7 @@ Plug 'mattn/vim-lsp-settings'
 " auto complete {{{
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'iofxl/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
 " }}}
 " ultisnips {{{
  Plug 'SirVer/ultisnips'
@@ -196,11 +196,10 @@ set completepopup=align:menu,border:off,highlight:Pmenu
 
 
 " Setup Folds {{{
-
-set foldmethod=syntax 
-augroup foldmethod_marker
+augroup foldmethod_settings
   autocmd!
-  autocmd FileType vim,snippets setlocal foldmethod=marker
+  autocmd FileType vim,snippets,tmux setlocal foldmethod=marker
+  autocmd FileType go setlocal foldmethod=syntax 
 augroup END
 
 " }}}
@@ -216,9 +215,10 @@ set laststatus=0    " never a status line
 " let mapleader=";"
 let mapleader=","
 nnoremap \ ,
+nnoremap <leader>, ,
 " }}}
 " help page {{{
-nnoremap <leader>H :tab h<space>
+nnoremap <leader>h :tab h<space>
 " }}}
 "
 " Automatically resize screens to be equally the same
@@ -244,8 +244,8 @@ nnoremap <leader>lcd :lcd %:p:h<cr>:pwd<cr>
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " move
-inoremap <C-A> <HOME>
-inoremap <C-E> <END>
+inoremap <C-A> <C-O>^
+inoremap <C-E> <C-O>$
 inoremap <C-F> <Right>
 inoremap <C-B> <Left>
 " inoremap <C-P> <UP>
@@ -256,36 +256,31 @@ inoremap <C-B> <Left>
 inoremap <C-D> <C-O>dl
 inoremap <C-K> <C-O>d$
 
-inoremap `, ``<left>
-inoremap ", ""<left>
-inoremap ', ''<left>
-inoremap (, ()<left>
-inoremap [, []<left>
-inoremap {, {}<left>
+inoremap `<C-Y> ``<left>
+inoremap "<C-Y> ""<left>
+inoremap '<C-Y> ''<left>
+inoremap (<C-Y> ()<left>
+inoremap [<C-Y> []<left>
+inoremap {<C-Y> {}<left>
 inoremap (<cr> (<CR>)<C-o>O
 inoremap {<cr> {<CR>}<C-o>O
 inoremap [<cr> [<CR>]<C-o>O
+inoremap {,<cr> {<CR>},<C-o>O
 
-" }}}
-" CommandLine {{{
-" Refer to history in command-line mode
-cnoremap <C-p> <Up> 
-cnoremap <C-n> <Down>
+
 " }}}
 " registers {{{
 
 vnoremap <leader>Y "*y
-vnoremap <leader>P "*p
+nnoremap <leader>P "*p
 nnoremap Y y$
 "
 "" reverse word
-vn <leader>rw c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+vnoremap <leader>rw c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 
 " clear highlight
-nnoremap <leader><space> :noh<CR>
+nnoremap <silent> <leader><space> :noh<CR>
 
-nnoremap <leader>ju :jumps<CR>
-nnoremap <leader>ma :marks<CR>
 " }}}
 " sessions {{{
 " " Saving options in session and view files causes more problems than it
@@ -293,33 +288,121 @@ nnoremap <leader>ma :marks<CR>
 nnoremap <leader>S :mks! /Users/x/Session.vim<CR>
 " }}}
 " tabs {{{
-nnoremap <leader>to :tabonly<CR>
-nnoremap <leader>tx :tabclose<CR>
-nnoremap <leader>ts :tabs<CR>
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>tf :tabfind<space>
-nnoremap <leader>tr :tabrewind<cr>
-nnoremap <leader>tl :tablast<CR>
-nnoremap <leader>t<space> :tab 
-nnoremap <leader>t2 :tab 2<cr>
-nnoremap <leader>t3 :tab 3<cr>
-nnoremap <leader>tm :tabmove<Space>
-nnoremap <leader>tj :tabmove -1<CR>
-nnoremap <leader>tk :tabmove +1<CR>
-nnoremap <leader>tJ :tabmove 0<CR>
-nnoremap <leader>tK :tabmove $<CR>
 
-nnoremap gp gT
+" new and close
+nnoremap <silent> <C-E>N :tab h<cr>
+nnoremap <silent> <C-E>c :tabclose<CR>
+nnoremap <silent> <C-E>x :tabclose<CR>
+
+" select previous and next
+nnoremap <silent> <C-E>p gT
+nnoremap <silent> <C-E>n gt
+nnoremap <silent> <C-P> gT
+nnoremap <silent> <C-N> gt
+" nnoremap <silent> <C-P> gT:if tabpagenr() == 1 | :bprevious | endif 
+
+" select by moving around
+nnoremap <silent> <C-E>h gT
+nnoremap <silent> <C-E>l gt
+
+" select by number
+
+" pitty these not working
+nnoremap <silent> <C-1> 1gt
+nnoremap <silent> <C-2> 2gt
+nnoremap <silent> <C-3> 3gt
+nnoremap <silent> <C-4> 4gt
+nnoremap <silent> <C-5> 5gt
+nnoremap <silent> <C-6> 6gt
+nnoremap <silent> <C-7> 7gt
+nnoremap <silent> <C-8> 8gt
+nnoremap <silent> <C-9> 9gt
+
+nnoremap <silent> <C-E>1 1gt
+nnoremap <silent> <C-E>2 2gt
+nnoremap <silent> <C-E>3 3gt
+nnoremap <silent> <C-E>4 4gt
+nnoremap <silent> <C-E>5 5gt
+nnoremap <silent> <C-E>6 6gt
+nnoremap <silent> <C-E>7 7gt
+nnoremap <silent> <C-E>8 8gt
+nnoremap <silent> <C-E>9 9gt
+
+" select first and last or say top and bottom
+nnoremap <silent> <C-E>^ :tabfirst<cr>
+nnoremap <silent> <C-E>$ :tablast<cr>
+nnoremap <silent> <C-E>t :tabfirst<cr>
+nnoremap <silent> <C-E>b :tablast<cr>
+
+" select last accessed
+nnoremap <silent> <C-E><tab> g<tab>
+nnoremap <silent> <C-E>;     g<tab>
+
+
+" move tabs around
+nnoremap <silent> <C-E>{ :tabmove -1<cr>
+nnoremap <silent> <C-E>} :tabmove +1<cr>
+nnoremap <silent> <C-E><C-D> :tabmove -1<cr>
+nnoremap <silent> <C-E><C-F> :tabmove +1<cr>
+
+
+" move tabs to first/last
+nnoremap <silent> <C-E>H :tabmove 0<cr>
+nnoremap <silent> <C-E>L :tabmove $<cr>
+nnoremap <silent> <C-E>< :tabmove 0<cr>
+nnoremap <silent> <C-E>> :tabmove $<cr>
+
+" rotate tabs
+
+nnoremap <silent> <C-E>o :tabonly<CR>
+nnoremap <silent> <C-E>a :tabs<CR>
 " }}}
+
 " windows {{{
+   
+" new window and close
+nnoremap <silent> <C-w>N <C-w>n
+
+" select previous and next
+nnoremap <silent> <C-w>p <C-w>W
+nnoremap <silent> <C-w>n <C-w>w
+
+" select by move around 
+nnoremap <silent> <C-H> <C-w>h
+nnoremap <silent> <C-J> <C-w>j
+nnoremap <silent> <C-K> <C-w>k
+nnoremap <silent> <C-L> <C-w>l
+
+" select first and last or say top and bottom
+" default
+
+" select last accessed
+nnoremap <silent> <C-w><tab> <C-w>p
+nnoremap <silent> <C-w>;     <C-w>p
+
+" move window around
+" C-W_HJKL
+
+" move window to first/last
+
+" rotate window doesn't support much
+
+" resize window
+" default is C-W_-+<>
+
 nnoremap <silent> <leader>w :update<CR>
 nnoremap <silent> <leader>W :wa<CR>
 nnoremap <silent> <leader>x :x<CR>
 nnoremap <silent> <leader>X :xa<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>Q :qa<CR>
+nnoremap <silent> <leader>q :q<CR>
+nnoremap <silent> <leader>Q :qa<CR>
+
+
+
+" nnoremap <C-W><tab> <C-W>p
 
 " }}}
+
 " buffers {{{
 
 " Mappings to access buffers (don't use "\p" because a
@@ -341,13 +424,13 @@ nnoremap <silent> <leader>b<Space> :buffers<CR>:buffer<Space>
 " nnoremap <C-p> :bp<CR>
 " inoremap <C-n> <ESC>:bn<CR>
 " inoremap <C-p> <ESC>:bp<CR>
-nnoremap <silent> <leader>bn :bn<CR>
-nnoremap <silent> <leader>bp :bp<CR>
+nnoremap <silent> gb :bn<CR>
+nnoremap <silent> gB :bp<CR>
 
 " Unload buffer and delete it from the buffer list.
 nnoremap <silent> <leader>bd :bd<CR>
+nnoremap <silent> <leader>bD :bd!<CR>
 nnoremap <silent> <leader>bu :bu<CR>
-nnoremap <silent> <leader>bk :bd!<CR>
 " first && last
 nnoremap <silent> <leader>br :br<CR>
 nnoremap <silent> <leader>b1 :bf<CR>
@@ -388,6 +471,10 @@ augroup END
 " compile {{{
 nnoremap <leader>mk :tab :make<CR>
 " }}}
+" EX mode {{{
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+" }}}
 " }}}
 
 " augroup tabstop_settings {{{
@@ -402,18 +489,35 @@ augroup END
 " Plugins Configs {{{
 "
 " fzf {{{
+
 nnoremap <leader>fd :Files<CR>
-nnoremap <leader>fH :History:<CR>
 nnoremap <leader>f<space> :Files<Space>
-nnoremap <leader>fh :Files ~<CR>
-nnoremap <leader>fc :Files ~/.config/<CR>
-nnoremap <leader>fv :Files ~/.vim/<CR>
+nnoremap <leader>ff :Buffers<CR>
 nnoremap <leader>fr :Rg<CR>
 nnoremap <leader>fa :Tags<space>
+nnoremap <leader>fA :BTags<space> 
+nnoremap <leader>fg :GFiles<cr> " git status
+nnoremap <leader>fG :GFiles?<cr> " git ls-files
+nnoremap <leader>fu :Commits<cr>
+nnoremap <leader>f~ :Files ~<CR>
+nnoremap <leader>f.c :Files ~/.config/<CR>
+nnoremap <leader>f.v :Files ~/.vim/<CR>
 nnoremap <leader>fs :Snippets<CR>
-nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fc :Changes<CR>
+nnoremap <leader>fl :Lines<space>
+nnoremap <leader>fL :BLines<space>
+nnoremap <leader>fm :Marks<CR>
+nnoremap <leader>fk :Maps<CR>
+nnoremap <leader>fj :Jumps<CR>
+nnoremap <leader>fw :Windows<CR>
+nnoremap <leader>fp :Locate<space>
+nnoremap <leader>fh :Helptags<CR>
+nnoremap <leader>fH :History<CR>
+nnoremap <leader>f: :History:<CR>
+nnoremap <leader>f/ :History/<CR>
+nnoremap <leader>ft :FileTypes<CR>
 
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~50%' }
 
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
@@ -472,9 +576,9 @@ let g:go_highlight_variable_assignments = 1
 " let g:go_term_enabled = 0
 let g:go_gopls_enabled = 0
 let g:go_code_completion_enabled = 0
-let g:go_fmt_autosave = 0
-let g:go_imports_autosave = 0
-let g:go_mod_fmt_autosave = 0
+let g:go_fmt_autosave = 1
+let g:go_imports_autosave = 1
+let g:go_mod_fmt_autosave = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_def_mapping_enabled = 0
 let g:go_textobj_enabled = 1
@@ -653,5 +757,3 @@ runtime macros/sandwich/keymap/surround.vim
 let g:rsi_no_meta = 1
 " }}}
 " }}}
-"
-

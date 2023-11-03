@@ -37,6 +37,9 @@ snippet ie "if ... else ... end"
 {{end}}
 endsnippet
 
+snippet iei "if ... else ... end inline" 
+{{if ${1:condition})}} ${2:${VISUAL}} {{else}} ${0:todo} {{end}}
+endsnippet
 
 
 snippet wi "with ... end" 
@@ -56,18 +59,13 @@ snippet ra "range ... end inline"
 endsnippet
 
 
-
 snippet e "{{end}}" b
-{{end}}
-${0}
-endsnippet
-
-snippet \{ "{{VISUAL}}" w
-{{${0:${VISUAL}}}}
+{{end}} ${0}
 endsnippet
 
 snippet . "{{VISUAL}}" w
-{{${0:.}}}
+{{${0:${VISUAL:.}}}}
 endsnippet
+
 
 

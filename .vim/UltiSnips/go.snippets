@@ -1,3 +1,11 @@
+# x. snippet template {{{
+
+# snippet x. "x" w
+# x.
+# endsnippet
+
+# }}}
+
 # operater {{{
 # +    sum                    integers, floats, complex values, strings
 # -    difference             integers, floats, complex values
@@ -94,7 +102,7 @@ endsnippet
 # constants
 snippet cos "const ( ... )"
 const (
-	${1:NAME} ${2:Type} = ${3:value}
+	${1:NAME_type} = ${2:value}
 	${0}
 )
 endsnippet
@@ -465,6 +473,15 @@ if err != nil {
 }
 ${0}
 endsnippet
+
+# error t.Fatal
+snippet etf "if err != nil { t.Fatal(err)" b
+if err != nil {
+    t.Fatal(${1:err})
+}
+${0}
+endsnippet
+
 # }}}
 
 # function and method {{{
@@ -472,12 +489,18 @@ endsnippet
 snippet fn "func Function(...) [error] { ... }" b
 // $1 ${4:DOC ...}
 func ${1:name}(${2:params})${3/(.+)/ /}`!p opening_par(snip, 3)`$3`!p closing_par(snip, 3)` {
-	${0:${VISUAL}}
+    ${0:${VISUAL}}
 }
 endsnippet
 
-snippet af "func(...) [error] { ... }" 
-func(${1:params})${2/(.+)/ /}`!p opening_par(snip, 2)`$2`!p closing_par(snip, 2)` {
+snippet af "func(){ ... }" w
+func() { 
+    ${0:${VISUAL}}
+}
+endsnippet
+
+snippet aff "func(...) [error] { ... }" w
+func(${1:params})${2/(.+)/ /}`!p opening_par(snip, 2)`$2`!p closing_par(snip, 2)` { 
 	${0:${VISUAL}}
 }
 endsnippet
@@ -499,7 +522,14 @@ func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}`!p opening_par
 endsnippet
 # }}}
 
+# function call {{{
+snippet .c ".Close()" i
+.Close()
+endsnippet
+# }}}
+
 # standard library {{{
+
 
 # b. bytes {{{
 snippet b. "bytes" w
@@ -610,8 +640,12 @@ http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 })
 endsnippet
 
-snippet hl "http.Handler" 
+snippet h.hl "http.Handler" w
 http.Handler
+endsnippet
+
+snippet h.h "http.Header" w
+http.Header
 endsnippet
 
 snippet h.rq "http.Request" w
@@ -642,8 +676,20 @@ snippet h.nf "http.NotFound" w
 http.StatusNotFound
 endsnippet
 
-# }}}
+snippet h.br "http.StatusBadRequest" w
+http.StatusBadRequest
+endsnippet
 
+snippet h.ue "http.StatusUnprocessableEntity" w
+http.StatusUnprocessableEntity
+endsnippet
+
+snippet h.so "http.StatusSeeOther" w
+http.StatusSeeOther
+endsnippet
+
+
+# }}}
 # ht. httptest {{{
 snippet ht. "httptest." w
 httptest.
@@ -663,6 +709,16 @@ snippet i.ra "io.ReadAll(...)" w
 io.ReadAll(${1:Reader})
 endsnippet
 # }}}
+# o. os {{{
+snippet o. "os" w
+os.
+endsnippet
+
+snippet o.rf "os.ReadFile" w
+os.ReadFile(${0:filename})
+endsnippet
+
+# }}}
 # r. regexp {{{
 snippet r. "regexp" w
 regexp.
@@ -677,6 +733,24 @@ endsnippet
 snippet sc. "strconv" w
 strconv.
 endsnippet
+# }}}
+# sq. sql {{{
+
+snippet sq. "sql." w
+sql.
+endsnippet
+
+
+snippet sq.db "sql.DB" w
+sq.DB
+endsnippet
+
+
+snippet sq.o "sql.Open(...)" w
+sql.Open(${1:driverName}, ${2:dataSourceName})${0}
+endsnippet
+
+
 # }}}
 # t. time {{{
 
@@ -736,6 +810,16 @@ func Equal[T comparable](t *testing.T, actual, expected T) {
 }
 endsnippet
 
+
+# }}}
+# u. url {{{
+snippet u. "url." w
+url.
+endsnippet
+
+snippet u.v "url.Values" w
+url.Values
+endsnippet
 
 # }}}
 
