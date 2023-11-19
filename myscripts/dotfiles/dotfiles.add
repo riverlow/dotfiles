@@ -13,7 +13,8 @@ dotfiles add $HOME/myscripts/
 dotfiles add $HOME/.dotfiles_linux/
 
 # alcaritty
-dotfiles add $HOME/.config/alacritty/alacritty.yml
+# dotfiles add $HOME/.config/alacritty/alacritty.yml
+dotfiles add $HOME/.config/alacritty/alacritty.toml
 
 #fish
 dotfiles add $HOME/.config/fish/fish_plugins
@@ -32,6 +33,7 @@ dotfiles add $HOME/.poliporc
 # vim
 dotfiles add $HOME/.vimrc
 dotfiles add $HOME/.vim/UltiSnips/
+dotfiles add $HOME/.vim/myplugin/
 
 # blocky
 dotfiles add $HOME/.config/blocky/config.yml

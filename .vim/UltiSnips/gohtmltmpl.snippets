@@ -8,16 +8,17 @@ snippet ti "template"
 {{template ${1} ${0:.}}} {{end}} 
 endsnippet
 
-
-snippet di "define template inline" 
-{{define "${1:name}"}} ${0:{{.}}}{{end}}
-endsnippet
-
 snippet de "define template" 
 {{define "${1:name}"}}
     ${0:{{.}}}
 {{end}}
 endsnippet
+
+snippet di "define template inline" 
+{{define "${1:name}"}} ${2:{{.}}}{{end}}
+${0}
+endsnippet
+
 
 snippet if "if ... end" 
 {{if (${1:condition})}}
@@ -26,7 +27,8 @@ snippet if "if ... end"
 endsnippet
 
 snippet ii "if ... end inline" 
-{{if (${1:condition})}}${0:${VISUAL}}{{end}}
+{{if (${1:condition})}}${1:${VISUAL}}{{end}}
+${0}
 endsnippet
 
 snippet ie "if ... else ... end" 
@@ -39,6 +41,7 @@ endsnippet
 
 snippet iei "if ... else ... end inline" 
 {{if ${1:condition})}} ${2:${VISUAL}} {{else}} ${0:todo} {{end}}
+${0}
 endsnippet
 
 
@@ -50,6 +53,7 @@ endsnippet
 
 snippet wii "with ... end inline" 
 {{with ${1:.value}}} ${0:{{.}}} {{end}}
+${0}
 endsnippet
 
 snippet ra "range ... end inline" 
@@ -63,7 +67,7 @@ snippet e "{{end}}" b
 {{end}} ${0}
 endsnippet
 
-snippet . "{{VISUAL}}" w
+snippet . "{{VISUAL}}" i
 {{${0:${VISUAL:.}}}}
 endsnippet
 

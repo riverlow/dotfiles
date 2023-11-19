@@ -3,14 +3,28 @@ set -gx EDITOR vim
 set fish_greeting
 
 # alias
-alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias pas="gopass"
-alias mux="tmuxinator"
-alias dk=docker
-alias yd=yt-dlp
-alias py=python3
-alias compose="docker compose"
-alias bat="bat --color=always"
+alias so       "source"
+alias bat      "bat --color=always"
+alias d        "docker"
+alias dp       "docker compose"
+alias di       "docker image"
+alias dis      "docker images"
+alias dr       'docker run --detach-keys="ctrl-z,ctrl-q"'
+alias dc       "docker container"
+alias dx       'docker container exec --detach-keys="ctrl-z,ctrl-q"'
+alias dotfiles "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias p        "pwd"
+alias ls       "eza -s type"
+alias la       "eza -a"
+alias ll       "eza -l"
+alias mux      "tmuxinator"
+alias pas      "gopass"
+alias yd       "yt-dlp"
+
+## python
+alias py "python3"
+alias pe "pyenv"
+alias pie "pipenv"
 
 # lang
 set -gx LANG en_US.UTF-8
@@ -28,12 +42,17 @@ fish_add_path $HOME/go/bin/ $HOME/.local/go/bin /usr/local/go/bin
 fish_add_path $HOME/.cargo/bin
 
 # pyenv
-set -Ux PYENV_ROOT $HOME/.pyenv
-fish_add_path $PYENV_ROOT/bin
-
+pyenv init - --no-rehash| source
 
 # fzf
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
+# bat
+set -gx BAT_THEME gruvbox-dark
+
 source ~/.config/fish/conf.d/linux.fish
 source ~/.config/fish/conf.d/macOS.fish
+
+
+
+

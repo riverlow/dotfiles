@@ -128,8 +128,7 @@ endsnippet
 
 # defer
 snippet df "defer someFunction()"
-defer ${1:func}(${2})
-${0}
+defer ${1:func}
 endsnippet
 
 snippet fs "for select"
@@ -355,87 +354,114 @@ endsnippet
 # 	append cap clear close complex copy delete imag len
 # 	make max min new panic print println real recover
 
-snippet a "any" w
-any
-endsnippet
-
-snippet b "byte" w
-byte
-endsnippet
-
-snippet bl "bool" w
+# snippet a "any" w
+# any
+# endsnippet
+context "re.search(r'\S',snip.before[:-2]) and re.match(r'[^\w\[]',snip.before[-3])"
+snippet /b[ol]/ "bool" rwe
 bool
 endsnippet
 
-snippet cm "comparable" w
+context "re.search(r'\S',snip.before[:-2]) and re.match(r'[^\w\[]',snip.before[-3])"
+snippet cm "comparable" we
 comparable
 endsnippet
 
-snippet er "error" w
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet a "any" we
+any
+endsnippet
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet b "byte" we
+byte
+endsnippet
+
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet e "error" we
 error
 endsnippet
 
-snippet i "int" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet i "int" we
 int
 endsnippet
 
 
-snippet ui "uint" w
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet u "uint" we
 uint
 endsnippet
 
-snippet s "string" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet s "string" we
 string
 endsnippet
 
-snippet t "true" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet t "true" we
 true
 endsnippet
 
-snippet f "false" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet f "false" we
 false
 endsnippet
 
-snippet n "nil" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet n "nil" we
 nil
 endsnippet
 
-snippet fl "float" w
+
+context "re.search(r'\S',snip.before[:-1]) and re.match(r'[^\w\[]',snip.before[-2])"
+snippet fl "float" we
 float
 endsnippet
 
 
-snippet [b "[]byte"  
+snippet [b "[]byte"  i
 []byte
 endsnippet
 
-snippet [s "[]string" 
+snippet [s "[]string" i
 []string
 endsnippet
 
-snippet [i "[]int" 
+snippet [i "[]int" i
 []int
 endsnippet
 
-snippet [f "[]float" 
+snippet [u "[]uint" i
+[]uint
+endsnippet
+
+
+snippet [f "[]float" i
 []float
 endsnippet
 
 
 
 # json field tag
-snippet js "\`json:key\`" 
+snippet `j "\`json:key\`" 
 \`json:"${1:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
 # yaml field tag
-snippet yl "\`yaml:key\`" 
+snippet `y "\`yaml:key\`" 
 \`yaml:"${1:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
 #  field tag
-snippet ` "\`input:key\`" 
-\`${1:input}:"${2:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
+snippet `f "\`input:key\`" 
+\`${1:form}:"${2:`!v  go#util#snippetcase(matchstr(getline("."), '\w\+'))`}"\`
 endsnippet
 
 # }}}
@@ -459,7 +485,7 @@ ${0}
 endsnippet
 
 # error log.Fatal
-snippet ef "if err != nil { log.Fatal(err)}" b
+snippet eF "if err != nil { log.Fatal(err)}" b
 if err != nil {
 	log.Fatal(err)
 }
@@ -499,7 +525,7 @@ func() {
 }
 endsnippet
 
-snippet aff "func(...) [error] { ... }" w
+snippet aF "func(with parameters) [error] { ... }" w
 func(${1:params})${2/(.+)/ /}`!p opening_par(snip, 2)`$2`!p closing_par(snip, 2)` { 
 	${0:${VISUAL}}
 }
@@ -513,7 +539,7 @@ func ${1:name}[${2:constraints}](${3:params})${4/(.+)/ /}`!p opening_par(snip, 4
 }
 endsnippet
 
-
+# method
 snippet me "func (self Type) Method(...) [error] { ... }" b
 // $3 ${6:DOC ...}
 func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}`!p opening_par(snip, 5)`$5`!p closing_par(snip, 5)` {
@@ -541,6 +567,11 @@ snippet c. "context"
 context.
 endsnippet
 
+snippet .ct ".Context()" i
+.Context()
+endsnippet
+
+
 snippet c.wc "context.WithValue"
 ${1:ctx}.WithContext(${0:ctx})
 endsnippet
@@ -555,13 +586,13 @@ snippet e. "errors" w
 errors.
 endsnippet
 
-snippet e.is "if errors.Is(err,...)"
+snippet eis "if errors.Is(err,...)"
 if errors.Is(err,${1:some error}) {
     ${0:handle err}
 }
 endsnippet
 
-snippet e.as "if errors.As(err,...)"
+snippet eas "if errors.As(err,...)"
 if errors.As(err,${1:some error}) {
     ${0:handle err}
 }
@@ -587,6 +618,16 @@ endsnippet
 snippet ef "fmt.Errorf(...)"
 fmt.Errorf("${1:${VISUAL}}")
 endsnippet
+
+snippet Ff "fmt.Printf(...)"
+fmt.Fprintf(${1:w},"${2: = %+v\n"}, ${0:${VISUAL}})
+endsnippet
+
+snippet Fl "fmt.Printf(...)"
+fmt.Fprintln(${1:w}, ${0:${VISUAL}})
+endsnippet
+
+
 
 # }}}
 # h. http {{{
@@ -630,7 +671,7 @@ func (${1:receiver} ${2:type}) ${3:myMiddleware}(h http.Handler) http.Handler {
 
 endsnippet
 # }}}
-snippet h. "http."
+snippet h. "http." w
 http.
 endsnippet
 
@@ -676,6 +717,11 @@ snippet h.nf "http.NotFound" w
 http.StatusNotFound
 endsnippet
 
+snippet h.ise "http.StatusInternalServerError" w
+http.StatusInternalServerError
+endsnippet
+
+
 snippet h.br "http.StatusBadRequest" w
 http.StatusBadRequest
 endsnippet
@@ -687,6 +733,16 @@ endsnippet
 snippet h.so "http.StatusSeeOther" w
 http.StatusSeeOther
 endsnippet
+
+snippet h.st "http.StatusText(...)" w
+http.StatusText(${0:StatusCode})
+endsnippet
+
+snippet h.rd "http.Redirect(w,r,url,code)" w
+http.Redirect(w,r,${1:url},http.StatusSeeOther)
+endsnippet
+
+
 
 
 # }}}
@@ -701,18 +757,18 @@ endsnippet
 
 # }}}
 # i. io {{{
-snippet i. "io" w
-io.
-endsnippet
+# snippet i. "io" w
+# io.
+# endsnippet
 
 snippet i.ra "io.ReadAll(...)" w
 io.ReadAll(${1:Reader})
 endsnippet
 # }}}
 # o. os {{{
-snippet o. "os" w
-os.
-endsnippet
+# snippet o. "os" w
+# os.
+# endsnippet
 
 snippet o.rf "os.ReadFile" w
 os.ReadFile(${0:filename})
@@ -730,9 +786,14 @@ strings.
 endsnippet
 # }}}
 # sc. strconv {{{
-snippet sc. "strconv" w
+snippet sv. "strconv" w
 strconv.
 endsnippet
+
+snippet a2i "strconv.Atoi(...)" w
+strconv.Atoi(${0:"string"})
+endsnippet
+
 # }}}
 # sq. sql {{{
 
@@ -757,9 +818,14 @@ endsnippet
 snippet t. "time" w
 time.
 endsnippet
+
+snippet now "time.Now()" w
+time.Now()
+endsnippet
+
 # }}}
 # te. testing {{{
-snippet te. "testing" w
+snippet tt. "testing" w
 testing.
 endsnippet
 

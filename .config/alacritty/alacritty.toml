@@ -1,0 +1,99 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+style = "Block"
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "Monaco"
+style = "Bold"
+
+[font.bold_italic]
+family = "Monaco"
+style = "Bold Italic"
+
+[font.italic]
+family = "Monaco"
+style = "Italic"
+
+[font.normal]
+family = "Monaco"
+style = "Regular"
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Escape"
+mode = "~Search"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001E"
+key = "Key6"
+mods = "Control"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[window]
+decorations = "buttonless"
+dynamic_padding = true
+option_as_alt = "Both"
+startup_mode = "SimpleFullscreen"
+
+[colors.cursor]
+cursor = "0x24b300"
+text = "0xdcdcdc"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xdcdcdc"
+
+[colors.normal]
+black = "0x000000"
+red = "0xfe0100"
+green = "0x2cdb00"
+yellow = "0xf5f500"
+blue = "0x0051ff"
+magenta = "0xB800E6"
+cyan = "0x00eded"
+white = "0xdcdcdc"
+
+[colors.bright]
+black = "0x444444"
+red = "0xfe0100"
+green = "0x33ff00"
+yellow = "0xfeff00"
+blue = "0x00a1ff"
+magenta = "0xcc00ff"
+cyan = "0x00ffff"
+white = "0xeeeeee"
+
+
+

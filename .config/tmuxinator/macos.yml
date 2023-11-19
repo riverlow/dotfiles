@@ -1,6 +1,6 @@
 # /Users/x/.config/tmuxinator/macos.yml
 
-name: macos
+name: 0
 root: ~
 
 windows:
@@ -16,7 +16,6 @@ windows:
       - sslocal -vc bv.json
     - bv6:
       - sslocal -vc bv6.json
-
     - rack:
       - sslocal -vc rack.json
 - new:
