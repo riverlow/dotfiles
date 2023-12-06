@@ -25,7 +25,9 @@ Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'hiterm/asyncomplete-look'
 " make comple slow
 " Plug 'yami-beta/asyncomplete-omni.vim'
-
+"
+" ale lint
+Plug 'dense-analysis/ale'
 " auto complete tag 
 Plug 'mattn/emmet-vim'
 
@@ -127,7 +129,6 @@ set formatoptions+=cqnmMB1j     " all:tcroqwan2vblmMB1j  r: Automatically insert
 set formatoptions-=trowa2vbl    " o: Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
 set nrformats-=octal
 set grepprg=rg
-set hlsearch noshowmatch nocursorcolumn incsearch           
 set ignorecase  smartcase               
 set iminsert=0
 set imsearch=-1
@@ -159,21 +160,37 @@ endif
 " tabline {{{
 
 " tabline }}}
-
-" colors {{{
+" colors and highlight {{{
 set termguicolors
 set background=dark
 colorscheme habamax
 
-nnoremap <leader>o :hi Normal guibg='#000000'<cr>
 
+augroup colorscheme
+autocmd!
 autocmd ColorScheme * highlight VertSplit guibg=bg
+" tabline color hsl(0, 0%, 25.1%)
+autocmd ColorScheme * highlight Tabline guibg=bg guifg='#646464' 
+autocmd ColorScheme * highlight TablineFill guibg=bg 
+autocmd ColorScheme * highlight TablineSel cterm=reverse,bold guifg='#646464'
+augroup END
+
+
+
+set noshowmatch nocursorcolumn incsearch           
+
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
+
 
 " }}}
 " IDE {{{
  
 set balloondelay=250         " Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short balloondelay
-set number signcolumn=number numberwidth=1
+set number signcolumn=number 
 syntax enable                " :syntax enable only sets groups that weren't set yet. :syntax on overrules existing colors
 filetype plugin indent on
 set autoindent smartindent breakindent
@@ -194,6 +211,7 @@ augroup END
 " tabstop }}}
 " Folding {{{
 
+set foldmethod=marker
 augroup foldmethod_settings
   autocmd!
   autocmd FileType vim,snippets,tmux setlocal foldmethod=marker
@@ -239,8 +257,8 @@ map ][ /}<CR>b99]}
 map ]] j0[[%/{<CR>
 map [] k$][%?}<CR>
 
-" nnoremap <silent> <space> <C-D>
-" nnoremap <silent> <space>k <C-U>
+nnoremap <silent> <space> <C-F>
+nnoremap <silent> <leader><space> <C-B>
 
 "
 " }}}
@@ -266,18 +284,18 @@ inoremap <C-B> <Left>
 inoremap <C-D> <C-O>dl
 inoremap <C-K> <C-O>d$
 
-" autopair {{{
-inoremap `<TAB> ``<left>
-inoremap "<TAB> ""<left>
-inoremap '<TAB> ''<left>
-inoremap (<TAB> ()<left>
-inoremap [<TAB> []<left>
-inoremap {<TAB> {}<left>
+" autopairs {{{
+inoremap `. ``<left>
+inoremap ". ""<left>
+inoremap '. ''<left>
+inoremap (. ()<left>
+inoremap [. []<left>
+inoremap {. {}<left>
 inoremap (<cr> (<CR>)<C-o>O
 inoremap {<cr> {<CR>}<C-o>O
 inoremap [<cr> [<CR>]<C-o>O
 inoremap {,<cr> {<CR>},<C-o>O
-" autopair }}}
+" autopairs }}}
 
 " }}}
 " copy & paste & registers {{{
@@ -290,10 +308,22 @@ nnoremap Y y$
 "" reverse word
 vnoremap <leader>rw c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 
-" clear highlight
-nnoremap <silent> <silent> <leader><space> :noh<CR>
-
 " }}}
+" highlight {{{
+
+" true black
+" hsl(0, 0%, 50.2%) = #808080
+" hsl(45,15,65)
+nnoremap <leader>oo :hi Normal guibg='#000000' guifg='#A6A08D'<cr>
+" hsl(0, 0%, 60%) = #999999
+nnoremap <leader>oa :hi Normal guibg='#0c0c0c' guifg='#999999'<cr>
+" hsl(0, 0%, 70%) = #b3b3b3
+nnoremap <leader>ob :hi Normal guibg='#1c1c1c' guifg='#b3b3b3'<cr>
+
+nnoremap <silent> <silent> <leader>oh :noh<CR>
+nnoremap <silent> <silent> <leader>L :redraw<CR>
+
+" highlight }}}
 " sessions {{{
 " " Saving options in session and view files causes more problems than it
 " solves, so disable it.
@@ -435,7 +465,7 @@ nnoremap <silent> <leader>Q :qa<CR>
 " mnemonics: quick record
 " nnoremap qr q 
 " nnoremap <silent> qq :cquit<cr>
-nnoremap <silent> <leader>qc :cclose<cr>
+nnoremap <silent> <leader>c :cclose<cr>
 nnoremap <silent> [q :cprevious<cr>
 nnoremap <silent> ]q :cnext<cr>
 " quickfix }}}
@@ -555,12 +585,13 @@ augroup END
 let g:lsp_use_native_client = 1
 let g:lsp_semantic_enabled = 1
 
+let g:lsp_diagnostics_enabled  = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 let g:lsp_diagnostics_virtual_text_align = "right"
+let g:lsp_diagnostics_echo_cursor = 0
 
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_echo_cursor = 1
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -580,10 +611,9 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> gpc <plug>(lsp-peak-declaration)
     nnoremap <buffer> gpi <plug>(lsp-peak-implementation)
     nnoremap <buffer> gpt <plug>(lsp-peak-type-definition)
-    nnoremap <buffer> gls <plug>(lsp-status)
+    nnoremap <buffer> gll <plug>(lsp-status)
 
-    let g:lsp_format_sync_timeout = 1000
-    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+    autocmd! BufWritePre *.go call execute('LspDocumentFormatSync')
     
     " refer to doc to add more commands
 endfunction
@@ -609,6 +639,26 @@ augroup END
 " \ ]
 let g:lsp_settings_filetype_python = ['pylsp','ruff-lsp']
 " }}}
+" ale lint {{{
+let g:ale_completion_enabled = 0
+let g:ale_linters_explicit = 1
+let g:ale_hover_cursor = 0
+
+let g:ale_disable_lsp = 1
+
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+
+let g:ale_virtualtext_cursor = 'current'
+
+augroup ale_filetyp
+    au!
+    autocmd FileType go let b:ale_linters = ['golangci-lint']
+augroup END
+" ale lint }}}
 " vim-go {{{
 
 " let g:go_fold_enable                     = 0
@@ -727,7 +777,7 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
-autocmd! BufWritePost *.go silent! !gotags -R . 2>&1 | echo
+autocmd! BufWritePost *.go silent! !gotags -R -f tags . 2>&1 &
 
 " }}}
 " emmet-vim {{{
@@ -758,7 +808,6 @@ nnoremap gsD <Plug>VimspectorDisassemble
 nnoremap gsp <Plug>VimspectorPause
 nnoremap gsR <Plug>VimspectorRestart
 nnoremap gsx <Plug>VimspectorStop
-
 nnoremap gsK <Plug>VimspectorBalloonEval
 nnoremap gsb <Plug>VimspectorToggleBreakpoint
 nnoremap gst <Plug>VimspectorToggleConditionalBreakpoint
@@ -797,8 +846,23 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 let g:easy_align_delimiters = {  '\': { 'pattern': '\\',      'left_margin':   1,      'right_margin':  1,      'stick_to_left': 0    } }
 " }}}
-" vim-sandwich {{{
-runtime macros/sandwich/keymap/surround.vim
+" vim-sandwich surround {{{
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
+let g:textobj_sandwich_no_default_key_mappings = 1
+
+nnoremap <leader>s <Plug>(sandwich-add)
+xnoremap <leader>s <Plug>(sandwich-add)
+onoremap <leader>s <Plug>(sandwich-add)
+
+nnoremap ds <Plug>(sandwich-delete)
+xnoremap ds <Plug>(sandwich-delete)
+nnoremap dss <Plug>(sandwich-delete-auto)
+
+nnoremap cs <Plug>(sandwich-replace)
+xnoremap cs <Plug>(sandwich-replace)
+nnoremap css <Plug>(sandwich-replace-auto)
+
 " }}}
 " goyo {{{
 nnoremap <silent> gy :Goyo<CR>

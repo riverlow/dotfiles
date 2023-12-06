@@ -45,10 +45,6 @@ dotfiles add $HOME/.config/mpv/scripts
 # yt-dlp
 dotfiles add $HOME/.config/yt-dlp.conf
 
-# Go
-dotfiles add $HOME/pkgs/0get.sh
-dotfiles add $HOME/pkgs/main.go
-
 # npm
 dotfiles add $HOME/.npmrc
 
@@ -61,6 +57,10 @@ dotfiles add $HOME/.npmrc
 
 # X11 for xQuartz
 dotfiles add $HOME/.Xresources
+
+# sioyek
+dotfiles add $HOME/.config/sioyek/keys_user.config
+dotfiles add $HOME/.config/sioyek/prefs_user.config
 
 dotfiles status
 

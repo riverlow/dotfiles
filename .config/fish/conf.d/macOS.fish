@@ -21,5 +21,8 @@ if test (uname) = "Darwin";
     # qt5
     fish_add_path /usr/local/opt/qt@5/bin
 
+    # pyenv
+    pyenv init - --no-rehash| source
+
 end
 

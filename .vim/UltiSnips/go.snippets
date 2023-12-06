@@ -5,7 +5,6 @@
 # endsnippet
 
 # }}}
-
 # operater {{{
 # +    sum                    integers, floats, complex values, strings
 # -    difference             integers, floats, complex values
@@ -71,7 +70,6 @@ snippet ge "name >= value"
 ${1} >= ${0}
 endsnippet
 # }}}
-
 # keyword {{{
 # break        default      func         interface    select
 # case         defer        go           map          struct
@@ -297,7 +295,6 @@ endsnippet
 
 
 # }}}
-
 # built-in function {{{
 # Functions:
 # 	append cap clear close complex copy delete imag len
@@ -336,7 +333,6 @@ panic(${1:err})
 ${0}
 endsnippet
 # }}}
-
 # data type {{{
 # Types:
 # 	any bool byte comparable
@@ -465,7 +461,6 @@ snippet `f "\`input:key\`"
 endsnippet
 
 # }}}
-
 # error {{{
 # error snippet
 snippet e "if err != nil { return  err }" b
@@ -509,12 +504,11 @@ ${0}
 endsnippet
 
 # }}}
-
 # function and method {{{
 # function
 snippet fn "func Function(...) [error] { ... }" b
 // $1 ${4:DOC ...}
-func ${1:name}(${2:params})${3/(.+)/ /}`!p opening_par(snip, 3)`$3`!p closing_par(snip, 3)` {
+func ${1:name}(${2:params}) ${3:error} {
     ${0:${VISUAL}}
 }
 endsnippet
@@ -526,7 +520,7 @@ func() {
 endsnippet
 
 snippet aF "func(with parameters) [error] { ... }" w
-func(${1:params})${2/(.+)/ /}`!p opening_par(snip, 2)`$2`!p closing_par(snip, 2)` { 
+func(${1:params}) ${2:error} { 
 	${0:${VISUAL}}
 }
 endsnippet
@@ -534,7 +528,7 @@ endsnippet
 
 snippet gf "func Function[generics] (...) [error] { ... }" b
 // $1 ${5:DOC ...}
-func ${1:name}[${2:constraints}](${3:params})${4/(.+)/ /}`!p opening_par(snip, 4)`$4`!p closing_par(snip, 4)` {
+func ${1:name}[${2:constraints}](${3:params}) ${4:error} {
 	${0:${VISUAL}}
 }
 endsnippet
@@ -542,30 +536,36 @@ endsnippet
 # method
 snippet me "func (self Type) Method(...) [error] { ... }" b
 // $3 ${6:DOC ...}
-func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}`!p opening_par(snip, 5)`$5`!p closing_par(snip, 5)` {
+func (${1:receiver} ${2:type}) ${3:name}(${4:params}) ${5:error} {
 	${0:${VISUAL}}
 }
 endsnippet
 # }}}
-
 # function call {{{
 snippet .c ".Close()" i
 .Close()
 endsnippet
 # }}}
-
 # standard library {{{
-
-
 # b. bytes {{{
+snippet bs "bytes" w
+bytes
+endsnippet
+
 snippet b. "bytes" w
 bytes.
 endsnippet
+
 # }}}
 # c. context {{{
+snippet ct "context"
+context
+endsnippet
+
 snippet c. "context"
 context.
 endsnippet
+
 
 snippet .ct ".Context()" i
 .Context()
@@ -582,9 +582,14 @@ endsnippet
 # }}}
 # e. errors {{{
 
+snippet es "errors" w
+errors
+endsnippet
+
 snippet e. "errors" w
 errors.
 endsnippet
+
 
 snippet eis "if errors.Is(err,...)"
 if errors.Is(err,${1:some error}) {
@@ -599,10 +604,6 @@ if errors.As(err,${1:some error}) {
 endsnippet
 # }}}
 # f. fmt {{{
-
-snippet f. "fmt" w
-fmt.
-endsnippet
 
 # Fmt Printf debug
 snippet pf "fmt.Printf(...)"
@@ -776,18 +777,23 @@ endsnippet
 
 # }}}
 # r. regexp {{{
-snippet r. "regexp" w
-regexp.
+snippet re "regexp" w
+regexp
 endsnippet
 # }}}
 # s. strings {{{
+snippet ss "strings" w
+strings
+endsnippet
+
 snippet s. "strings" w
 strings.
 endsnippet
+
 # }}}
-# sc. strconv {{{
-snippet sv. "strconv" w
-strconv.
+# sv. strconv {{{
+snippet sv "strconv" w
+strconv
 endsnippet
 
 snippet a2i "strconv.Atoi(...)" w
@@ -797,16 +803,6 @@ endsnippet
 # }}}
 # sq. sql {{{
 
-snippet sq. "sql." w
-sql.
-endsnippet
-
-
-snippet sq.db "sql.DB" w
-sq.DB
-endsnippet
-
-
 snippet sq.o "sql.Open(...)" w
 sql.Open(${1:driverName}, ${2:dataSourceName})${0}
 endsnippet
@@ -815,8 +811,8 @@ endsnippet
 # }}}
 # t. time {{{
 
-snippet t. "time" w
-time.
+snippet tm "time" w
+time
 endsnippet
 
 snippet now "time.Now()" w
@@ -825,9 +821,14 @@ endsnippet
 
 # }}}
 # te. testing {{{
-snippet tt. "testing" w
+snippet te "testing" w
+testing
+endsnippet
+
+snippet te. "testing" w
 testing.
 endsnippet
+
 
 snippet tf "func TestXYZ(t *testing.T) { ... }" b
 // Test$1 ${2:DOC ...}
@@ -879,43 +880,13 @@ endsnippet
 
 # }}}
 # u. url {{{
-snippet u. "url." w
-url.
-endsnippet
+# snippet u. "url." w
+# url.
+# endsnippet
 
 snippet u.v "url.Values" w
 url.Values
 endsnippet
 
 # }}}
-
 # }}}
-
-# global {{{
-global !p
-
-import re
-
-# Automatically wrap return types with parentheses
-
-def return_values(s):
-	# remove everything wrapped in parentheses
-	s = re.sub("\(.*?\)|\([^)]*$", "", s)
-	return len(s.split(","))
-
-def opening_par(snip, pos):
-	if return_values(t[pos]) > 1 and not t[pos].startswith("("):
-		snip.rv = "("
-	else:
-		snip.rv = ""
-
-def closing_par(snip, pos):
-	if return_values(t[pos]) > 1:
-		snip.rv = ")"
-	else:
-		snip.rv = ""
-
-endglobal
-# }}}
-
-

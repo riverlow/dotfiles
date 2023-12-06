@@ -1,5 +1,13 @@
 live_config_reload = true
 
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+option_as_alt = "Both"
+startup_mode = "SimpleFullscreen"
+
+
+
 [colors]
 draw_bold_text_with_bright_colors = true
 
@@ -7,7 +15,8 @@ draw_bold_text_with_bright_colors = true
 style = "Block"
 
 [font]
-size = 18.0
+# 15.5 is perfect for monaco. it will make lines almost fit the screen, but it's too small for me
+size = 17.5
 
 [font.bold]
 family = "Monaco"
@@ -61,39 +70,31 @@ multiplier = 3
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
-[window]
-decorations = "buttonless"
-dynamic_padding = true
-option_as_alt = "Both"
-startup_mode = "SimpleFullscreen"
-
 [colors.cursor]
-cursor = "0x24b300"
-text = "0xdcdcdc"
+cursor     = "#29A63E"
+text       = "#000000"
 
 [colors.primary]
-background = "0x000000"
-foreground = "0xdcdcdc"
+background = "#000000"
+# hsl(45,15,65)
+foreground = "#8AE62E"
 
 [colors.normal]
-black = "0x000000"
-red = "0xfe0100"
-green = "0x2cdb00"
-yellow = "0xf5f500"
-blue = "0x0051ff"
-magenta = "0xB800E6"
-cyan = "0x00eded"
-white = "0xdcdcdc"
+black      = "0x000000"
+red        = "#998282"
+green      = "#829989"
+yellow     = "#999982"
+blue       = "#828F99"
+magenta    = "#BF30BF"
+cyan       = "#30BFAA"
+white      = "#B3B0AA"
 
 [colors.bright]
-black = "0x444444"
-red = "0xfe0100"
-green = "0x33ff00"
-yellow = "0xfeff00"
-blue = "0x00a1ff"
-magenta = "0xcc00ff"
-cyan = "0x00ffff"
-white = "0xeeeeee"
-
-
-
+black      = "#111111"
+red        = "#CC6866"
+green      = "#70CC66"
+yellow     = "#CCCC33"
+blue       = "#6672CC"
+magenta    = "#CC33CC"
+cyan       = "#33CCB5"
+white      = "#B3B0AA"
