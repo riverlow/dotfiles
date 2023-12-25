@@ -25,9 +25,12 @@ blocking:
   blackLists:
     ads:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    pds:
+      - /Users/x/.config/blocky/parallels_servers.txt
   clientGroupsBlock:
     default:
       - ads
+      - pds
 
 caching:
   minTime: 5m

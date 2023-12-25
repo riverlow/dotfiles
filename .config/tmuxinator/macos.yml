@@ -5,9 +5,7 @@ root: ~
 
 windows:
 - tor: 
-  - tor -c /usr/local/etc/torrc
-- blocky:
-  - blocky serve -c ~/.config/blocky/config.yml
+  - tor 
 - ss:
     root: ~/ss/
     layout: even-horizontal
