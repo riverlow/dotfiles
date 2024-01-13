@@ -17,7 +17,6 @@ dotfiles add $HOME/.dotfiles_linux/
 dotfiles add $HOME/.config/alacritty/alacritty.toml
 
 #fish
-dotfiles add $HOME/.config/fish/fish_plugins
 dotfiles add $HOME/.config/fish/conf.d/localrc.fish
 dotfiles add $HOME/.config/fish/conf.d/{macOS,linux}.fish
 

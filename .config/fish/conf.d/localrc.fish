@@ -20,6 +20,9 @@ alias ll       "ls -l"
 alias mux      "tmuxinator"
 alias pas      "gopass"
 alias yd       "yt-dlp"
+alias ymp3     "yt-dlp -x --audio-format mp3"
+alias au       "arc unarchive"
+alias u       "uhubctl -a2 -p4"
 
 ## python
 alias py "python3"
