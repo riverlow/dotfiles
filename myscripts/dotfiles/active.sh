@@ -2,10 +2,17 @@
 #
 fontsdir=$HOME/myfonts
 
-if ! type pip3 || ! type vim || ! [[ vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+' > 8 ]]; then
-    echo need pip3 and latest vim
+latestvim=$(echo `vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+'` '>= 9' | bc -l)
+if ! type vim || [ $latestvim -eq 0 ]; then
+    echo need latest vim
     exit 1;
 fi
+
+if ! type pip3 ; then
+    echo need pip3 
+    exit 2;
+fi
+
 
 echo install vim-plug
 pip3 install debugpy python-lsp-server
