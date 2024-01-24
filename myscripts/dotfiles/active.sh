@@ -2,8 +2,9 @@
 #
 fontsdir=$HOME/myfonts
 
-if ! type pip3 || ! type vim || ! [[ vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+') > 8 ]]; then
+if ! type pip3 || ! type vim || ! [[ vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+' > 8 ]]; then
     echo need pip3 and latest vim
+    exit 1;
 fi
 
 echo install vim-plug
@@ -14,9 +15,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo install vim plugins
 vim -es -u ~/.vimrc -i NONE -c "PlugInstall | qa"
 
-echo install fonts
-mkdir -p $fontsdir
-
+# echo install fonts
+# mkdir -p $fontsdir
 # https://github.com/powerline/fonts
 # git clone https://github.com/powerline/fonts.git --depth=1 $fontsdir/powerlinefonts
 # cd $fontsdir/powerlinefonts/ && ./install.sh

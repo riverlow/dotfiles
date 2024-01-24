@@ -1,14 +1,9 @@
-# optional: Mininal TLS version that the DoH and DoT server will use
-minTlsServeVersion: 1.3
-# if https port > 0: path to cert and key file for SSL encryption. if not set, self-signed certificate will be generated
-certFile: /etc/lego/certificates/lego.crt
-keyFile: /etc/lego/certificates/lego.key
-#
-upstream:
-  default:
-    - https://dns11.quad9.net/dns-query
-    - https://cloudflare-dns.com/dns-query
-upstreamTimeout: 5s
+upstreams:
+  timeout: 5s
+  groups:
+    default:
+      - https://dns11.quad9.net/dns-query
+      - https://cloudflare-dns.com/dns-query
 
 bootstrapDns:
   - upstream: https://dns11.quad9.net/dns-query
@@ -22,18 +17,20 @@ bootstrapDns:
     - 1.1.1.1
 
 ports:
-  dns: 53
-  tls: 853
+  dns: :53
   #https: 26443
-  http: 4000
+  http: 127.0.0.1:4000
 
 blocking:
   blackLists:
     ads:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    pds:
+      - /etc/blocky/parallels_servers.txt
   clientGroupsBlock:
     default:
       - ads
+      - pds
 
 caching:
   minTime: 5m

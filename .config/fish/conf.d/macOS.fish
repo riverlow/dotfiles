@@ -30,9 +30,5 @@ if test (uname) = "Darwin";
     # pyenv
     pyenv init - --no-rehash| source
 
-    # wine
-    set -gx WINEPREFIX ~/WINE_Library 
-    set -gx DYLD_FALLBACK_LIBRARY_PATH $DYLD_FALLBACK_LIBRARY_PATH:/usr/lib:/usr/X11/lib
-
 end
 

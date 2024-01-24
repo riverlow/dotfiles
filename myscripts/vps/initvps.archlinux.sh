@@ -12,10 +12,9 @@ homedir=/home/${username}
 ssh_pubkey='ssh-rsa AAAAB3NzaC1yc2EAAAABIwAABAEAwnBemzbCjtnyKLImE7gnqoVRW9HrJHRNxymMDI83jxHlitZKhI0tIP+vXS7YFyRsYlEWKu/NMqxl+KRjsuH/Lv9nbYlnPPLS0hG5l5qfCH4HYNTQdV/suwG1R/eqSMcRUUTG3WMXwp9RyZ7U53F0wa0B1OivpM24WWPtAjoTbFCOS5dhBwXAYd6Ozdb4ZV/ubAQXHSZCl2gDgmzyQ8QolriB6o5jUXVQbIadt7JJWH8qbnWgEVIkwdSxJqp7ft3dvT55yd5XptjwtTB7jONHAQVmG04//9lYoQbDj9HatlQNycMX8CiNupC3BMGAkFcJtrhB9FuKAGzpImxK3YtU8WhJiQVLlYONP1hmQriR8Q2mfjSGIS3gWYx+MoU0AfHnhsohgMtpCp2d+pBGxKO4fYVSdkx+aK3HHWDnrbwd0Mi+k9WDwjLZ6Iq44iKhy+qusmbCnBiQJPOWiJWtKkvVgCjkNLajB1APBycnD8IamuqOMM16vB+HB/xQPlHQTe5XM+LIVV1RcvWiJEA5PWIGT1VFLA8rQk5De1Bj0ie7ADb84aHX1J6dhGyBHiPXowIerVzC0t3RKATJCLdYgWQfTjb+TUJQWczH91Y7yY0JL5lCb33FGt3dIJgjx2NsFn1aOku8xRneWAzKBYWFdqdU5CnSm9i5QEcJjQlEFO0CkE1eyFy9BRqTYI7DzwGBxUZLsdvWWFDcQgWde8/Yt5BRYeEz5Oi3ZfpIFJtZ9aBKie3pLZMZYW8KlNuLmHy80kzB7bkihd6++1MO6BlS9AsaOkX7pnvOjhWTqmyAHXcdNb12pzOssTPX4JDnlhegGcpLhkRl0XSAd2vJRgOt+0fuSJOz+PRA7lPbCZST1mFpjv7ZocEjHBCUPpXHr/vsJsovqcoe7bPpnkfZbTtj+PJa6QoiUPlDTFG3kDL9aURMtWjVGL8Eg7Z9+S+Gi6qQ3GSwVVSvz600ZPik9qfm171drrcWPC9gLwLkRGSInLuvE2COh0g3XV2SVMGSkSsGnZ2s+lWks5/O4SQa7MO2LTiK9Ua3pbPE4e0uZpD36J7izY+ijyAyFCmlIuKpAMmA+YFquHjR26rn1AJw5O6Z+zxF6PSzmeIBfBnMoqYQ7/M+1mJVKEl3cjg4P/cIkcKVFkw//K0xxEDkVhbS7xL1FokhpFK1F5gOLkGwJPPWS1M2bzHGYANCCYnAMc/6aucU65c9QmsYRE617gK+UEQ8AzleP3xSPK/P9ZZCoOglzdspnXn2qSOesfpM0kpvp3okNI2A7H3+IyfmkiLLxPqOZJ60XgcBSZuW2hQbO1bNGc+avbfz+StKYLr9lKpRFhfExJQfMZsnGy+jWKf7IXCi6OKecQ=='
 
 # update system
-apt-get update && apt-get -y upgrade
-
-# install fish
-apt -y install fish vim qrencode wireguard shadowsocks-libev
+pacman -Syu
+pacman -S --needed vim fish sudo go git base-devel lsof nftables tcpdump tree
+pacman -S --needed caddy wireguard-tools shadowsocks-rust
 
 # create user
 useradd -ms /usr/bin/fish ${username}
@@ -92,6 +91,9 @@ net.ipv4.tcp_mtu_probing = 1
 net.ipv4.tcp_congestion_control = bbr
 # forward ipv4
 net.ipv4.ip_forward = 1
+# forward ipv4
+# Configure IPv6 forwarding
+net.ipv6.conf.all.forwarding = 1
 
 # turn on TCP Fast Open on both client and server side
 net.ipv4.tcp_fastopen = 3
