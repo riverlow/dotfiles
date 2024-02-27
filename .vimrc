@@ -80,7 +80,7 @@ Plug 'tpope/vim-fugitive'
 " }}}
 
 " colors {{{
-Plug 'lifepillar/vim-colortemplate', {'tags':'v3.0.0-alpha0'}
+Plug 'lifepillar/vim-colortemplate'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 " Plug 'nordtheme/vim', {'tags': '0.19.0', 'as': 'nordtheme'} " comment not clear
@@ -232,10 +232,10 @@ nnoremap <silent> <leader>, ,
 " nnoremap <leader>mc :mapclear <buffer><cr>
 " }}}
 " help page {{{
-nnoremap <leader>h :tab h<space>
+nnoremap <leader>H :tab h<space>
 " }}}
 " vimrc {{{
-nnoremap  <leader><C-E> :tabnew $MYVIMRC<CR>
+nnoremap  <leader>, :tabnew $MYVIMRC<CR>
 nnoremap <leader><C-R> :source $MYVIMRC<CR>
 " }}}
 " movement {{{
@@ -329,12 +329,12 @@ nnoremap <silent> <silent> <leader>L :redraw<CR>
 " solves, so disable it.
 nnoremap <leader>S :mks! /Users/x/Session.vim<CR>
 " }}}
-" tabs {{{
+" Tabs {{{
 
 " new and close
 nnoremap <silent> <C-E>N :tabnew<cr>
+nnoremap <silent> <C-E>t :tab<space>
 nnoremap <silent> <C-E>c :tabclose<CR>
-nnoremap <silent> <C-E>x :tabclose<CR>
 
 " only; close all others
 nnoremap <silent> <C-E>o :tabonly<CR>
@@ -695,7 +695,7 @@ let g:UltiSnipsEnableSnipMate = 0
 " fzf {{{
 
 nnoremap <leader>f' :Marks<CR>
-nnoremap <leader>f. :Files ~/.config/<CR>
+nnoremap <leader>fc :Files ~/.config/<CR>
 nnoremap <leader>f<space> :Files<Space>
 nnoremap <leader>fA :BTags<space> 
 nnoremap <leader>fG :GFiles?<cr> " git ls-files
@@ -705,8 +705,9 @@ nnoremap <leader>fS :Snippets<CR>
 nnoremap <leader>f[ :Colors<CR>
 nnoremap <leader>fa :Tags<space>
 nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>fc :Changes<CR>
+nnoremap <leader>fC :Changes<CR>
 nnoremap <leader>fd :Files<CR>
+nnoremap <leader>f. :Files<CR>
 nnoremap <leader>fe :History:<CR>
 nnoremap <leader>fg :GFiles<cr> " git status
 nnoremap <leader>fh :Helptags<CR>
@@ -714,12 +715,12 @@ nnoremap <leader>fj :Jumps<CR>
 nnoremap <leader>fk :Locate<space>
 nnoremap <leader>fl :Lines<space>
 nnoremap <leader>fm :Maps<CR>
-nnoremap <leader>fp :Files ~/.vim/<CR>
+nnoremap <leader>fv :Files ~/.vim/<CR>
 nnoremap <leader>fr :Rg<CR>
 nnoremap <leader>f/ :History/<CR>
 nnoremap <leader>ft :Filetypes<CR>
 nnoremap <leader>fu :Commits<cr>
-nnoremap <leader>fv :Files $VIMRUNTIME<CR>
+nnoremap <leader>fp :Files $VIMRUNTIME<CR>
 nnoremap <leader>fw :Windows<CR>
 nnoremap <leader>f~ :Files ~<CR>
 
@@ -851,17 +852,17 @@ let g:sandwich_no_default_key_mappings = 1
 let g:operator_sandwich_no_default_key_mappings = 1
 let g:textobj_sandwich_no_default_key_mappings = 1
 
-nnoremap <leader>s <Plug>(sandwich-add)
-xnoremap <leader>s <Plug>(sandwich-add)
-onoremap <leader>s <Plug>(sandwich-add)
+nnoremap <leader>sa <Plug>(sandwich-add)
+xnoremap <leader>sa <Plug>(sandwich-add)
+onoremap <leader>sa <Plug>(sandwich-add)
 
-nnoremap ds <Plug>(sandwich-delete)
-xnoremap ds <Plug>(sandwich-delete)
-nnoremap dss <Plug>(sandwich-delete-auto)
+nnoremap <leader>sd <Plug>(sandwich-delete)
+xnoremap <leader>sd <Plug>(sandwich-delete)
+nnoremap <leader>ss <Plug>(sandwich-delete-auto)
 
-nnoremap cs <Plug>(sandwich-replace)
-xnoremap cs <Plug>(sandwich-replace)
-nnoremap css <Plug>(sandwich-replace-auto)
+nnoremap <leader>sr <Plug>(sandwich-replace)
+xnoremap <leader>sr <Plug>(sandwich-replace)
+nnoremap <leader>sR <Plug>(sandwich-replace-auto)
 
 " }}}
 " goyo {{{

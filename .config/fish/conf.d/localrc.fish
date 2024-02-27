@@ -20,6 +20,7 @@ alias pas      "gopass"
 alias yd       "yt-dlp"
 alias ymp3     "yt-dlp -x --audio-format mp3"
 alias au       "arc unarchive"
+alias ssf       "ssh -F config.txt"
 
 ## python
 alias py "python3"

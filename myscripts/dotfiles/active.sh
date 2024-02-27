@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 #
+# install packages
+sh install_packages.sh
+
 fontsdir=$HOME/myfonts
 
 latestvim=$(echo `vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+'` '>= 9' | bc -l)
