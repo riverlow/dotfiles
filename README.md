@@ -7,7 +7,7 @@
 # On New System
 
 * run [dotfiles.init.sh](myscripts/dotfiles/dotfiles.init.sh)
-* run [active.sh](myscripts/dotfiles/active.sh)
+* run [active.sh](myscripts/dotfiles/activate.sh)
 
 # Add Remote Git
 

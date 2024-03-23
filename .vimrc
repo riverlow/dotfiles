@@ -235,7 +235,7 @@ nnoremap <silent> <leader>, ,
 nnoremap <leader>H :tab h<space>
 " }}}
 " vimrc {{{
-nnoremap  <leader>, :tabnew $MYVIMRC<CR>
+nnoremap <leader><C-E> :tabnew $MYVIMRC<CR>
 nnoremap <leader><C-R> :source $MYVIMRC<CR>
 " }}}
 " movement {{{

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # install packages
+if [ ! -f activated.txt ]; then
 sh install_packages.sh
 
 fontsdir=$HOME/myfonts
@@ -16,7 +17,6 @@ if ! type pip3 ; then
     exit 2;
 fi
 
-
 echo install vim-plug
 pip3 install debugpy python-lsp-server
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -30,3 +30,11 @@ vim -es -u ~/.vimrc -i NONE -c "PlugInstall | qa"
 # https://github.com/powerline/fonts
 # git clone https://github.com/powerline/fonts.git --depth=1 $fontsdir/powerlinefonts
 # cd $fontsdir/powerlinefonts/ && ./install.sh
+#
+date > activated.txt
+
+fi
+
+if [[ `uname` == 'Linux' ]]; then
+    ./rsync_dotfiles_linux.sh
+fi
