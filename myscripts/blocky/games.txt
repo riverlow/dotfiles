@@ -1,0 +1,19 @@
+# games
+*.crazygames.com
+*.poki.com
+*.addictinggames.com
+*.gamesgames.com
+*.pogo.com
+*.freegames.org
+*.arkadium.com
+*.gamesgames.com
+*.agame.com
+*.y8.com
+*.addictinggames.com
+*.miniplay.com
+*.aol.com
+*.aarp.org
+*.505games.com
+
+# roblox
+*.roblox.com
