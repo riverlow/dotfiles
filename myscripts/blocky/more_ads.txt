@@ -1,5 +1,5 @@
 # ads
-beacons*.gvt3.com
+/beacons.*\.gvt3\.com$/
 
 # android tv ad
 androidtvchannels-pa.googleapis.com
