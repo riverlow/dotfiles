@@ -112,8 +112,11 @@ call plug#end()
 " vim-plug Plugins }}}
 " Settings {{{
 
+" defaults {{{
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+" defaults }}}
 " General {{{
-
 set nocompatible nolangremap lazyredraw
 set fillchars+=vert:\│,eob:.
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+,eol:¬
@@ -140,7 +143,7 @@ set noswapfile nowritebackup hidden nobackup autoread autowrite
 set sessionoptions-=options
 set shiftround               
 set shortmess=acTI
-set sidescroll=1 sidescrolloff=3 scrolloff=3     
+" set sidescroll=1 sidescrolloff=3 scrolloff=3     
 set splitbelow splitright              
 set updatetime=100
 set viewoptions-=options
@@ -232,7 +235,7 @@ nnoremap <silent> <leader>, ,
 " nnoremap <leader>mc :mapclear <buffer><cr>
 " }}}
 " help page {{{
-nnoremap <leader>H :tab h<space>
+nnoremap <leader>h :tab h<space>
 " }}}
 " vimrc {{{
 nnoremap <leader><C-E> :tabnew $MYVIMRC<CR>
@@ -244,7 +247,7 @@ nnoremap k gk
 nnoremap n nzzzv " These will make it so that going to the next one in a search will center on the line it's found in.
 nnoremap N Nzzzv
 
-" tags
+" tags {{{
 nnoremap <C-T> <C-T>zzzv
 nnoremap ]t :tag<cr>zzzv
 " nnoremap gas :tags<cr>
@@ -260,7 +263,6 @@ map [] k$][%?}<CR>
 nnoremap <silent> <space> <C-F>
 nnoremap <silent> <leader><space> <C-B>
 
-"
 " }}}
 " Insert Mode {{{
 
@@ -297,6 +299,7 @@ inoremap [<cr> [<CR>]<C-o>O
 inoremap {,<cr> {<CR>},<C-o>O
 " autopairs }}}
 
+
 " }}}
 " copy & paste & registers {{{
 
@@ -306,7 +309,7 @@ nnoremap <leader>p "*p
 nnoremap Y y$
 "
 "" reverse word
-vnoremap <leader>rw c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+vnoremap <leader>R c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 
 " }}}
 " highlight {{{
@@ -341,8 +344,8 @@ nnoremap <silent> <C-E>o :tabonly<CR>
 
 
 " select previous and next
-nnoremap <silent> <C-E>p gT
-nnoremap <silent> <C-E>n gt
+" nnoremap <silent> <C-E>p gT
+" nnoremap <silent> <C-E>n gt
 nnoremap <silent> <C-P> gT
 nnoremap <silent> <C-N> gt
 " nnoremap <silent> <C-P> gT:if tabpagenr() == 1 | :bprevious | endif 
@@ -362,32 +365,33 @@ nnoremap <silent> <C-6> 6gt
 nnoremap <silent> <C-7> 7gt
 nnoremap <silent> <C-8> 8gt
 
-nnoremap <silent> <C-E>1 1gt
-nnoremap <silent> <C-E>2 2gt
-nnoremap <silent> <C-E>3 3gt
-nnoremap <silent> <C-E>4 4gt
-nnoremap <silent> <C-E>5 5gt
-nnoremap <silent> <C-E>6 6gt
-nnoremap <silent> <C-E>7 7gt
-nnoremap <silent> <C-E>8 8gt
+" nnoremap <silent> <C-E>1 1gt
+" nnoremap <silent> <C-E>2 2gt
+" nnoremap <silent> <C-E>3 3gt
+" nnoremap <silent> <C-E>4 4gt
+" nnoremap <silent> <C-E>5 5gt
+" nnoremap <silent> <C-E>6 6gt
+" nnoremap <silent> <C-E>7 7gt
+" nnoremap <silent> <C-E>8 8gt
 
 " select first and last or say top and bottom
-nnoremap <silent> <leader>tr :tabfirst<cr>
+nnoremap <silent> <leader>tf :tabfirst<cr>
 nnoremap <silent> <leader>tl :tablast<cr>
-nnoremap <silent> <C-E>^ :tabfirst<cr>
-nnoremap <silent> <C-E>$ :tablast<cr>
-nnoremap <silent> <C-E>0 :tabfirst<cr>
-nnoremap <silent> <C-E>9 :tablast<cr>
+" nnoremap <silent> <C-E>^ :tabfirst<cr>
+" nnoremap <silent> <C-E>$ :tablast<cr>
+" nnoremap <silent> <C-E>0 :tabfirst<cr>
+" nnoremap <silent> <C-E>9 :tablast<cr>
 
 " select last accessed
-nnoremap <silent> <C-E><tab> g<tab>
-nnoremap <silent> <C-E>;     g<tab>
+" nnoremap <silent> <C-E><tab> g<tab>
+" nnoremap <silent> <C-E>;     g<tab>
 
 
 " move tabs around
-nnoremap <silent> <C-E>h :tabmove -1<cr>
-nnoremap <silent> <C-E>l :tabmove +1<cr>
-
+nnoremap <silent> <C-E>H :tabmove -1<cr>
+nnoremap <silent> <C-E>L :tabmove +1<cr>
+nnoremap <silent> <C-E>< :tabmove -1<cr>
+nnoremap <silent> <C-E>> :tabmove +1<cr>
 
 " move tabs to first/last
 nnoremap <silent> <C-E><C-h> :tabmove 0<cr>
@@ -603,15 +607,15 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> glS  <plug>(lsp-workspace-symbol-search)
     nnoremap <buffer> glr  <plug>(lsp-references)
     nnoremap <buffer> glR  <plug>(lsp-rename)
-    nnoremap <buffer> gi  <plug>(lsp-implementation)
+    nnoremap <buffer> <leader>gi  <plug>(lsp-implementation)
     nnoremap <buffer> [d  <plug>(lsp-previous-diagnostic)
     nnoremap <buffer> ]d  <plug>(lsp-next-diagnostic)
     nnoremap <buffer> K   <plug>(lsp-hover)
-    nnoremap <buffer> gpd <plug>(lsp-peak-definition)
-    nnoremap <buffer> gpc <plug>(lsp-peak-declaration)
-    nnoremap <buffer> gpi <plug>(lsp-peak-implementation)
-    nnoremap <buffer> gpt <plug>(lsp-peak-type-definition)
-    nnoremap <buffer> gll <plug>(lsp-status)
+    nnoremap <buffer> gld <plug>(lsp-peak-definition)
+    nnoremap <buffer> glD <plug>(lsp-peak-declaration)
+    nnoremap <buffer> glI <plug>(lsp-peak-implementation)
+    nnoremap <buffer> glt <plug>(lsp-peak-type-definition)
+    nnoremap <buffer> <leader>gs <plug>(lsp-status)
 
     autocmd! BufWritePre *.go call execute('LspDocumentFormatSync')
     
@@ -694,35 +698,36 @@ let g:UltiSnipsEnableSnipMate = 0
 " }}}
 " fzf {{{
 
-nnoremap <leader>f' :Marks<CR>
-nnoremap <leader>fc :Files ~/.config/<CR>
+nnoremap <leader>f. :Files ~/.config/<CR>
+nnoremap <leader>fv :Files ~/.vim/<CR>
+nnoremap <leader>f# :Colors<CR>
+nnoremap <leader>fR :Files $VIMRUNTIME<CR>
+nnoremap <leader>f~ :Files ~<CR>
+
 nnoremap <leader>f<space> :Files<Space>
-nnoremap <leader>fA :BTags<space> 
-nnoremap <leader>fG :GFiles?<cr> " git ls-files
-nnoremap <leader>fH :History<CR>
-nnoremap <leader>fL :BLines<space>
-nnoremap <leader>fS :Snippets<CR>
-nnoremap <leader>f[ :Colors<CR>
+nnoremap <leader>ff :Files<CR>
+
 nnoremap <leader>fa :Tags<space>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>fC :Changes<CR>
-nnoremap <leader>fd :Files<CR>
-nnoremap <leader>f. :Files<CR>
-nnoremap <leader>fe :History:<CR>
+nnoremap <leader>fA :BTags<space> 
 nnoremap <leader>fg :GFiles<cr> " git status
+nnoremap <leader>fG :GFiles?<cr> " git ls-files
 nnoremap <leader>fh :Helptags<CR>
+nnoremap <leader>fH :History<CR>
+nnoremap <leader>f: :History:<CR>
+nnoremap <leader>f/ :History/<CR>
+nnoremap <leader>fl :Lines<space>
+nnoremap <leader>fL :BLines<space>
+nnoremap <leader>fs :Snippets<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fc :Changes<CR>
+nnoremap <leader>fC :Commits<cr>
 nnoremap <leader>fj :Jumps<CR>
 nnoremap <leader>fk :Locate<space>
-nnoremap <leader>fl :Lines<space>
-nnoremap <leader>fm :Maps<CR>
-nnoremap <leader>fv :Files ~/.vim/<CR>
+nnoremap <leader>fm :Marks<CR>
+nnoremap <leader>fM :Maps<CR>
 nnoremap <leader>fr :Rg<CR>
-nnoremap <leader>f/ :History/<CR>
 nnoremap <leader>ft :Filetypes<CR>
-nnoremap <leader>fu :Commits<cr>
-nnoremap <leader>fp :Files $VIMRUNTIME<CR>
 nnoremap <leader>fw :Windows<CR>
-nnoremap <leader>f~ :Files ~<CR>
 
 let g:fzf_layout = { 'down': '~50%' }
 
@@ -800,26 +805,26 @@ let g:python_highlight_operators = 1
 " debug vimspector {{{
 let g:vimspector_bottombar_height = 5
 
-nnoremap gsl :call vimspector#Launch()<cr>
-nnoremap gsL :call vimspector#Reset()<cr>
-nnoremap gsB <Plug>VimspectorBreakpoints
-nnoremap gsw :VimspectorWatch<space>
-nnoremap gsE :call vimspector#ClearBreakpoints()<cr>
-nnoremap gsD <Plug>VimspectorDisassemble
-nnoremap gsp <Plug>VimspectorPause
-nnoremap gsR <Plug>VimspectorRestart
-nnoremap gsx <Plug>VimspectorStop
-nnoremap gsK <Plug>VimspectorBalloonEval
-nnoremap gsb <Plug>VimspectorToggleBreakpoint
-nnoremap gst <Plug>VimspectorToggleConditionalBreakpoint
-nnoremap gsf <Plug>VimspectorAddFunctionBreakpoint
-nnoremap gsc <Plug>VimspectorContinue
-nnoremap gs<space> <Plug>VimspectorStepInto
-nnoremap [s <Plug>VimspectorStepOut
-nnoremap ]s <Plug>VimspectorStepOver
-nnoremap gsu <Plug>VimspectorUpFrame
-nnoremap gsd <Plug>VimspectorDownFrame
-nnoremap gsh <Plug>VimspectorRunToCursor
+" nnoremap gsl :call vimspector#Launch()<cr>
+" nnoremap gsL :call vimspector#Reset()<cr>
+" nnoremap gsB <Plug>VimspectorBreakpoints
+" nnoremap gsw :VimspectorWatch<space>
+" nnoremap gsE :call vimspector#ClearBreakpoints()<cr>
+" nnoremap gsD <Plug>VimspectorDisassemble
+" nnoremap gsp <Plug>VimspectorPause
+" nnoremap gsR <Plug>VimspectorRestart
+" nnoremap gsx <Plug>VimspectorStop
+" nnoremap gsK <Plug>VimspectorBalloonEval
+" nnoremap gsb <Plug>VimspectorToggleBreakpoint
+" nnoremap gst <Plug>VimspectorToggleConditionalBreakpoint
+" nnoremap gsf <Plug>VimspectorAddFunctionBreakpoint
+" nnoremap gsc <Plug>VimspectorContinue
+" nnoremap gs<space> <Plug>VimspectorStepInto
+" nnoremap [s <Plug>VimspectorStepOut
+" nnoremap ]s <Plug>VimspectorStepOver
+" nnoremap gsu <Plug>VimspectorUpFrame
+" nnoremap gsd <Plug>VimspectorDownFrame
+" nnoremap gsh <Plug>VimspectorRunToCursor
 " debug vimspector }}}
 
 " IDE }}}
@@ -866,7 +871,7 @@ nnoremap <leader>sR <Plug>(sandwich-replace-auto)
 
 " }}}
 " goyo {{{
-nnoremap <silent> gy :Goyo<CR>
+nnoremap <silent> <leader>gy :Goyo<CR>
 " }}}
 
 " Plugin Configs }}}
