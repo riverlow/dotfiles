@@ -20,12 +20,14 @@ alias pas      "gopass"
 alias yd       "yt-dlp"
 alias ymp3     "yt-dlp -x --audio-format mp3"
 alias au       "arc unarchive"
-alias ssf       "ssh -F config.txt"
+alias ssf      "ssh -F config.txt"
+alias ff       "fastfetch"
+alias fn       "fastfetch -c $HOME/.config/fastfetch/neofetch.jsonc"
 
 ## python
-alias py "python3"
-alias pye "pyenv"
-alias pie "pipenv"
+alias py       "python3"
+alias pye      "pyenv"
+alias pie      "pipenv"
 
 # lang
 set -gx LANG en_US.UTF-8

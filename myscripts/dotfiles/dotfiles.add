@@ -34,6 +34,9 @@ dotfiles add $HOME/.vimrc
 dotfiles add $HOME/.vim/UltiSnips/
 dotfiles add $HOME/.vim/myplugin/
 
+# fastfetch
+dotfiles add $HOME/.config/fastfetch
+
 # blocky
 dotfiles add $HOME/.config/blocky/config.yml
 
