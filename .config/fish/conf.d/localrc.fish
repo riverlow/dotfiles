@@ -12,7 +12,6 @@ alias dc       "docker container"
 alias dr       'docker run --detach-keys="ctrl-z,ctrl-q"'
 alias dx       'docker container exec --detach-keys="ctrl-z,ctrl-q" -it'
 alias dotfiles "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias ls       "eza -s type"
 alias la       "ls -a"
 alias ll       "ls -l"
 alias mux      "tmuxinator"
@@ -22,7 +21,8 @@ alias ymp3     "yt-dlp -x --audio-format mp3"
 alias au       "arc unarchive"
 alias ssf      "ssh -F config.txt"
 alias ff       "fastfetch"
-alias fn       "fastfetch -c $HOME/.config/fastfetch/neofetch.jsonc"
+alias fe       "fastfetch -c $HOME/.config/fastfetch/neofetch.jsonc"
+alias dff      "duf --hide-fs tmpfs,vfat"
 
 ## python
 alias py       "python3"
