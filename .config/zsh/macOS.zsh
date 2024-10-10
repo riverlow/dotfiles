@@ -27,27 +27,6 @@ path=($HOME/myscripts/bin_macos $path)
 
 export PATH
 # PATH }}}
-# zsh-syntax-highlighting {{{
-# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-# source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# zsh-syntax-highlighting }}}
-# fsh {{{
-# git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh/plugins/fast-syntax-highlighting
-source $ZSH_PLUGINS/fsh/fast-syntax-highlighting.plugin.zsh
-# fsh }}}
-# zsh-autosuggestions {{{
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh-autosuggestions }}}
-# zsh-completions {{{
-# FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-# this shit slow zsh startup a lot. 
-# from:
-#first_prompt_lag_ms=73.841
-# first_command_lag_ms=74.116
-# to:
-# first_prompt_lag_ms=200.004
-# first_command_lag_ms=200.370
-# zsh-completions }}}
 # pyenv {{{
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"

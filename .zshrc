@@ -95,6 +95,10 @@ source <(fzf --zsh)
 # https://github.com/agkozak/zsh-z?tab=readme-ov-file#installation
 source $ZSH_PLUGINS/zsh-z/zsh-z.plugin.zsh
 # zsh-z }}}
+# fsh {{{
+# git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh/plugins/fast-syntax-highlighting
+source $ZSH_PLUGINS/fsh/fast-syntax-highlighting.plugin.zsh
+# fsh }}}
 # Completion {{{
 zstyle ':completion:*' menu select
 zstyle ':completion:*' completer _complete _extensions _match _approximate _expand_alias _ignored _files
