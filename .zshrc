@@ -46,6 +46,9 @@ export BAT_THEME=gruvbox-dark
 export WINEPREFIX=$HOME/WINE_Library
 export DXVK_HUD=1
 # ENVs }}}
+# Prompt {{{
+export PS1='%n@%m %1~ %# '
+# Prompt }}}
 # History {{{
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000    # Maximum events for internal history
