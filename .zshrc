@@ -1,3 +1,9 @@
+# Zinit {{{
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+# Zinit }}}
 # Completion {{{
 fpath=($HOME/.zsh/completion $fpath)
 autoload -Uz compinit; compinit -C
@@ -116,12 +122,20 @@ source <(fzf --zsh)
 # zsh-z {{{
 # zsh-z 
 # https://github.com/agkozak/zsh-z?tab=readme-ov-file#installation
-source $ZSH_PLUGINS/zsh-z/zsh-z.plugin.zsh
+# source $ZSH_PLUGINS/zsh-z/zsh-z.plugin.zsh
+zinit load agkozak/zsh-z
 # zsh-z }}}
-# fsh {{{
+# fast-syntax-highlighting {{{
 # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh/plugins/fast-syntax-highlighting
-source $ZSH_PLUGINS/fsh/fast-syntax-highlighting.plugin.zsh
-# fsh }}}
+# source $ZSH_PLUGINS/fsh/fast-syntax-highlighting.plugin.zsh
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+# fast-syntax-highlighting }}}
 # ostype {{{
 if [[ `uname` == "Linux" ]]; then
     . $HOME/.config/zsh/linux.zsh

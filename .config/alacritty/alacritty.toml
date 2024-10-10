@@ -1,5 +1,10 @@
 live_config_reload = true
 
+import = [
+    # "~/.config/alacritty/themes/themes/pastel_dark.toml"
+    "~/.config/alacritty/themes/themes/snazzy.toml"
+]
+
 [window]
 decorations = "buttonless"
 dynamic_padding = false
@@ -72,29 +77,29 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
 [colors.cursor]
 cursor     = "#29A63E"
-text       = "#000000"
+text       = "#dedede"
 
-[colors.primary]
-background = "#000000"
-# hsl(45,15,65)
-foreground = "#8AE62E"
+# [colors.primary]
+# background = "#000000"
+# # hsl(45,15,65)
+# foreground = "#8AE62E"
 
-[colors.normal]
-black      = "0x000000"
-red        = "#998282"
-green      = "#829989"
-yellow     = "#999982"
-blue       = "#828F99"
-magenta    = "#BF30BF"
-cyan       = "#30BFAA"
-white      = "#B3B0AA"
+# [colors.normal]
+# black      = "0x000000"
+# red        = "#998282"
+# green      = "#829989"
+# yellow     = "#999982"
+# blue       = "#828F99"
+# magenta    = "#BF30BF"
+# cyan       = "#30BFAA"
+# white      = "#B3B0AA"
 
-[colors.bright]
-black      = "#111111"
-red        = "#CC6866"
-green      = "#70CC66"
-yellow     = "#CCCC33"
-blue       = "#6672CC"
-magenta    = "#CC33CC"
-cyan       = "#33CCB5"
-white      = "#B3B0AA"
+# [colors.bright]
+# black      = "#111111"
+# red        = "#CC6866"
+# green      = "#70CC66"
+# yellow     = "#CCCC33"
+# blue       = "#6672CC"
+# magenta    = "#CC33CC"
+# cyan       = "#33CCB5"
+# white      = "#B3B0AA"

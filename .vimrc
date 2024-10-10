@@ -80,7 +80,8 @@ Plug 'tpope/vim-fugitive'
 " }}}
 
 " colors {{{
-Plug 'lifepillar/vim-colortemplate'
+" Plug 'lifepillar/vim-colortemplate'
+Plug 'connorholyday/vim-snazzy'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 " Plug 'nordtheme/vim', {'tags': '0.19.0', 'as': 'nordtheme'} " comment not clear
@@ -169,7 +170,8 @@ endif
 " colors and highlight {{{
 set termguicolors
 set background=dark
-colorscheme habamax
+" colorscheme habamax
+colorscheme snazzy
 
 
 augroup colorscheme
