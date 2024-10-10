@@ -1,6 +1,25 @@
-# Common {{{
+# Completion {{{
+fpath=($HOME/.zsh/completion $fpath)
+autoload -Uz compinit; compinit -C
 
-# Common }}}
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete _extensions _match _approximate _expand_alias _ignored _files
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' case-insensitive yes
+zstyle ':completion:*:*:cp:*' file-sort modification
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+# zstyle ':completion:*' list-prompt '%S%M%u'  # Display matches in a friendly format
+zstyle ':completion:*:warnings' format $'\e[91m -- No Matches Found --\e[0m'
+zstyle ':completion:*:descriptions' format $'\e[2m -- %d --\e[0m'
+zstyle ':completion:*:corrections' format $'\e[93m -- %d (errors: %e) --\e[0m'
+# zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
+zstyle ':completion:*' squeeze-slashes true
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $HOME/.zsh/cache
+zstyle ':completion:*' rehash true
+setopt nohashall
+# Completion }}}
 # setopts {{{
 unsetopt beep
 setopt autocd
@@ -61,6 +80,7 @@ alias ymp3="yt-dlp -x --audio-format mp3"
 alias au="arc unarchive"
 alias ff="fastfetch"
 alias fe="fastfetch -c $HOME/.config/fastfetch/neofetch.jsonc"
+alias hf=hyperfine
 
 alias bat="bat --color=always"
 
@@ -99,26 +119,6 @@ source $ZSH_PLUGINS/zsh-z/zsh-z.plugin.zsh
 # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh/plugins/fast-syntax-highlighting
 source $ZSH_PLUGINS/fsh/fast-syntax-highlighting.plugin.zsh
 # fsh }}}
-# Completion {{{
-zstyle ':completion:*' menu select
-zstyle ':completion:*' completer _complete _extensions _match _approximate _expand_alias _ignored _files
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' case-insensitive yes
-zstyle ':completion:*:*:cp:*' file-sort modification
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-# zstyle ':completion:*' list-prompt '%S%M%u'  # Display matches in a friendly format
-zstyle ':completion:*:warnings' format $'\e[91m -- No Matches Found --\e[0m'
-zstyle ':completion:*:descriptions' format $'\e[2m -- %d --\e[0m'
-zstyle ':completion:*:corrections' format $'\e[93m -- %d (errors: %e) --\e[0m'
-# zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
-zstyle ':completion:*' squeeze-slashes true
-
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $HOME/.local/share/zsh/cache
-zstyle ':completion:*' rehash true
-setopt nohashall
-autoload -Uz compinit; compinit 
-# Completion }}}
 # ostype {{{
 if [[ `uname` == "Linux" ]]; then
     . $HOME/.config/zsh/linux.zsh
