@@ -16,7 +16,10 @@ if  command -v pacman; then
     pacman -Sy openssh git vim bc gnupg rsync unzip usbutils tree jq dnsutils
 
     # riir & built in golang
-    pacman -S fzf ripgrep fd dog eza bat
+    pacman -S ripgrep fd dog eza bat vivid
+
+    # build in golang
+    pacman -S fzf
 
     # multimedia tools
     pacman -Sy ffmpeg mp3wrap mp3splt mediainfo imagemagick 

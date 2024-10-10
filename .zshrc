@@ -20,6 +20,8 @@ export VISUAL=vim
 export TERM=alacritty
 export LANG=en_US.UTF-8
 
+# LS_COLORS
+export LS_COLORS=`vivid generate snazzy`
 
 # bat
 export BAT_THEME=gruvbox-dark

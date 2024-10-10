@@ -35,6 +35,7 @@ brew rip
 brew ripgrep
 brew starship
 brew hyperfine
+brew vivid
 
 tap macos-fuse-t/homebrew-cask
 brew fuse-t
