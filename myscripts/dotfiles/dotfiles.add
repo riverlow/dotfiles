@@ -16,9 +16,15 @@ dotfiles add $HOME/.dotfiles_linux/
 # dotfiles add $HOME/.config/alacritty/alacritty.yml
 dotfiles add $HOME/.config/alacritty/alacritty.toml
 
+#zsh
+dotfiles add $HOME/.zshrc
+dotfiles add $HOME/.config/zsh/linux.zsh
+dotfiles add $HOME/.config/zsh/macOS.zsh
+
 #fish
 dotfiles add $HOME/.config/fish/conf.d/localrc.fish
-dotfiles add $HOME/.config/fish/conf.d/{macOS,linux}.fish
+dotfiles add $HOME/.config/fish/conf.d/linux.fish
+dotfiles add $HOME/.config/fish/conf.d/macOS.fish
 
 # tmux
 dotfiles add $HOME/.tmux.conf

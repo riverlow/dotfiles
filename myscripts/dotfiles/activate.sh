@@ -4,8 +4,6 @@
 if [ ! -f activated.txt ]; then
 sh install_packages.sh
 
-fontsdir=$HOME/myfonts
-
 latestvim=$(echo `vim --version | head -1 | grep -E -o '[8-9]\.[0-9]+'` '>= 9' | bc -l)
 if ! type vim || [ $latestvim -eq 0 ]; then
     echo need latest vim
@@ -25,15 +23,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo install vim plugins
 vim -es -u ~/.vimrc -i NONE -c "PlugInstall | qa"
 
-# echo install fonts
-# mkdir -p $fontsdir
-# https://github.com/powerline/fonts
-# git clone https://github.com/powerline/fonts.git --depth=1 $fontsdir/powerlinefonts
-# cd $fontsdir/powerlinefonts/ && ./install.sh
-#
 date > activated.txt
-
-fi
 
 if [[ `uname` == 'Linux' ]]; then
     ./rsync_dotfiles_linux.sh

@@ -1,34 +1,33 @@
-if test (uname) = "Darwin";
+# ENV {{{
+# homebrew
+set -gx HOMEBREW_FORCE_BREWED_CURL 1
+# ENV }}}
+# PATH {{{
+fish_add_path /usr/local/opt/curl/bin /usr/local/opt/gawk/libexec/gnubin /usr/local/opt/iftop/sbin /usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin /usr/local/opt/make/libexec/gnubin/ /usr/local/opt/libpcap/bin
 
-    # bin_macos
-    fish_add_path $HOME/myscripts/bin_macos
+# Java
+fish_add_path '/usr/local/opt/openjdk/bin' 
 
-    # PATH
-    fish_add_path /usr/local/opt/curl/bin /usr/local/opt/gawk/libexec/gnubin /usr/local/opt/iftop/sbin /usr/local/opt/unzip/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/findutils/libexec/gnubin /usr/local/opt/gnu-tar/libexec/gnubin /usr/local/opt/gnu-indent/libexec/gnubin /usr/local/opt/grep/libexec/gnubin /usr/local/opt/make/libexec/gnubin/ /usr/local/opt/libpcap/bin
+# c++
+fish_add_path  "/usr/local/opt/gettext/bin"
 
-    # homebrew
-    set -gx HOMEBREW_FORCE_BREWED_CURL 1
+# openssl
+fish_add_path '/usr/local/opt/openssl@3/bin'
 
-    # Java
-    fish_add_path '/usr/local/opt/openjdk/bin' 
+# llvm
+fish_add_path /usr/local/opt/llvm/bin
 
-    # c++
-    fish_add_path  "/usr/local/opt/gettext/bin"
+# bison
+fish_add_path /usr/local/Cellar/bison/3.8.2/bin/
 
-    # openssl
-    fish_add_path '/usr/local/opt/openssl@3/bin'
+# qt5
+fish_add_path /usr/local/opt/qt@5/bin
 
-    # llvm
-    fish_add_path /usr/local/opt/llvm/bin
+# bin_macos
+fish_add_path $HOME/myscripts/bin_macos
 
-    # bison
-    fish_add_path /usr/local/Cellar/bison/3.8.2/bin/
-
-    # qt5
-    fish_add_path /usr/local/opt/qt@5/bin
-
-    # pyenv
-    pyenv init - --no-rehash| source
-
-end
-
+# PATH }}}
+# init | source {{{
+# pyenv
+pyenv init - --no-rehash| source
+# init | source }}}

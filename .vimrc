@@ -74,7 +74,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-commentary'            " gc, gc<motion>, gcap
+" Plug 'tpope/vim-commentary'            " gc, gc<motion>, gcap
 Plug 'tpope/vim-fugitive'
 
 " }}}
@@ -110,6 +110,9 @@ Plug 'lifepillar/vim-colortemplate'
 " }}}
 call plug#end()
 " vim-plug Plugins }}}
+" packadd {{{
+packadd comment
+" packadd }}}
 " Settings {{{
 
 " defaults {{{
@@ -698,14 +701,14 @@ let g:UltiSnipsEnableSnipMate = 0
 " }}}
 " fzf {{{
 
+nnoremap <leader>fe :Files ~<CR>
 nnoremap <leader>f. :Files ~/.config/<CR>
 nnoremap <leader>fv :Files ~/.vim/<CR>
+nnoremap <leader>fp :Files $VIMRUNTIME<CR>
 nnoremap <leader>f# :Colors<CR>
-nnoremap <leader>fR :Files $VIMRUNTIME<CR>
-nnoremap <leader>f~ :Files ~<CR>
 
 nnoremap <leader>f<space> :Files<Space>
-nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fd :Files<CR>
 
 nnoremap <leader>fa :Tags<space>
 nnoremap <leader>fA :BTags<space> 

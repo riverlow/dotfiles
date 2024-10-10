@@ -1,23 +1,42 @@
 #!/usr/bin/env bash
 #
+# it's archlinux
+if  command -v pacman; then
+
+    # update system
+    pacman -Sy archlinux-keyring && pacman -Syyu
+
+    # terminal
+    pacman -Sy alacritty tmux tmuxp 
+
+    # zsh
+    pacman -Sy zsh 
+
+    # utilities
+    pacman -Sy openssh git vim bc gnupg rsync unzip usbutils tree jq dnsutils
+
+    # riir & built in golang
+    pacman -S fzf ripgrep fd dog eza bat
+
+    # multimedia tools
+    pacman -Sy ffmpeg mp3wrap mp3splt mediainfo imagemagick 
+
+    # devel
+    pacman -Sy base-devel linux-headers go rust nodejs 
+
+    # networks wifi wireguard
+    pacman -Sy iw iwd wireguard-tools systemd-resolvconf
+
+    # system management
+    pacman -Sy lsof tcpdump iperf3
+    # fonts
+    pacman -Sy otf-font-awesome noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra 
+
+fi
+
 if [[ `uname` == "Linux" && grep -q "Ubuntu" /etc/issue ]]; then
     apt update
     apt -y upgrade
-    apt install -y fish tree lsof git fzf python3-pip
-    apt install -y pkg-config
-
-    # golang
-    if [[ `uname -i` == 'x86_64' ]]; then
-	wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz
-	rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz
-    fi
-
-    # rust
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    source $HOME/.cargo/env
-    cargo install bat eza du-dust fd-find ripgrep 
-
-    # uctags
-    sh install_ctags.sh
-
 fi
+
+sh install_ctags.sh

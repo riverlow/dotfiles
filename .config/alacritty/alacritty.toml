@@ -19,19 +19,19 @@ style = "Block"
 size = 17.5
 
 [font.bold]
-family = "Monaco"
+family = "Monaco Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "Monaco"
+family = "Monaco Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "Monaco"
+family = "Monaco Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "Monaco"
+family = "Monaco Nerd Font"
 style = "Regular"
 
 [[hints.enabled]]
