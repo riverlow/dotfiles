@@ -20,14 +20,6 @@ export VISUAL=vim
 export TERM=alacritty
 export LANG=en_US.UTF-8
 
-# history
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=10000    # Maximum events for internal history
-export SAVEHIST=10000    # Maximum events in history file
-setopt HIST_SAVE_NO_DUPS # Do not write a duplicate event to the history file.
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-
 
 # bat
 export BAT_THEME=gruvbox-dark
@@ -36,6 +28,14 @@ export BAT_THEME=gruvbox-dark
 export WINEPREFIX=$HOME/WINE_Library
 export DXVK_HUD=1
 # ENVs }}}
+# History {{{
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=10000    # Maximum events for internal history
+export SAVEHIST=10000    # Maximum events in history file
+setopt HIST_SAVE_NO_DUPS # Do not write a duplicate event to the history file.
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+# History }}}
 # PATH {{{
 path=(/usr/local/bin /usr/local/sbin $path)
 
@@ -53,6 +53,7 @@ export PATH
 # Aliases {{{
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+alias ls='ls --color=always'
 alias la="ls -a"
 alias ll="ls -l"
 alias pas="gopass"
